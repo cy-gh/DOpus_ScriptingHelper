@@ -17,7 +17,9 @@ You need VSCode or similar; I prefer [VSCodium Portable](https://portapps.io/app
 * Copy the .d.ts file to your scripts directory.
 
 * Put this at the top of your user script:
+
   `///<reference path="./_DOpusDefinitions.d.ts" />`
+
   `// @ts-check`
 
 * Done!
