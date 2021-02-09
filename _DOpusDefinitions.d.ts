@@ -1,7 +1,6 @@
 /**
  * @typedef DOpusCurrency
  * @type number
- *
  */
 
 /**
@@ -2014,12 +2013,12 @@ interface DOpusDOpus {
 	/**
 	 *Creates and returns a new DOpusFactory object, which can be used to create various lightweight helper objects like Blob, Map and Vector.
 	 */
-	Create(): DOpusDOpusFactory;
+	Create(): DOpusFactory;
 
 	/**
 	 *Creates and returns a new DOpusFactory object, which can be used to create various lightweight helper objects like Blob, Map and Vector.
 	 */
-	create(): DOpusDOpusFactory;
+	create(): DOpusFactory;
 
 	/**
 	 *Delays for the specified number of milliseconds before returning.
@@ -2160,116 +2159,6 @@ interface DOpusDOpus {
 	 *Returns a string indicating the type of an object or variable.
 	 */
 	typeof(): string;
-
-}
-
-/**
- * The DOpusFactory object is a helper object that you can use to create various other objects. Unlike the objects that represent existing things (e.g. Lister or Tab ), the objects created by DOpusFactory are independent objects that you can instantiate whenever you need their functionality. The DOpusFactory object is obtained via the DOpus .Create method.
- * @see {DOpusLister}
- * @see {DOpusTab}
- * @see {DOpusDOpus}
- */
-interface DOpusDOpusFactory {
-
-	/**
-	 *Returns a new Blob object, that lets you access and manipulate a chunk of binary data from a script. If no parameters are given the new Blob will be empty - you can set its size using the resize method - otherwise you can specify the initial size as a parameter.You can also create a Blob pre-filled with data by specifying the actual byte values (e.g. Blob(72,69,76,76,79)).If another Blob (or an array - see the documentation on the Blob object for a discussion of this) is given then the new Blob will be created as a copy of the existing one.
-	 */
-	Blob(size?: number, source?: number|DOpusBlob): DOpusBlob;
-
-	/**
-	 *Returns a new Blob object, that lets you access and manipulate a chunk of binary data from a script. If no parameters are given the new Blob will be empty - you can set its size using the resize method - otherwise you can specify the initial size as a parameter.You can also create a Blob pre-filled with data by specifying the actual byte values (e.g. Blob(72,69,76,76,79)).If another Blob (or an array - see the documentation on the Blob object for a discussion of this) is given then the new Blob will be created as a copy of the existing one.
-	 */
-	blob(size?: number, source?: number|DOpusBlob): DOpusBlob;
-
-	/**
-	 *Creates a new BusyIndicator object, that lets you control the breadcrumbs bar busy indicator from your script.
-	 */
-	BusyIndicator(): DOpusBusyIndicator;
-
-	/**
-	 *Creates a new BusyIndicator object, that lets you control the breadcrumbs bar busy indicator from your script.
-	 */
-	busyindicator(): DOpusBusyIndicator;
-
-	/**
-	 *Creates a new Command object, that lets you run Opus commands from a script.
-	 */
-	Command(): DOpusCommand;
-
-	/**
-	 *Creates a new Command object, that lets you run Opus commands from a script.
-	 */
-	command(): DOpusCommand;
-
-	/**
-	 *Creates a new Date object. If an existing Date object or date value is specified the new object will be initialized to that value, otherwise the date will be set to the current local time.
-	 */
-	Date(date?: any): DOpusDate;
-
-	/**
-	 *Creates a new Date object. If an existing Date object or date value is specified the new object will be initialized to that value, otherwise the date will be set to the current local time.
-	 */
-	date(date?: any): DOpusDate;
-
-	/**
-	 *Creates a new Map object. If no arguments are provided, the Map will be empty. Otherwise, the Map will be pre-initialized with the supplied key/value pairs. For example: Map("firstname","fred","lastname","bloggs");. The individual keys and values can be different types.
-	 */
-	Map(key?: any, value?: any): DOpusMap;
-
-	/**
-	 *Creates a new Map object. If no arguments are provided, the Map will be empty. Otherwise, the Map will be pre-initialized with the supplied key/value pairs. For example: Map("firstname","fred","lastname","bloggs");. The individual keys and values can be different types.
-	 */
-	map(key?: any, value?: any): DOpusMap;
-
-	/**
-	 *Creates a new case-sensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings; for example: StringSet("dog","cat","pony"); You can also pass an array of strings or Vector object to initialise the set.
-	 */
-	StringSet(): DOpusStringSet;
-
-	/**
-	 *Creates a new case-sensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings; for example: StringSet("dog","cat","pony"); You can also pass an array of strings or Vector object to initialise the set.
-	 */
-	stringset(): DOpusStringSet;
-
-	/**
-	 *Creates a new case-insensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings.
-	 */
-	StringSetI(): DOpusStringSet;
-
-	/**
-	 *Creates a new case-insensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings.
-	 */
-	stringseti(): DOpusStringSet;
-
-	/**
-	 *Creates a new StringTools object, that provides helper functions for string encoding and decoding.
-	 */
-	StringTools(): DOpusStringTools;
-
-	/**
-	 *Creates a new StringTools object, that provides helper functions for string encoding and decoding.
-	 */
-	stringtools(): DOpusStringTools;
-
-	/**
-	 *Creates a new UnorderedSet object. If no arguments are provided the UnorderedSet will be empty. Otherwise it will be pre-initialized with the supplied elements. You can also pass an array or Vector to initialise the set.
-	 */
-	UnorderedSet(): DOpusUnorderedSet;
-
-	/**
-	 *Creates a new UnorderedSet object. If no arguments are provided the UnorderedSet will be empty. Otherwise it will be pre-initialized with the supplied elements. You can also pass an array or Vector to initialise the set.
-	 */
-	unorderedset(): DOpusUnorderedSet;
-
-	/**
-	 *Creates a new Vector object. If no arguments are provided, the Vector will be empty.If a single integer argument is provided, the Vector will be pre-initialized to that number of elements.If more than one argument is provided, the Vector will be pre-initialized with those elements; for example: Vector("dog","cat","horse"); The individual elements can be different types. You can also pass another Vector or a JScript array as the argument to initialise the new Vector from an existing one.
-	 */
-	Vector(elements?: number): DOpusVector<any>;
-
-	/**
-	 *Creates a new Vector object. If no arguments are provided, the Vector will be empty.If a single integer argument is provided, the Vector will be pre-initialized to that number of elements.If more than one argument is provided, the Vector will be pre-initialized with those elements; for example: Vector("dog","cat","horse"); The individual elements can be different types. You can also pass another Vector or a JScript array as the argument to initialise the new Vector from an existing one.
-	 */
-	vector(elements?: number): DOpusVector<any>;
 
 }
 
@@ -4400,7 +4289,7 @@ interface DOpusOtherMeta {
  * @see {DOpusDOpus}
  * @see {DOpusFSUtil}
  *
- * @returns {string} Returns the full path as a string.
+ * @returns {typeof string} Returns the full path as a string.
  */
 interface DOpusPath extends String {
 
@@ -5698,7 +5587,7 @@ interface DOpusStyleSelectedData {
 
 /**
  * The SysInfo object is created by the DOpusFactory .SysInfo method. It lets scripts access miscellaneous system information that may not be otherwise easy to obtain from a script.
- * @see {DOpusDOpusFactory}
+ * @see {DOpusFactory}
  */
 interface DOpusSysInfo {
 
@@ -6947,3 +6836,326 @@ interface DOpusWinVer extends String {
 	readonly win10orbetter: boolean;
 
 }
+
+
+interface DOpusConstructor {
+	/** The Aliases object gives the script access to the defined folder aliases. */
+	readonly aliases: DOpusAliases;
+
+	/** Returns a collection of Format objects representing the used-defined favorite formats. */
+	readonly favoriteformats: DOpusFormat;
+
+	/** Returns a Favorites object which lets you query and modify the user-defined favorite folders. */
+	readonly favorites: DOpusFavorites;
+
+	/** Returns a FiletypeGroups object which lets you enumerate and query the configured file type groups. */
+	readonly filetypegroups: DOpusFiletypeGroups;
+
+	/** Returns a GlobalFilters object which lets you access information about the global filter settings (configured on the Folders / Global Filters page in Preferences). */
+	readonly filters: DOpusGlobalFilters;
+
+	/** Returns a string representing the current user interface language. */
+	readonly language: string;
+
+	/** Returns a Listers object which represents any currently open Lister windows (each one is represented by a Lister object). */
+	readonly listers: DOpusListers;
+
+
+	/** Returns a SmartFavorites object which lets you query the SmartFavorites data. */
+	readonly smartfavorites: DOpusSmartFavorites;
+
+	/** Returns a ScriptStrings object which lets your script access any strings defined as string resources. */
+	readonly strings: DOpusScriptStrings;
+
+	/** Returns a TabGroups object which lets your script access and manipulate the configured folder tab groups. */
+	readonly tabgroups: DOpusTabGroups;
+
+	/** This Vars object represents all defined variables with global scope. */
+	readonly vars: DOpusVars;
+
+	/** The Version object provides information about the current Opus program version. */
+	readonly version: DOpusVersion;
+
+	/** Returns a Viewers object which represents any currently open standalone image viewers (each one is represented by a Viewer object). */
+	readonly viewers: DOpusViewers;
+
+	/**
+	 * Clears the script output log.
+	 */
+	ClearOutput(): void;
+
+    /**
+	 * Clears the script output log.
+	 */
+	clearoutput(): void;
+
+	/**
+	 * Creates and returns a new DOpusFactory object, which can be used to create various lightweight helper objects like Blob, Map and Vector.
+	 */
+	Create(): DOpusFactoryConstructor;
+
+	/**
+	 * Creates and returns a new DOpusFactory object, which can be used to create various lightweight helper objects like Blob, Map and Vector.
+	 */
+	create(): DOpusFactoryConstructor;
+
+	/**
+	 * Delays for the specified number of milliseconds before returning.
+	 */
+	Delay(time?: number): none;
+
+	/**
+	 * Delays for the specified number of milliseconds before returning.
+	 */
+	delay(time?: number): none;
+
+	/**
+	 * Creates a new Dialog object, that lets you display dialogs and popup menus.XXXXNote: Scripts should not usually use this when responding to events triggered by toolbars or folder tabs. The Dialog returned by DOpus.Dlg will not have its parent window configured. Most scripting events provide you an object which can either create a pre-configured Dialog or which includes a SourceTab property or similar which can do the same. In almost all situations you should use those instead.
+	 */
+	Dlg(): DOpusDialog;
+
+	/**
+	 * Creates a new Dialog object, that lets you display dialogs and popup menus.XXXXNote: Scripts should not usually use this when responding to events triggered by toolbars or folder tabs. The Dialog returned by DOpus.Dlg will not have its parent window configured. Most scripting events provide you an object which can either create a pre-configured Dialog or which includes a SourceTab property or similar which can do the same. In almost all situations you should use those instead.
+	 */
+	dlg(): DOpusDialog;
+
+
+	/**
+	 * Creates the DPI helper object which assists when dealing with different system scaling settings (e.g. high-DPI monitors).
+	 */
+	DPI(): DOpusDPI;
+
+	/**
+	 * Creates the DPI helper object which assists when dealing with different system scaling settings (e.g. high-DPI monitors).
+	 */
+	dpi(): DOpusDPI;
+
+
+	/**
+	 * Creates a new FSUtil object, that provides helper methods for accessing the file system.
+	 */
+	FSUtil(): DOpusFSUtil;
+
+    /**
+	 * Creates a new FSUtil object, that provides helper methods for accessing the file system.
+	 */
+	fsutil(): DOpusFSUtil;
+
+	/**
+	 * Retrieves the current contents of the system clipboard, if it contains either text or files.XXXXYou can control the returned type by passing either "text" or "files" for the <type> argument - Opus will convert to the requested type if possible.XXXXIf <type> is not specified the contents will be returned in their native format.
+	 */
+	GetClip(type?:string): string|DOpusItem;
+
+	/**
+	 * Retrieves the current contents of the system clipboard, if it contains either text or files.XXXXYou can control the returned type by passing either "text" or "files" for the <type> argument - Opus will convert to the requested type if possible.XXXXIf <type> is not specified the contents will be returned in their native format.
+	 */
+	getclip(type?:string): string|DOpusItem;
+
+
+	/**
+	 * Returns a string indicating the native format of the clipboard contents - "text", "files" or an empty string in any other case.
+	 */
+	GetClipFormat(): string;
+
+	/**
+	 * Returns a string indicating the native format of the clipboard contents - "text", "files" or an empty string in any other case.
+	 */
+	getclipformat(): string;
+
+	/**
+	 * Returns a string indicating which qualifier keys are currently held down. If none are held down, the string will be "none". Otherwise, the string can contain any or all of the following, separated by commas: "shift", "ctrl", "alt", "lwin", "rwin".XXXXNote that many events pass you a similar list of qualifiers. If you are passed a list of qualifiers, you should generally use that list rather than call DOpus.GetQualifiers.XXXXFor example, script commands are passed a Func object with a qualifiers property. That property will tell you which keys were held down when the command was triggered, and that may be different to the keys held down a few seconds later. When the user clicks a button to run a command, they normally expect the command to use the keys they held when they clicked, not the keys they are touching later while waiting for it to finish.XXXXSimilarly, events like OnBeforeFolderChange will often pass you an object like BeforeFolderChangeData containing a qualifiers property which indicates key state when the event was triggered. You should normally use that instead of calling DOpus.GetQualifiers.XXXXIf you do call DOpus.GetQualifiers, you would normally want to call it as soon as possible and then store the result, so there is less time for the user to let go of a key after triggering your script.XXXXIf you call DOpus.GetQualifiers more than once, you may get a different result each time, due to keys being pushed or released between calls. Call it once and store the result if you need to do multiple checks and need them to be consistent. This does not generally affect the qualifiers properties mentioned earlier, since they are usually stored snapshots of the key state.
+	 */
+	GetQualifiers(): string;
+
+	/**
+	 * Returns a string indicating which qualifier keys are currently held down. If none are held down, the string will be "none". Otherwise, the string can contain any or all of the following, separated by commas: "shift", "ctrl", "alt", "lwin", "rwin".XXXXNote that many events pass you a similar list of qualifiers. If you are passed a list of qualifiers, you should generally use that list rather than call DOpus.GetQualifiers.XXXXFor example, script commands are passed a Func object with a qualifiers property. That property will tell you which keys were held down when the command was triggered, and that may be different to the keys held down a few seconds later. When the user clicks a button to run a command, they normally expect the command to use the keys they held when they clicked, not the keys they are touching later while waiting for it to finish.XXXXSimilarly, events like OnBeforeFolderChange will often pass you an object like BeforeFolderChangeData containing a qualifiers property which indicates key state when the event was triggered. You should normally use that instead of calling DOpus.GetQualifiers.XXXXIf you do call DOpus.GetQualifiers, you would normally want to call it as soon as possible and then store the result, so there is less time for the user to let go of a key after triggering your script.XXXXIf you call DOpus.GetQualifiers more than once, you may get a different result each time, due to keys being pushed or released between calls. Call it once and store the result if you need to do multiple checks and need them to be consistent. This does not generally affect the qualifiers properties mentioned earlier, since they are usually stored snapshots of the key state.
+	 */
+	getqualifiers(): string;
+
+	/**
+	 * Loads an image file from the specified external file. You can optionally specify the desired size to load the image at, and whether the alpha channel (if any) should be loaded or not.XXXXYou can also provide a Blob object containing the image data instead of a filename.XXXXThe returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
+	 */
+	LoadImage(filename?: string|DOpusBlob, width?: number, height?: number, alpha?: boolean): DOpusImage;
+
+    /**
+	 * Loads an image file from the specified external file. You can optionally specify the desired size to load the image at, and whether the alpha channel (if any) should be loaded or not.XXXXYou can also provide a Blob object containing the image data instead of a filename.XXXXThe returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
+	 */
+	loadimage(filename?: string|DOpusBlob, width?: number, height?: number, alpha?: boolean): DOpusImage;
+
+	/**
+	 * Extracts a thumbnail from the specified external file. You can optionally specify a timeout (in milliseconds) and the desired size to load the thumbnail at.XXXXIf loading fails (or the timeout expires before the thumbnail could be generated) this method returns False.XXXXThe returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
+	 */
+	LoadThumbnail(filename?: string, timeout?: number, width?: number, height?: number): DOpusImage|false;
+
+	/**
+	 * Extracts a thumbnail from the specified external file. You can optionally specify a timeout (in milliseconds) and the desired size to load the thumbnail at.XXXXIf loading fails (or the timeout expires before the thumbnail could be generated) this method returns False.XXXXThe returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
+	 */
+	loadthumbnail(filename?: string, timeout?: number, width?: number, height?: number): DOpusImage|false;
+
+	/**
+	 * Prints the specified text string to the script output log (found in the Utility Panel,  the CLI in script mode, the Rename dialog and the Command Editor in script mode). XXXXIf the second argument is provided and set to True, the message will be displayed as an error. This means the text will be displayed in red and if no log windows are currently open, a warning icon will flash in the Lister status bar to alert the user of an error condition. XXXXIf the optional third argument is provided and set to True then the log message will have a timestamp prepended to it. Timestamps only appear in the utility panel, not in places like the Command Editor's output panel. Error messages always get timestamps so if the second argument is True then the third is ignored
+	 */
+	Output(text?: string, error?: boolean, timestamp?: boolean): void;
+
+	/**
+	 * Prints the specified text string to the script output log (found in the Utility Panel,  the CLI in script mode, the Rename dialog and the Command Editor in script mode). XXXXIf the second argument is provided and set to True, the message will be displayed as an error. This means the text will be displayed in red and if no log windows are currently open, a warning icon will flash in the Lister status bar to alert the user of an error condition. XXXXIf the optional third argument is provided and set to True then the log message will have a timestamp prepended to it. Timestamps only appear in the utility panel, not in places like the Command Editor's output panel. Error messages always get timestamps so if the second argument is True then the third is ignored
+	 */
+	output(text?: string, error?: boolean, timestamp?: boolean): void;
+
+	/**
+	 * Causes Opus to reload and reinitialize the specified script. You must provide the full pathname of the script on disk (if a script add-in wants to reload itself you can pass the value of the Script.file property).
+	 */
+	ReloadScript(file?: string): void;
+
+	/**
+	 * Causes Opus to reload and reinitialize the specified script. You must provide the full pathname of the script on disk (if a script add-in wants to reload itself you can pass the value of the Script.file property).
+	 */
+	reloadscript(file?: string): void;
+
+	/**
+	 * Places the specified text, or Item collection (or Vector of Item objects) on the system clipboard. If called with no arguments the clipboard will be cleared.
+	 */
+	SetClip(text?: string|DOpusItem|Vector<DOpusItem>): void;
+
+	/**
+	 * Places the specified text, or Item collection (or Vector of Item objects) on the system clipboard. If called with no arguments the clipboard will be cleared.
+	 */
+	setclip(text?: string|DOpusItem|Vector<DOpusItem>): void;
+
+	/**
+	 * Returns a Toolbars object which lets you enumerate all defined toolbars (whether they are currently open or not).XXXXYou can restrict this object to only return in-use toolbars by specifying the optional type parameter - specify "listers" to only return toolbars currently turned on in a Lister, and "docks" to only return toolbars that are currently floating.
+	 */
+	Toolbars(type?: string): DOpusToolbars;
+
+	/**
+	 * Returns a Toolbars object which lets you enumerate all defined toolbars (whether they are currently open or not).XXXXYou can restrict this object to only return in-use toolbars by specifying the optional type parameter - specify "listers" to only return toolbars currently turned on in a Lister, and "docks" to only return toolbars that are currently floating.
+	 */
+	toolbars(type?: string): DOpusToolbars;
+
+	/**
+	 * Returns a string indicating the type of an object or variable.
+	 */
+    TypeOf(arg0: any): string;
+
+	/**
+	 * Returns a string indicating the type of an object or variable.
+	 */
+    typeof(arg0: any): string;
+
+}
+
+declare var DOpus: DOpusConstructor;
+
+
+
+/**
+ * The DOpusFactory object is a helper object that you can use to create various other objects. Unlike the objects that represent existing things (e.g. Lister or Tab ), the objects created by DOpusFactory are independent objects that you can instantiate whenever you need their functionality. The DOpusFactory object is obtained via the DOpus .Create method.
+ * @see {DOpusLister}
+ * @see {DOpusTab}
+ * @see {DOpusDOpus}
+ */
+interface DOpusFactoryConstructor {
+
+	/**
+	 *Returns a new Blob object, that lets you access and manipulate a chunk of binary data from a script. If no parameters are given the new Blob will be empty - you can set its size using the resize method - otherwise you can specify the initial size as a parameter.You can also create a Blob pre-filled with data by specifying the actual byte values (e.g. Blob(72,69,76,76,79)).If another Blob (or an array - see the documentation on the Blob object for a discussion of this) is given then the new Blob will be created as a copy of the existing one.
+	 */
+	Blob(size?: number, source?: number|DOpusBlob): DOpusBlob;
+
+	/**
+	 *Returns a new Blob object, that lets you access and manipulate a chunk of binary data from a script. If no parameters are given the new Blob will be empty - you can set its size using the resize method - otherwise you can specify the initial size as a parameter.You can also create a Blob pre-filled with data by specifying the actual byte values (e.g. Blob(72,69,76,76,79)).If another Blob (or an array - see the documentation on the Blob object for a discussion of this) is given then the new Blob will be created as a copy of the existing one.
+	 */
+	blob(size?: number, source?: number|DOpusBlob): DOpusBlob;
+
+	/**
+	 *Creates a new BusyIndicator object, that lets you control the breadcrumbs bar busy indicator from your script.
+	 */
+	BusyIndicator(): DOpusBusyIndicator;
+
+	/**
+	 *Creates a new BusyIndicator object, that lets you control the breadcrumbs bar busy indicator from your script.
+	 */
+	busyindicator(): DOpusBusyIndicator;
+
+	/**
+	 *Creates a new Command object, that lets you run Opus commands from a script.
+	 */
+	Command(): DOpusCommand;
+
+	/**
+	 *Creates a new Command object, that lets you run Opus commands from a script.
+	 */
+	command(): DOpusCommand;
+
+	/**
+	 *Creates a new Date object. If an existing Date object or date value is specified the new object will be initialized to that value, otherwise the date will be set to the current local time.
+	 */
+	Date(date?: any): DOpusDate;
+
+	/**
+	 *Creates a new Date object. If an existing Date object or date value is specified the new object will be initialized to that value, otherwise the date will be set to the current local time.
+	 */
+	date(date?: any): DOpusDate;
+
+	/**
+	 *Creates a new Map object. If no arguments are provided, the Map will be empty. Otherwise, the Map will be pre-initialized with the supplied key/value pairs. For example: Map("firstname","fred","lastname","bloggs");. The individual keys and values can be different types.
+	 */
+	Map(key?: any, value?: any): DOpusMap;
+
+	/**
+	 *Creates a new Map object. If no arguments are provided, the Map will be empty. Otherwise, the Map will be pre-initialized with the supplied key/value pairs. For example: Map("firstname","fred","lastname","bloggs");. The individual keys and values can be different types.
+	 */
+	map(key?: any, value?: any): DOpusMap;
+
+	/**
+	 *Creates a new case-sensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings; for example: StringSet("dog","cat","pony"); You can also pass an array of strings or Vector object to initialise the set.
+	 */
+	StringSet(): DOpusStringSet;
+
+	/**
+	 *Creates a new case-sensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings; for example: StringSet("dog","cat","pony"); You can also pass an array of strings or Vector object to initialise the set.
+	 */
+	stringset(): DOpusStringSet;
+
+	/**
+	 *Creates a new case-insensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings.
+	 */
+	StringSetI(): DOpusStringSet;
+
+	/**
+	 *Creates a new case-insensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings.
+	 */
+	stringseti(): DOpusStringSet;
+
+	/**
+	 *Creates a new StringTools object, that provides helper functions for string encoding and decoding.
+	 */
+	StringTools(): DOpusStringTools;
+
+	/**
+	 *Creates a new StringTools object, that provides helper functions for string encoding and decoding.
+	 */
+	stringtools(): DOpusStringTools;
+
+	/**
+	 *Creates a new UnorderedSet object. If no arguments are provided the UnorderedSet will be empty. Otherwise it will be pre-initialized with the supplied elements. You can also pass an array or Vector to initialise the set.
+	 */
+	UnorderedSet(): DOpusUnorderedSet;
+
+	/**
+	 *Creates a new UnorderedSet object. If no arguments are provided the UnorderedSet will be empty. Otherwise it will be pre-initialized with the supplied elements. You can also pass an array or Vector to initialise the set.
+	 */
+	unorderedset(): DOpusUnorderedSet;
+
+	/**
+	 *Creates a new Vector object. If no arguments are provided, the Vector will be empty.If a single integer argument is provided, the Vector will be pre-initialized to that number of elements.If more than one argument is provided, the Vector will be pre-initialized with those elements; for example: Vector("dog","cat","horse"); The individual elements can be different types. You can also pass another Vector or a JScript array as the argument to initialise the new Vector from an existing one.
+	 */
+	Vector(elements?: number): DOpusVector<any>;
+
+	/**
+	 *Creates a new Vector object. If no arguments are provided, the Vector will be empty.If a single integer argument is provided, the Vector will be pre-initialized to that number of elements.If more than one argument is provided, the Vector will be pre-initialized with those elements; for example: Vector("dog","cat","horse"); The individual elements can be different types. You can also pass another Vector or a JScript array as the argument to initialise the new Vector from an existing one.
+	 */
+	vector(elements?: number): DOpusVector<any>;
+
+}
+
+declare var DOpusFactory: DOpusFactoryConstructor;
