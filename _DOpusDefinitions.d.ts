@@ -342,8 +342,9 @@ interface DOpusBeforeFolderChangeData {
 
 /**
  * A Blob object represents a chunk of binary data. Scripting languages like VBScript and JScript have no built-in support for binary data - this object can be used to allocate a chunk of memory and manipulate it in a similar way to low-level languages like C. You can use Blob objects in conjunction with the File object to read or write binary data from or to disk files. Blob objects are convertible to and from two types of ActiveX arrays - a SAFEARRAY of type VT_UI1 (known as an array ) and a SAFEARRAY of type VT_VARIANT, with each variant holding a VT_UI1 (known as a VB array ). You can initialize a Blob with either of these two types of array (either when creating it via the DOpusFactory.Blob method or with the Blob.CopyFrom method), and you can also convert a Blob back to an array with the ToArray and ToVBArray methods. Support for these array types is dependent on the scripting language.
-
-You can read and write individual bytes within the  Blob  by indexing the byte offset starting from 0. For example, my_blob(5) = 128 would set the value of the sixth byte in the blob to 128.
+ *
+ * You can read and write individual bytes within the  Blob  by indexing the byte offset starting from 0. For example, my_blob(5) = 128 would set the value of the sixth byte in the blob to 128.
+ *
  * @see {DOpusFile}
  */
 interface DOpusBlob {
@@ -364,12 +365,12 @@ interface DOpusBlob {
 	/**
 	 *Copies data from the source Blob (or array) into this Blob. By default the entire contents of the source Blob will be copied over the top of this one. The optional parameters that let you configure the operation are:to - specifies the byte offset within this Blob to copy to. Defaults to 0.from - specifies the byte offset within the source Blob to copy from. Defaults to 0.size - specifies the number of bytes to copy. Defaults to the full size of the source Blob. As well as copying from another Blob, you can use this method to initialise a Blob from a string. By default the Blob will be set to the Unicode form of the string; if you pass "utf8" as the second parameter it will initialise the Blob with the UTF8-encoded form of the string.If this Blob is not currently large enough to contain the copied data it will be resized automatically.
 	 */
-	CopyFrom(source?: DOpusBlob, to?: number, from?: number, size?: number): void;
+	CopyFrom(sourceOrString?: DOpusBlob|string, toOrType?: number|string, from?: number, size?: number): void;
 
 	/**
 	 *Copies data from the source Blob (or array) into this Blob. By default the entire contents of the source Blob will be copied over the top of this one. The optional parameters that let you configure the operation are:to - specifies the byte offset within this Blob to copy to. Defaults to 0.from - specifies the byte offset within the source Blob to copy from. Defaults to 0.size - specifies the number of bytes to copy. Defaults to the full size of the source Blob. As well as copying from another Blob, you can use this method to initialise a Blob from a string. By default the Blob will be set to the Unicode form of the string; if you pass "utf8" as the second parameter it will initialise the Blob with the UTF8-encoded form of the string.If this Blob is not currently large enough to contain the copied data it will be resized automatically.
 	 */
-	copyfrom(source?: DOpusBlob, to?: number, from?: number, size?: number): void;
+	copyfrom(sourceOrString?: DOpusBlob|string, toOrType?: number|string, from?: number, size?: number): void;
 
 	/**
 	 *Searches the contents of this Blob for the data contained in another Blob (or array). By default the entire contents of this Blob are searched. The optional from parameter lets you specify the starting position for the search, and the optional size parameter lets you specify the length of data in this Blob to search through. The return value is -1 if the search data were not found, otherwise the offset from the start of the Blob data is returned.
@@ -664,12 +665,12 @@ interface DOpusCommand {
 	/**
 	 *Adds the specified item to the collection of items this command is to act upon. You can pass the item's path as either a string or a Path object, and you can also pass an Item object directly.This method returns the total number of items in the collection.
 	 */
-	AddFile(path?: string|DOpusPath, item?: DOpusItem): number;
+	AddFile(pathStringOrPathOrItem?: string|DOpusPath|DOpusItem): number;
 
 	/**
 	 *Adds the specified item to the collection of items this command is to act upon. You can pass the item's path as either a string or a Path object, and you can also pass an Item object directly.This method returns the total number of items in the collection.
 	 */
-	addfile(path?: string|DOpusPath, item?: DOpusItem): number;
+	addfile(pathStringOrPathOrItem?: string|DOpusPath|DOpusItem): number;
 
 	/**
 	 *Adds the items in the specified collection to the list of items this command is to act upon. The return value is the new number of items in the collection.You can also pass a Vector of Item or Path objects, or of strings (full paths), instead of a collection.
@@ -3200,12 +3201,12 @@ interface DOpusFSUtil {
 	/**
 	 *Calculates a checksum for the specified file or Blob. By default the MD5 checksum is calculated, but you can use the optional type parameter to change the checksum algorithm - valid values are "md5", "sha1", "sha256", "sha512", "crc32", "crc32_php", and "crc32_php_rev".You can also specify multiple types (e.g. "md5,sha1,sha256") as the type, in which case then all checksums will be calculated at the same time, and the result will be returned as a Vector of strings (in the same order as you requested them).Unlike the other algorithms, CRC32 is a concept rather than a well-defined standard. We have provided the three CRC32 implementations you're most likely to encounter. "CRC32" is most common in the Windows world and matches what tools like 7-Zip and PKZip call "CRC32", and what PHP calls "CRC32b". "CRC32_PHP" is less common and matches what BZIP2 uses and what PHP outputs by default; "CRC32_PHP_REV" is the same but with the result's byte-order reversed, as output by some tools.Example (VBScript): DOpus.FSUtil.Hash("C:\Windows\Notepad.exe","md5")
 	 */
-	Hash(path?: string, Blob?: object, type?: string): string|DOpusVector<any>;
+	Hash(pathOrBlob?: string|DOpusBlob, type?: string): string|DOpusVector<any>;
 
 	/**
 	 *Calculates a checksum for the specified file or Blob. By default the MD5 checksum is calculated, but you can use the optional type parameter to change the checksum algorithm - valid values are "md5", "sha1", "sha256", "sha512", "crc32", "crc32_php", and "crc32_php_rev".You can also specify multiple types (e.g. "md5,sha1,sha256") as the type, in which case then all checksums will be calculated at the same time, and the result will be returned as a Vector of strings (in the same order as you requested them).Unlike the other algorithms, CRC32 is a concept rather than a well-defined standard. We have provided the three CRC32 implementations you're most likely to encounter. "CRC32" is most common in the Windows world and matches what tools like 7-Zip and PKZip call "CRC32", and what PHP calls "CRC32b". "CRC32_PHP" is less common and matches what BZIP2 uses and what PHP outputs by default; "CRC32_PHP_REV" is the same but with the result's byte-order reversed, as output by some tools.Example (VBScript): DOpus.FSUtil.Hash("C:\Windows\Notepad.exe","md5")
 	 */
-	hash(path?: string, Blob?: object, type?: string): string|DOpusVector<any>;
+	hash(pathOrBlob?: string|DOpusBlob, type?: string): string|DOpusVector<any>;
 
 	/**
 	 *Creates a new FileAttr object, which represents file attributes. You can initialize the new object by passing either a string representing the attributes to turn on (e.g. "hsr") or another FileAttr object. If you don't pass a value the new object will default to all attributes turned off.
@@ -3250,12 +3251,12 @@ interface DOpusFSUtil {
 	/**
 	 *Opens or creates a file and returns a File object that lets you access its contents as binary data. You can pass a string or Path object representing a file to open, and you can also pass an existing Blob object to create a File object that gives you read/write stream access to a chunk of memory.By default the file will be opened in read mode - specify "w" for the optional mode parameter to open the file in write mode. Note that you cannot both read and write with the same File object, unless it was opened on a Blob. When opening in write mode, you can also specify optional flags that control how the file is opened:wc - create a new file, only if it doesn't already exist.wa - create a new file, always. If the file already exists it will be overwritten. (This is the default.)we - open existing file. The file will not be created if it doesn't already exist.wo - open existing file. If the file doesn't exist it will be created.wt - truncate existing file. If the file exists it will be truncated. The file will not be created if it doesn't already exist.When using write mode, you may add f (force) to any of the above mode strings to tell Opus to clear the read-only file attribute if it blocks modifying an existing file; otherwise, attempting to open a read-only file for writing will fail. For example, "wof" is like "wo" mode but also clears the read-only attribute.If you only want to make changes to a file's attributes without modifying its data you can also specify "m" to open it in modify mode.The optional third parameter lets you associate the File object with a Tab or a Lister, which will be used if Opus needs to display any dialogs (e.g. a UAC elevation dialog). You may also specify the string "NoElevate" for the third parameter to prevent UAC elevation entirely, or "ElevateNoAsk" to prevent UAC prompts while still gaining elevation if something else has already performed it. A File object is always returned, even if the file could not be opened. Check File.error on the returned object immediately after creating it to see if opening the file succeeded. Even if the file was not be opened, some of the object's methods may still work. For example, if a file doesn't exist then you can't open it or set its attributes, but permissions on an existing file may allow you to set its attributes while blocking you from modifying it or vice versa.
 	 */
-	OpenFile(path?: string, Blob?: object, mode?: string, window?: object, elevation?: string): DOpusFile;
+	OpenFile(pathOrBlob?: string|DOpusBlob, mode?: string, window?: object, elevation?: string): DOpusFile;
 
 	/**
 	 *Opens or creates a file and returns a File object that lets you access its contents as binary data. You can pass a string or Path object representing a file to open, and you can also pass an existing Blob object to create a File object that gives you read/write stream access to a chunk of memory.By default the file will be opened in read mode - specify "w" for the optional mode parameter to open the file in write mode. Note that you cannot both read and write with the same File object, unless it was opened on a Blob. When opening in write mode, you can also specify optional flags that control how the file is opened:wc - create a new file, only if it doesn't already exist.wa - create a new file, always. If the file already exists it will be overwritten. (This is the default.)we - open existing file. The file will not be created if it doesn't already exist.wo - open existing file. If the file doesn't exist it will be created.wt - truncate existing file. If the file exists it will be truncated. The file will not be created if it doesn't already exist.When using write mode, you may add f (force) to any of the above mode strings to tell Opus to clear the read-only file attribute if it blocks modifying an existing file; otherwise, attempting to open a read-only file for writing will fail. For example, "wof" is like "wo" mode but also clears the read-only attribute.If you only want to make changes to a file's attributes without modifying its data you can also specify "m" to open it in modify mode.The optional third parameter lets you associate the File object with a Tab or a Lister, which will be used if Opus needs to display any dialogs (e.g. a UAC elevation dialog). You may also specify the string "NoElevate" for the third parameter to prevent UAC elevation entirely, or "ElevateNoAsk" to prevent UAC prompts while still gaining elevation if something else has already performed it. A File object is always returned, even if the file could not be opened. Check File.error on the returned object immediately after creating it to see if opening the file succeeded. Even if the file was not be opened, some of the object's methods may still work. For example, if a file doesn't exist then you can't open it or set its attributes, but permissions on an existing file may allow you to set its attributes while blocking you from modifying it or vice versa.
 	 */
-	openfile(path?: string, Blob?: object, mode?: string, window?: object, elevation?: string): DOpusFile;
+	openfile(pathOrBlob?: string|DOpusBlob, mode?: string, window?: object, elevation?: string): DOpusFile;
 
 	/**
 	 *Returns a FolderEnum object that lets you enumerate the contents of the specified folder. The optional flags string consists of one or more flag characters: "r" - recurse. Recursively enumerate the folder (i.e. to enumerate the contents of all its sub-folders, and their sub-folders, and so on). "l" - skip links. Prevents the traversal of links and junctions when recursively enumerating folders. "s" - use shell. Lets you use ReadDir to enumerate shell (non-filesystem) folders; for example, the Quick Access folder on Windows 10 could be enumerated by passing "/quickaccess" for the path and "s" for the flags. If you don't need any flags, skip the second argument entirely. You may see older scripts pass True and False as the second argument, to turn recursion on and off; that is deprecated but remains supported for compatibility.
@@ -4064,8 +4065,8 @@ interface DOpusMap {
 	Get(key?: any): any;
 	get(key?: any): any;
 
-	Set(key?: any): any;
-	set(key?: any): any;
+	Set(key?: any, val?: any): any;
+	set(key?: any, val?: any): any;
 
 
 }
