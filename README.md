@@ -35,11 +35,17 @@ This is not a JSDoc tutorial but let's get you started. Ping me on DOpus forums 
 For example, there is DOpusScriptColumnData definition which includes the column data definitions
 
 `/**`
+
 ` * @param {DOpusScriptColumnData} scriptColData`
+
  `*/`
+
 `function onDOpusColHasStream(scriptColData){`
-	`// type the following and press and ctrl-space`
-	`// scriptColData.`
+
+`// type the following and press and ctrl-space`
+
+`// scriptColData.`
+
 `}`
 
 If you add the JSDoc @param line (note the /** */ -- it's not /\* */), you can access all the attributes and methods of ScriptColumnData object. JSDoc comments can also be all in a single line if you prefer.
