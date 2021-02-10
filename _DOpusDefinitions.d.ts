@@ -5,7 +5,6 @@
 
 /**
  * If a script add-in provides an OnAboutScript method, it is passed an AboutData object when invoked via the user clicking the About button in Preferences.
- * @see {DOpusscript add-in}
  * @see {DOpusOnAboutScript}
  */
 interface DOpusAboutData {
@@ -17,7 +16,6 @@ interface DOpusAboutData {
 
 /**
  * If a script add-in implements the OnActivateLister event, the method receives an ActivateListerData whenever the window activation state of a Lister changes.
- * @see {DOpusscript add-in}
  * @see {DOpusOnActivateLister}
  */
 interface DOpusActivateListerData {
@@ -35,8 +33,7 @@ interface DOpusActivateListerData {
 
 /**
  * If a script add-in implements the OnActivateTab event, the method receives an ActivateTabData object whenever the activation state of a tab changes.
- * @see {DOpusscript add-in}
- * @see {DOpusOnActivateTab}
+  * @see {DOpusOnActivateTab}
  */
 interface DOpusActivateTabData {
 
@@ -54,8 +51,6 @@ interface DOpusActivateTabData {
 /**
  * The AddCmdData object is passed to the OnAddCommands event in a script add-in . The script can use this to add internal commands using the AddCommand method.
  * @see {DOpusOnAddCommands}
- * @see {DOpusscript add-in}
- * @see {DOpusadd internal commands}
  */
 interface DOpusAddCmdData {
 
@@ -73,8 +68,6 @@ interface DOpusAddCmdData {
 
 /**
  * The AddColData object is passed to the OnAddColumns event in a script add-in . The script can use this to add columns using the AddColumn method.
- * @see {DOpusscript add-in}
- * @see {DOpusadd columns}
  */
 interface DOpusAddColData {
 
@@ -92,8 +85,7 @@ interface DOpusAddColData {
 
 /**
  * If a script add-in implements the OnAfterFolderChange event, the method receives an AfterFolderChangeData object once the folder read is complete.
- * @see {DOpusscript add-in}
- * @see {DOpusOnAfterFolderChange}
+  * @see {DOpusOnAfterFolderChange}
  */
 interface DOpusAfterFolderChangeData {
 
@@ -132,7 +124,7 @@ interface DOpusAlias extends String {
 
 /**
  * The Aliases object holds a collection of all the defined folder aliases . It is retrieved from the DOpus .aliases method.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  *
  * @returns {DOpusAlias} You can enumerate the Aliases object, or query the value of an individual alias by name (e.g. DOpus.Output(DOpus.aliases("desktop").path);)
  */
@@ -318,8 +310,7 @@ interface DOpusAudioMeta {
 
 /**
  * If a script add-in implements the OnBeforeFolderChange event, the method receives a BeforeFolderChangeData object before the new folder is read.
- * @see {DOpusscript add-in}
- * @see {DOpusOnBeforeFolderChange}
+  * @see {DOpusOnBeforeFolderChange}
  */
 interface DOpusBeforeFolderChangeData {
 
@@ -544,8 +535,7 @@ interface DOpusClickData {
 
 /**
  * If a script add-in implements the OnCloseLister event, the method receives a CloseListerData object before a Lister is closed.
- * @see {DOpusscript add-in}
- * @see {DOpusOnCloseLister}
+  * @see {DOpusOnCloseLister}
  */
 interface DOpusCloseListerData {
 
@@ -565,8 +555,7 @@ interface DOpusCloseListerData {
 
 /**
  * If a script add-in implements the OnCloseTab event, the method receives a CloseTabData object when a tab is closed.
- * @see {DOpusscript add-in}
- * @see {DOpusOnCloseTab}
+  * @see {DOpusOnCloseTab}
  */
 interface DOpusCloseTabData {
 
@@ -625,7 +614,6 @@ interface DOpusColumn extends String {
  * The Command object is used by a script to run Opus commands. Any command that you can run from a button or hotkey you can run from a script - a script can even run commands added by other scripts . Fundamentally, using the Command object is similar to configuring an Opus button. You add one or more command lines to the object just the same as you add one or more command lines to a button's function. You can tell it which files and folders to act upon, and you can use the various methods and properties of the object to modify the behavior of the command. Once the object has been initialized you can use the Run or RunCommand methods to invoke the command.
 
 A Command  object can be created by the   DOpusFactory .Command  method. By default, this object has no source, destination, files to operate on, etc. - you must use the appropriate methods to configure the command before running it. You can also retrieve a  Command  object from the   Func .command  property, and in this case the source, destination, files to operate on and several other properties are pre-initialized for you.
- * @see {DOpuscommands added by other scripts}
  */
 interface DOpusCommand {
 
@@ -934,10 +922,11 @@ interface DOpusCommand {
 
 }
 
+declare var Command: DOpusCommand;
+
 /**
  * If a script add-in implements the OnScriptConfigChange event, the method receives a ConfigChangeData object whenever the user modifies the script's configuration via the Preferences editor.
- * @see {DOpusscript add-in}
- * @see {DOpusOnScriptConfigChange}
+  * @see {DOpusOnScriptConfigChange}
  */
 interface DOpusConfigChangeData {
 
@@ -948,7 +937,6 @@ interface DOpusConfigChangeData {
 
 /**
  * The Control object represents a control on a script dialog ; it lets you read and modify a control's value (and contents). Use the Dialog .Control method to obtain a Control object.
- * @see {DOpusscript dialog}
  * @see {DOpusDialog}
  */
 interface DOpusControl {
@@ -1706,9 +1694,10 @@ interface DOpusDialog {
 
 }
 
+declare var Dialog: DOpusDialog;
+
 /**
  * The DialogListColumn object represents a column in a Details mode list view control in a script dialog. Use the Control .columns property to obtain a DialogListColumns object, and then enumerate it to obtain individual DialogListColumn objects.
- * @see {DOpusscript dialog.}
  * @see {DOpusControl}
  * @see {DOpusDialogListColumns}
  */
@@ -1741,7 +1730,6 @@ interface DOpusDialogListColumn {
  * The DialogListColumns object lets you query or modify the columns in a Details mode list view control in a script dialog. Use the Control .columns property to obtain a DialogListColumns object.
 
 You can enumerate this object to query the current columns. Each column is represented by a   DialogListColumn   object.
- * @see {DOpusscript dialog.}
  * @see {DOpusControl}
  */
 interface DOpusDialogListColumns {
@@ -1801,7 +1789,6 @@ interface DOpusDialogListColumns {
 
 /**
  * The DialogListGroup object represents a group in a list view control in a script dialog . It's returned by the Control .GetGroupById method.
- * @see {DOpusscript dialog}
  * @see {DOpusControl}
  */
 interface DOpusDialogListGroup {
@@ -1819,7 +1806,6 @@ interface DOpusDialogListGroup {
 
 /**
  * The DialogListItem object represents an item in a combo box or list box control in a script dialog . It's returned by the Control .GetItemAt and Control .GetItemByName methods.
- * @see {DOpusscript dialog}
  * @see {DOpusControl}
  */
 interface DOpusDialogListItem {
@@ -1878,8 +1864,7 @@ interface DOpusDialogOption {
 
 /**
  * If a script add-in implements the OnDisplayModeChange event, the method receives a DisplayModeChangeData object when the display mode is changed in a tab.
- * @see {DOpusscript add-in}
- * @see {DOpusOnDisplayModeChange}
+  * @see {DOpusOnDisplayModeChange}
  */
 interface DOpusDisplayModeChangeData {
 
@@ -1957,216 +1942,8 @@ interface DOpusDocMeta {
 }
 
 /**
- * The DOpus object is one of the two global script objects provided by Opus, and is available to all scripts. It provides various helper methods, and collections that let you access things like Listers and toolbars.
-
- */
-interface DOpusDOpus {
-
-	/** The Aliases object gives the script access to the defined folder aliases. */
-	readonly aliases: DOpusAliases;
-
-	/** Returns a collection of Format objects representing the used-defined favorite formats. */
-	readonly favoriteformats: DOpusFormat;
-
-	/** Returns a Favorites object which lets you query and modify the user-defined favorite folders. */
-	readonly favorites: DOpusFavorites;
-
-	/** Returns a FiletypeGroups object which lets you enumerate and query the configured file type groups. */
-	readonly filetypegroups: DOpusFiletypeGroups;
-
-	/** Returns a GlobalFilters object which lets you access information about the global filter settings (configured on the Folders / Global Filters page in Preferences). */
-	readonly filters: DOpusGlobalFilters;
-
-	/** Returns a string representing the current user interface language. */
-	readonly language: string;
-
-	/** Returns a Listers object which represents any currently open Lister windows (each one is represented by a Lister object). */
-	readonly listers: DOpusListers;
-
-	/** Returns a SmartFavorites object which lets you query the SmartFavorites data. */
-	readonly smartfavorites: DOpusSmartFavorites;
-
-	/** Returns a ScriptStrings object which lets your script access any strings defined as string resources. */
-	readonly strings: DOpusScriptStrings;
-
-	/** Returns a TabGroups object which lets your script access and manipulate the configured folder tab groups. */
-	readonly tabgroups: DOpusTabGroups;
-
-	/** This Vars object represents all defined variables with global scope. */
-	readonly vars: DOpusVars;
-
-	/** The Version object provides information about the current Opus program version. */
-	readonly version: DOpusVersion;
-
-	/** Returns a Viewers object which represents any currently open standalone image viewers (each one is represented by a Viewer object). */
-	readonly viewers: DOpusViewers;
-
-	/**
-	 *Clears the script output log.
-	 */
-	ClearOutput(): void;
-
-	/**
-	 *Clears the script output log.
-	 */
-	clearoutput(): void;
-
-	/**
-	 *Creates and returns a new DOpusFactory object, which can be used to create various lightweight helper objects like Blob, Map and Vector.
-	 */
-	Create(): DOpusFactory;
-
-	/**
-	 *Creates and returns a new DOpusFactory object, which can be used to create various lightweight helper objects like Blob, Map and Vector.
-	 */
-	create(): DOpusFactory;
-
-	/**
-	 *Delays for the specified number of milliseconds before returning.
-	 */
-	Delay(time?: number): void;
-
-	/**
-	 *Delays for the specified number of milliseconds before returning.
-	 */
-	delay(time?: number): void;
-
-	/**
-	 *Creates a new Dialog object, that lets you display dialogs and popup menus. Note: Scripts should not usually use this when responding to events triggered by toolbars or folder tabs. The Dialog returned by DOpus.Dlg will not have its parent window configured. Most scripting events provide you an object which can either create a pre-configured Dialog or which includes a SourceTab property or similar which can do the same. In almost all situations you should use those instead.
-	 */
-	Dlg(): DOpusDialog;
-
-	/**
-	 *Creates a new Dialog object, that lets you display dialogs and popup menus. Note: Scripts should not usually use this when responding to events triggered by toolbars or folder tabs. The Dialog returned by DOpus.Dlg will not have its parent window configured. Most scripting events provide you an object which can either create a pre-configured Dialog or which includes a SourceTab property or similar which can do the same. In almost all situations you should use those instead.
-	 */
-	dlg(): DOpusDialog;
-
-	/**
-	 *Creates the DPI helper object which assists when dealing with different system scaling settings (e.g. high-DPI monitors).
-	 */
-	DPI(): DOpusDPI;
-
-	/**
-	 *Creates the DPI helper object which assists when dealing with different system scaling settings (e.g. high-DPI monitors).
-	 */
-	dpi(): DOpusDPI;
-
-	/**
-	 *Creates a new FSUtil object, that provides helper methods for accessing the file system.
-	 */
-	FSUtil(): DOpusFSUtil;
-
-	/**
-	 *Creates a new FSUtil object, that provides helper methods for accessing the file system.
-	 */
-	fsutil(): DOpusFSUtil;
-
-	/**
-	 *Retrieves the current contents of the system clipboard, if it contains either text or files.You can control the returned type by passing either "text" or "files" for the argument - Opus will convert to the requested type if possible.If is not specified the contents will be returned in their native format.
-	 */
-	GetClip(type?: string): string|DOpusItem;
-
-	/**
-	 *Retrieves the current contents of the system clipboard, if it contains either text or files.You can control the returned type by passing either "text" or "files" for the argument - Opus will convert to the requested type if possible.If is not specified the contents will be returned in their native format.
-	 */
-	getclip(type?: string): string|DOpusItem;
-
-	/**
-	 *Returns a string indicating the native format of the clipboard contents - "text", "files" or an empty string in any other case.
-	 */
-	GetClipFormat(): string;
-
-	/**
-	 *Returns a string indicating the native format of the clipboard contents - "text", "files" or an empty string in any other case.
-	 */
-	getclipformat(): string;
-
-	/**
-	 *Returns a string indicating which qualifier keys are currently held down. If none are held down, the string will be "none". Otherwise, the string can contain any or all of the following, separated by commas: "shift", "ctrl", "alt", "lwin", "rwin". Note that many events pass you a similar list of qualifiers. If you are passed a list of qualifiers, you should generally use that list rather than call DOpus.GetQualifiers. For example, script commands are passed a Func object with a qualifiers property. That property will tell you which keys were held down when the command was triggered, and that may be different to the keys held down a few seconds later. When the user clicks a button to run a command, they normally expect the command to use the keys they held when they clicked, not the keys they are touching later while waiting for it to finish. Similarly, events like OnBeforeFolderChange will often pass you an object like BeforeFolderChangeData containing a qualifiers property which indicates key state when the event was triggered. You should normally use that instead of calling DOpus.GetQualifiers. If you do call DOpus.GetQualifiers, you would normally want to call it as soon as possible and then store the result, so there is less time for the user to let go of a key after triggering your script. If you call DOpus.GetQualifiers more than once, you may get a different result each time, due to keys being pushed or released between calls. Call it once and store the result if you need to do multiple checks and need them to be consistent. This does not generally affect the qualifiers properties mentioned earlier, since they are usually stored snapshots of the key state.
-	 */
-	GetQualifiers(): string;
-
-	/**
-	 *Returns a string indicating which qualifier keys are currently held down. If none are held down, the string will be "none". Otherwise, the string can contain any or all of the following, separated by commas: "shift", "ctrl", "alt", "lwin", "rwin". Note that many events pass you a similar list of qualifiers. If you are passed a list of qualifiers, you should generally use that list rather than call DOpus.GetQualifiers. For example, script commands are passed a Func object with a qualifiers property. That property will tell you which keys were held down when the command was triggered, and that may be different to the keys held down a few seconds later. When the user clicks a button to run a command, they normally expect the command to use the keys they held when they clicked, not the keys they are touching later while waiting for it to finish. Similarly, events like OnBeforeFolderChange will often pass you an object like BeforeFolderChangeData containing a qualifiers property which indicates key state when the event was triggered. You should normally use that instead of calling DOpus.GetQualifiers. If you do call DOpus.GetQualifiers, you would normally want to call it as soon as possible and then store the result, so there is less time for the user to let go of a key after triggering your script. If you call DOpus.GetQualifiers more than once, you may get a different result each time, due to keys being pushed or released between calls. Call it once and store the result if you need to do multiple checks and need them to be consistent. This does not generally affect the qualifiers properties mentioned earlier, since they are usually stored snapshots of the key state.
-	 */
-	getqualifiers(): string;
-
-	/**
-	 *Loads an image file from the specified external file. You can optionally specify the desired size to load the image at, and whether the alpha channel (if any) should be loaded or not. The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
-	 */
-	LoadImage(filename?: string, width?: number, height?: number, alpha?: boolean): DOpusImage;
-
-	/**
-	 *Loads an image file from the specified external file. You can optionally specify the desired size to load the image at, and whether the alpha channel (if any) should be loaded or not. The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
-	 */
-	loadimage(filename?: string, width?: number, height?: number, alpha?: boolean): DOpusImage;
-
-	/**
-	 *Extracts a thumbnail from the specified external file. You can optionally specify a timeout (in milliseconds) and the desired size to load the thumbnail at. If loading fails (or the timeout expires before the thumbnail could be generated) this method returns False. The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
-	 */
-	LoadThumbnail(filename?: string, timeout?: number, width?: number, height?: number): DOpusImage;
-
-	/**
-	 *Extracts a thumbnail from the specified external file. You can optionally specify a timeout (in milliseconds) and the desired size to load the thumbnail at. If loading fails (or the timeout expires before the thumbnail could be generated) this method returns False. The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
-	 */
-	loadthumbnail(filename?: string, timeout?: number, width?: number, height?: number): DOpusImage;
-
-	/**
-	 *Prints the specified text string to the script output log (found in the Utility Panel, the CLI in script mode, the Rename dialog and the Command Editor in script mode).If the second argument is provided and set to True, the message will be displayed as an error. This means the text will be displayed in red and if no log windows are currently open, a warning icon will flash in the Lister status bar to alert the user of an error condition. If the optional third argument is provided and set to True then the log message will have a timestamp prepended to it. Timestamps only appear in the utility panel, not in places like the Command Editor's output panel. Error messages always get timestamps so if the second argument is True then the third is ignored
-	 */
-	Output(text?: string, error?: boolean, timestamp?: boolean): void;
-
-	/**
-	 *Prints the specified text string to the script output log (found in the Utility Panel, the CLI in script mode, the Rename dialog and the Command Editor in script mode).If the second argument is provided and set to True, the message will be displayed as an error. This means the text will be displayed in red and if no log windows are currently open, a warning icon will flash in the Lister status bar to alert the user of an error condition. If the optional third argument is provided and set to True then the log message will have a timestamp prepended to it. Timestamps only appear in the utility panel, not in places like the Command Editor's output panel. Error messages always get timestamps so if the second argument is True then the third is ignored
-	 */
-	output(text?: string, error?: boolean, timestamp?: boolean): void;
-
-	/**
-	 *Causes Opus to reload and reinitialize the specified script. You must provide the full pathname of the script on disk (if a script add-in wants to reload itself you can pass the value of the Script.file property).
-	 */
-	ReloadScript(file?: string): void;
-
-	/**
-	 *Causes Opus to reload and reinitialize the specified script. You must provide the full pathname of the script on disk (if a script add-in wants to reload itself you can pass the value of the Script.file property).
-	 */
-	reloadscript(file?: string): void;
-
-	/**
-	 *Places the specified text, or Item collection (or Vector of Item objects) on the system clipboard. If called with no arguments the clipboard will be cleared.
-	 */
-	SetClip(text?: string): void;
-
-	/**
-	 *Places the specified text, or Item collection (or Vector of Item objects) on the system clipboard. If called with no arguments the clipboard will be cleared.
-	 */
-	setclip(text?: string): void;
-
-	/**
-	 *Returns a Toolbars object which lets you enumerate all defined toolbars (whether they are currently open or not). You can restrict this object to only return in-use toolbars by specifying the optional type parameter - specify "listers" to only return toolbars currently turned on in a Lister, and "docks" to only return toolbars that are currently floating.
-	 */
-	Toolbars(type?: string): DOpusToolbars;
-
-	/**
-	 *Returns a Toolbars object which lets you enumerate all defined toolbars (whether they are currently open or not). You can restrict this object to only return in-use toolbars by specifying the optional type parameter - specify "listers" to only return toolbars currently turned on in a Lister, and "docks" to only return toolbars that are currently floating.
-	 */
-	toolbars(type?: string): DOpusToolbars;
-
-	/**
-	 *Returns a string indicating the type of an object or variable.
-	 */
-	TypeOf(): string;
-
-	/**
-	 *Returns a string indicating the type of an object or variable.
-	 */
-	typeof(): string;
-
-}
-
-/**
  * If a script add-in implements the OnDoubleClick event, the method receives a DoubleClickData object when the user double-clicks a file or folder.
- * @see {DOpusscript add-in}
- * @see {DOpusOnDoubleClick}
+  * @see {DOpusOnDoubleClick}
  */
 interface DOpusDoubleClickData {
 
@@ -2207,7 +1984,7 @@ interface DOpusDoubleClickData {
 
 /**
  * The DPI object is a helper object that provides a number of methods and properties relating to the system DPI setting. For example, you can use it to convert a pixel width into one scaled for the current system DPI. The DPI object is returned via the DOpus .DPI property.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  */
 interface DOpusDPI {
 
@@ -2343,7 +2120,7 @@ interface DOpusFavorite extends String {
 
 /**
  * The Favorites object holds a collection of all the defined favorite folders . It is retrieved from the DOpus .favorites property.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  *
  * @returns {DOpusFavorite} You can enumerate the Favorites object to retrieve individual Favorite objects.
  */
@@ -2652,8 +2429,7 @@ interface DOpusFileGroup extends String {
 
 /**
  * If a script add-in implements the OnFileOperationComplete event, the method receives a FileOperationCompleteData object whenever a supported file operation begins. If you return True to indicate that you want to be notified about the operation, you'll receive another call when the operation is complete.
- * @see {DOpusscript add-in}
- * @see {DOpusOnFileOperationComplete}
+  * @see {DOpusOnFileOperationComplete}
  */
 interface DOpusFileOperationCompleteData {
 
@@ -2872,8 +2648,7 @@ interface DOpusFiletypeGroups extends DOpusFiletypeGroup {
 
 /**
  * If a script add-in implements the OnFlatViewChange event, the method receives a FlatViewChangeData object when the Flat View mode is changed in a tab.
- * @see {DOpusscript add-in}
- * @see {DOpusOnFlatViewChange}
+  * @see {DOpusOnFlatViewChange}
  */
 interface DOpusFlatViewChangeData {
 
@@ -3292,10 +3067,8 @@ interface DOpusFSUtil {
 
 /**
  * The Func object is passed to a script when it is invoked via a command. In a script function , it is passed to the OnClick method as the ClickData .func property, and in a script add-in that adds an internal command , via the ScriptCommandData .func property. The Func object provides information about the default source and destination of the command, as well as details about how it was invoked.
- * @see {DOpusscript function}
  * @see {DOpusOnClick}
  * @see {DOpusClickData}
- * @see {DOpusadds an internal command}
  * @see {DOpusScriptCommandData}
  */
 interface DOpusFunc {
@@ -3341,8 +3114,7 @@ interface DOpusFunc {
 
 /**
  * If a script add-in implements the OnGetCopyQueueName event, the method receives a GetCopyQueueNameData object whenever a copy operation begins that uses automatically-managed copy queues (i.e. the Automatically manage file copy queues option on the File Operations / Copy Options page in Preferences is turned on).
- * @see {DOpusscript add-in}
- * @see {DOpusOnGetCopyQueueName}
+  * @see {DOpusOnGetCopyQueueName}
  */
 interface DOpusGetCopyQueueNameData {
 
@@ -3422,7 +3194,6 @@ interface DOpusGetHelpContentData {
 
 /**
  * If a rename script is implemented using the OnGetNewName method, it receives a GetNewNameData object for each item being renamed.
- * @see {DOpusrename script}
  * @see {DOpusOnGetNewName}
  */
 interface DOpusGetNewNameData {
@@ -3458,7 +3229,7 @@ interface DOpusGetNewNameData {
 
 /**
  * The GlobalFilters object provides information about the global file and folder filter settings (configured on the Folders / Global Filters page in Preferences). It is obtained from the DOpus .filters property.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  */
 interface DOpusGlobalFilters {
 
@@ -3481,8 +3252,7 @@ interface DOpusGlobalFilters {
 
 /**
  * The Image object represents an image file or icon to be displayed in a script dialog . You can load an image or icon using the DOpus .LoadImage or Script .LoadImage methods. It can be displayed using a static control, or assigned as the dialog's icon.
- * @see {DOpusscript dialog}
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  * @see {DOpusScript}
  */
 interface DOpusImage {
@@ -3796,7 +3566,7 @@ interface DOpusItem extends String {
 
 /**
  * The Lister object represents an open Lister window. A collection of currently open Lister objects is available from the DOpus .listers property, and if a command results in a new Lister being opened, the Results object.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  * @see {DOpusResults}
  */
 interface DOpusLister {
@@ -3911,13 +3681,14 @@ interface DOpusLister {
 	 *The first time a script accesses a particular Lister object, a snapshot is taken of the Lister state. If the script then makes changes to that Lister (e.g. it opens a new tab, or moves the window), these changes will not be reflected by the object. To re-synchronize the object with the Lister, call the Lister.Update method.
 	 */
 	update(): void;
-
 }
+
+declare var Lister: DOpusLister;
+
 
 /**
  * If a script add-in implements the OnListerResize event, the method receives a ListerResizeData object whenever a Lister window is resized.
- * @see {DOpusscript add-in}
- * @see {DOpusOnListerResize}
+  * @see {DOpusOnListerResize}
  */
 interface DOpusListerResizeData {
 
@@ -3939,7 +3710,7 @@ interface DOpusListerResizeData {
  * The Listers object is a collection of all currently open Listers . It can be obtained via the DOpus .listers property.
 
 Note: If you are looking for a window to use as the parent for a  Dialog , you are probably looking in the wrong place. Scripts should not assume that  DOpus.listers(0)  or  DOpus.listers.lastactive  are the lister which launched them. Most scripting events provide you an object which can either create a pre-configured  Dialog  for you or which includes a  SourceTab  property or similar which can do the same. In almost all situations you should use those instead.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  *
  * @returns {DOpusLister} Lets you enumerate the currently open Listers. Do not assume that DOpus.listers(0) is the window which launched your script. See the note near the top of the page.
  */
@@ -3962,8 +3733,7 @@ interface DOpusListers extends DOpusLister {
 
 /**
  * If a script add-in implements the OnListerUIChange event, the method receives a ListerUIChangeData object when various user interface elements are opened or closed in a Lister.
- * @see {DOpusscript add-in}
- * @see {DOpusOnListerUIChange}
+  * @see {DOpusOnListerUIChange}
  */
 interface DOpusListerUIChangeData {
 
@@ -4125,9 +3895,7 @@ interface DOpusMetadata extends String {
 
 /**
  * The Msg object represents a script dialog input event message. It’s returned by the Dialog .GetMsg method which you call when running the message loop for a detached dialog .
- * @see {DOpusscript dialog}
  * @see {DOpusDialog}
- * @see {DOpusdetached dialog}
  *
  * @returns {boolean} Returns True if the message is valid, or False if the dialog has been closed (which means you should exit your message loop).
  */
@@ -4212,8 +3980,7 @@ interface DOpusMsg extends Boolean {
 
 /**
  * If a script add-in implements the OnOpenLister event, the method receives an OpenListerData object when invoked when a new Lister opens.
- * @see {DOpusscript add-in}
- * @see {DOpusOnOpenLister}
+  * @see {DOpusOnOpenLister}
  */
 interface DOpusOpenListerData {
 
@@ -4230,8 +3997,7 @@ interface DOpusOpenListerData {
 
 /**
  * If a script add-in implements the OnOpenTab event, the method receives an OpenTabData object when invoked when a new tab is opened.
- * @see {DOpusscript add-in}
- * @see {DOpusOnOpenTab}
+  * @see {DOpusOnOpenTab}
  */
 interface DOpusOpenTabData {
 
@@ -4287,7 +4053,7 @@ interface DOpusOtherMeta {
 /**
  * The Path object represents a file or folder path. Many objects have properties that return a Path - for example, Tab .path returns the current folder in a tab as a Path object. You can create a new Path object from a string (or another Path ) using the DOpus . FSUtil .NewPath method.
  * @see {DOpusTab}
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  * @see {DOpusFSUtil}
  *
  * @returns {typeof string} Returns the full path as a string.
@@ -4796,7 +4562,6 @@ interface DOpusResults {
 
 /**
  * The Script object is one of the two global script objects provided by Opus. This object is provided to script addins when their various event handlers are invoked (other than for the OnInit event). It provides information relating to the script itself.
- * @see {DOpusscript addins}
  * @see {DOpusOnInit}
  */
 interface DOpusScript {
@@ -4902,11 +4667,12 @@ interface DOpusScript {
 
 }
 
+declare var Script: DOpusScript;
+
 /**
  * In a script's OnInit method it can call the ScriptInitData .AddColumn method to add custom columns to Opus. These columns can be displayed in file displays and infotips, and can be searched on using the Advanced Find function. Each call to AddColumn returns a ScriptColumn object that the script needs to initialize.
  * @see {DOpusOnInit}
  * @see {DOpusScriptInitData}
- * @see {DOpusadd custom columns}
  */
 interface DOpusScriptColumn {
 
@@ -5022,9 +4788,7 @@ interface DOpusScriptColumn {
 
 /**
  * The ScriptColumnData object is passed to the script-defined entry points for any custom columns added by a script add-in . The method name for these events is defined by the script itself, but generically it's referred to as OnScriptColumn . Note that the fields group , sort , type and value are settable and are the way your method returns values for your column.
- * @see {DOpuscustom columns}
- * @see {DOpusscript add-in}
- * @see {DOpusOnScriptColumn}
+  * @see {DOpusOnScriptColumn}
  */
 interface DOpusScriptColumnData {
 
@@ -5120,7 +4884,6 @@ interface DOpusScriptColumnData {
  * In a script's OnInit method it can call the ScriptInitData .AddCommand method to add commands to the Opus internal command set. Each call to AddCommand returns a ScriptCommand object that the script needs to initialize.
  * @see {DOpusOnInit}
  * @see {DOpusScriptInitData}
- * @see {DOpusadd commands}
  */
 interface DOpusScriptCommand {
 
@@ -5149,9 +4912,7 @@ interface DOpusScriptCommand {
 
 /**
  * The ScriptCommandData object is passed to the script-defined entry points for any internal commands added by a script add-in . The method name for these events is defined by the script itself, but generically it's referred to as OnScriptCommand .
- * @see {DOpusinternal commands}
- * @see {DOpusscript add-in}
- * @see {DOpusOnScriptCommand}
+  * @see {DOpusOnScriptCommand}
  */
 interface DOpusScriptCommandData {
 
@@ -5192,9 +4953,6 @@ interface DOpusScriptConfig {
 /**
  * The ScriptInitData object is passed to the OnInit event in a script add-in . The script should initialize the various properties to identify itself, and can optionally add internal commands using the AddCommand method, and custom columns using the AddColumn method, before returning.
  * @see {DOpusOnInit}
- * @see {DOpusscript add-in}
- * @see {DOpusadd internal commands}
- * @see {DOpuscustom columns}
  */
 interface DOpusScriptInitData {
 
@@ -5267,11 +5025,11 @@ interface DOpusScriptInitData {
 	addcommand(): DOpusScriptCommand;
 
 }
+declare var ScriptInitData: DOpusScriptInitData;
 
 /**
  * The ScriptStrings object is returned by the DOpus .strings property. It lets you access any strings defined via string resources .
- * @see {DOpusDOpus}
- * @see {DOpusstring resources}
+ * @see {DOpusConstructor}
  */
 interface DOpusScriptStrings {
 
@@ -5330,8 +5088,7 @@ interface DOpusShellProperty {
 
 /**
  * If a script add-in implements the OnShutdown event, the method receives a ShutdownData object when invoked on Opus shutdown.
- * @see {DOpusscript add-in}
- * @see {DOpusOnShutdown}
+  * @see {DOpusOnShutdown}
  */
 interface DOpusShutdownData {
 
@@ -5362,7 +5119,7 @@ interface DOpusSmartFavorite {
 
 /**
  * The SmartFavorites object lets you query the contents of the SmartFavorites table. It is retrieved from the DOpus .smartfavorites property.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  *
  * @returns {DOpusSmartFavorite} You can enumerate the SmartFavorites object to retrieve individual SmartFavorite objects.
  */
@@ -5416,8 +5173,7 @@ interface DOpusSortOrder {
 
 /**
  * If a script add-in implements the OnSourceDestChange event, the method receives a SourceDestData object to indicate which tab's state changed.
- * @see {DOpusscript add-in}
- * @see {DOpusOnSourceDestChange}
+  * @see {DOpusOnSourceDestChange}
  */
 interface DOpusSourceDestData {
 
@@ -5439,8 +5195,7 @@ interface DOpusSourceDestData {
  * If a script add-in implements the OnStartup event, the method receives a StartupData object when Opus starts up.
 
 This object currently has no defined methods or properties.
- * @see {DOpusscript add-in}
- * @see {DOpusOnStartup}
+  * @see {DOpusOnStartup}
  */
 interface DOpusStartupData {
 
@@ -5570,8 +5325,7 @@ interface DOpusStringTools {
 
 /**
  * If a script add-in implements the OnStyleSelected event, the method receives a StyleSelectedData object when the user chooses a new Lister style .
- * @see {DOpusscript add-in}
- * @see {DOpusOnStyleSelected}
+  * @see {DOpusOnStyleSelected}
  */
 interface DOpusStyleSelectedData {
 
@@ -5746,10 +5500,11 @@ interface DOpusTab {
 
 }
 
+declare var Tab: DOpusTab;
+
 /**
  * If a script add-in implements the OnTabClick event, the method receives a TabClickData object when a tab is clicked with a qualifier key held down.
- * @see {DOpusscript add-in}
- * @see {DOpusOnTabClick}
+  * @see {DOpusOnTabClick}
  */
 interface DOpusTabClickData {
 
@@ -5860,7 +5615,7 @@ interface DOpusTabGroup {
  * The TabGroups object lets your script query and modify the configured Folder Tab Groups . You can obtain a TabGroups object from the DOpus .TabGroups property.
 
 The TabGroups  object is a collection of   TabGroup   objects; you can enumerate it to discover the top-level tab groups and folders. Folders can also be enumerated to discover the tab groups and folders they contain, and so on.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  */
 interface DOpusTabGroups {
 
@@ -6141,7 +5896,7 @@ interface DOpusToolbar extends String {
 
 /**
  * The Toolbars object lets you enumerate all the defined toolbars in your Directory Opus configuration (whether currently turned on or not). It's retrieved using the DOpus .Toolbars method.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  *
  * @returns {DOpusToolbar} Returns a collection of Toolbar objects that you can enumerate.
  */
@@ -6468,7 +6223,7 @@ interface DOpusVector<T> {
 
 /**
  * The Version object is retrieved from the DOpus .version property. It provides information about the current version of Directory Opus.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  *
  * @returns {string} Full version string (as shown in the About dialog).
  */
@@ -6592,7 +6347,7 @@ interface DOpusVideoMeta {
 /**
  * The Viewer object represents a standalone image viewer . A collection of Viewer objects is returned by the Viewers object, which is obtainable via the DOpus .viewers property. For functions launched from within a viewer (e.g. from its toolbar), the current Viewer object is provided by the ClickData . func .viewer property.
  * @see {DOpusViewers}
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  * @see {DOpusClickData}
  * @see {DOpusfunc}
  */
@@ -6736,7 +6491,7 @@ interface DOpusViewerEventData {
 
 /**
  * The Viewers object is a collection of all currently open standalone image viewers . It can be obtained via the DOpus .viewers property.
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  *
  * @returns {DOpusViewer} Lets you enumerate the currently open viewers.
  */
@@ -6903,12 +6658,12 @@ interface DOpusConstructor {
 	/**
 	 * Delays for the specified number of milliseconds before returning.
 	 */
-	Delay(time?: number): none;
+	Delay(time?: number): void;
 
 	/**
 	 * Delays for the specified number of milliseconds before returning.
 	 */
-	delay(time?: number): none;
+	delay(time?: number): void;
 
 	/**
 	 * Creates a new Dialog object, that lets you display dialogs and popup menus.XXXXNote: Scripts should not usually use this when responding to events triggered by toolbars or folder tabs. The Dialog returned by DOpus.Dlg will not have its parent window configured. Most scripting events provide you an object which can either create a pre-configured Dialog or which includes a SourceTab property or similar which can do the same. In almost all situations you should use those instead.
@@ -7016,12 +6771,12 @@ interface DOpusConstructor {
 	/**
 	 * Places the specified text, or Item collection (or Vector of Item objects) on the system clipboard. If called with no arguments the clipboard will be cleared.
 	 */
-	SetClip(text?: string|DOpusItem|Vector<DOpusItem>): void;
+	SetClip(text?: string|DOpusItem|DOpusVector<DOpusItem>): void;
 
 	/**
 	 * Places the specified text, or Item collection (or Vector of Item objects) on the system clipboard. If called with no arguments the clipboard will be cleared.
 	 */
-	setclip(text?: string|DOpusItem|Vector<DOpusItem>): void;
+	setclip(text?: string|DOpusItem|DOpusVector<DOpusItem>): void;
 
 	/**
 	 * Returns a Toolbars object which lets you enumerate all defined toolbars (whether they are currently open or not).XXXXYou can restrict this object to only return in-use toolbars by specifying the optional type parameter - specify "listers" to only return toolbars currently turned on in a Lister, and "docks" to only return toolbars that are currently floating.
@@ -7053,7 +6808,7 @@ declare var DOpus: DOpusConstructor;
  * The DOpusFactory object is a helper object that you can use to create various other objects. Unlike the objects that represent existing things (e.g. Lister or Tab ), the objects created by DOpusFactory are independent objects that you can instantiate whenever you need their functionality. The DOpusFactory object is obtained via the DOpus .Create method.
  * @see {DOpusLister}
  * @see {DOpusTab}
- * @see {DOpusDOpus}
+ * @see {DOpusConstructor}
  */
 interface DOpusFactoryConstructor {
 
