@@ -1831,12 +1831,12 @@ interface DOpusDialog {
 	/**
 	 * Displays a "Browse for Folder" dialog letting the user select a folder. The optional parameters are: title - specify title of the dialogdefault - specify the default path selected in the dialogexpand - specify True to automatically expand the initial pathwindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. A Path object is returned to indicate the folder chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
 	 */
-	Folder(title?: string, defaultValue?: string, expand?: boolean, window?: object): DOpusPath;
+	Folder(title?: string, defaultValue?: string, expand?: boolean, window?: DOpusLister|DOpusTab): DOpusPath;
 
 	/**
 	 * Displays a "Browse for Folder" dialog letting the user select a folder. The optional parameters are: title - specify title of the dialogdefault - specify the default path selected in the dialogexpand - specify True to automatically expand the initial pathwindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. A Path object is returned to indicate the folder chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
 	 */
-	folder(title?: string, defaultValue?: string, expand?: boolean, window?: object): DOpusPath;
+	folder(title?: string, defaultValue?: string, expand?: boolean, window?: DOpusLister|DOpusTab): DOpusPath;
 
 	/**
 	 * Returns a Msg object representing the most recent input event in a script dialog (only used in detached mode). The return value will evaluate to False when the dialog is closed, which is when you should exit your message loop. If the dialog is not already visible (because Show has not been called) then it will become visible when you first call GetMsg.
@@ -1851,12 +1851,12 @@ interface DOpusDialog {
 	/**
 	 * Displays a text entry dialog allowing the user to enter a string. The optional parameters are: message - specify message string in the dialogdefault - specify default string valuemax - specify maximum string lengthbuttons - specify button labels (in the same format as the buttons property described above)title - specify dialog window titlewindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.result - for scripting languages that support ByRef parameters, this can specify a variable to receive the string the user enters.The return value is the entered string, or an empty value if the dialog was cancelled. The index of the button selected by the user will be available via the result property once this method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
 	 */
-	GetString(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: object, result?: string): string;
+	GetString(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab, result?: string): string;
 
 	/**
 	 * Displays a text entry dialog allowing the user to enter a string. The optional parameters are: message - specify message string in the dialogdefault - specify default string valuemax - specify maximum string lengthbuttons - specify button labels (in the same format as the buttons property described above)title - specify dialog window titlewindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.result - for scripting languages that support ByRef parameters, this can specify a variable to receive the string the user enters.The return value is the entered string, or an empty value if the dialog was cancelled. The index of the button selected by the user will be available via the result property once this method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
 	 */
-	getstring(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: object, result?: string): string;
+	getstring(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab, result?: string): string;
 
 	/**
 	 * Stops the specified timer. The timer must previously have been created by a call to the SetTimer method.
@@ -1881,32 +1881,36 @@ interface DOpusDialog {
 	/**
 	 * Displays a "Browse to Open File" dialog that lets the user select one or more files. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected)window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. A collection of Item objects is returned to indicate the files selected by the user. The returned object will have a result property that you should check first - the collection of items is only valid if result returns True. If it returns False it means the user cancelled the dialog.
 	 */
-	Multi(title?: string, defaultValue?: string, window?: object): DOpusItem;
+	Multi(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab): DOpusItem;
 
 	/**
 	 * Displays a "Browse to Open File" dialog that lets the user select one or more files. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected)window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. A collection of Item objects is returned to indicate the files selected by the user. The returned object will have a result property that you should check first - the collection of items is only valid if result returns True. If it returns False it means the user cancelled the dialog.
 	 */
-	multi(title?: string, defaultValue?: string, window?: object): DOpusItem;
+	multi(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab): DOpusItem;
 
 	/**
 	 * Displays a "Browse to Open File" dialog that lets the user select a single file. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected)window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.A single Item object is returned to indicate the file selected by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Item properties will only be valid if result is True.
+	 *
+	 * README - the documentation on this seems to be wrong: when as 3rd parameter allowed file extension, e.g. '*.txt', is given it also seems to work
 	 */
-	Open(title?: string, defaultValue?: string, window?: object): DOpusItem;
+	Open(title?: string, defaultValue?: string, windowOrFileExt?: DOpusLister|DOpusTab|string): DOpusItem;
 
 	/**
 	 * Displays a "Browse to Open File" dialog that lets the user select a single file. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected)window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.A single Item object is returned to indicate the file selected by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Item properties will only be valid if result is True.
+	 *
+	 * README - the documentation on this seems to be wrong: when as 3rd parameter allowed file extension, e.g. '*.txt', is given it also seems to work
 	 */
-	open(title?: string, defaultValue?: string, window?: object): DOpusItem;
+	open(title?: string, defaultValue?: string, windowOrFileExt?: DOpusLister|DOpusTab|string): DOpusItem;
 
 	/**
 	 * Displays a dialog with one or more buttons. The optional parameters are: message - specify message string in the dialogbuttons - specify button labels (in the same format as the buttons property described above)title - specify dialog window titlewindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.The return value is the index of the button selected by the user, and this is also available in the result property once the method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
 	 */
-	Request(message?: string, buttons?: string, title?: string, window?: object): number;
+	Request(message?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab): number;
 
 	/**
 	 * Displays a dialog with one or more buttons. The optional parameters are: message - specify message string in the dialogbuttons - specify button labels (in the same format as the buttons property described above)title - specify dialog window titlewindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.The return value is the index of the button selected by the user, and this is also available in the result property once the method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
 	 */
-	request(message?: string, buttons?: string, title?: string, window?: object): number;
+	request(message?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab): number;
 
 	/**
 	 * Turns a previously detached dialog into a non-detached one, by taking over and running the default message loop. The RunDlg method won't return until the dialog has closed. You might use this if you created a dialog using Create, in order to initialize its controls, but don't actually want to run an interactive message loop. The return value is the same as the object's result property, and represents the index of the close button selected by the user. If the dialog is not already visible (because neither Show nor GetMsg were called) then it will become visible when you call RunDlg. (Compatibility note: Prior to Opus 12.22, scripts needed to call Show explicitly.)
@@ -1951,12 +1955,12 @@ interface DOpusDialog {
 	/**
 	 * Displays a "Browse to Save File" dialog that lets the user select a single file or enter a new filename to save. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected) type - specify a list of filetypes to populate the "Save as Type" dropdown in the save dialog.window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. The optional type parameter consists of one or more pairs of strings, separated by exclamation marks (!). The first string of each pair is the plain text string shown in the drop-down, and the second string of each pair is the actual file extension. You can also specify multiple extensions for the one type by separating them with semicolon. If you want the default "All files" item to be added to the list, add a # character at the start of the string. For example, #Text Files!*.txt!Doc Files!*.doc.A Path object is returned to indicate the file chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
 	 */
-	Save(title?: string, defaultValue?: string, window?: object, type?: string): DOpusPath;
+	Save(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab, type?: string): DOpusPath;
 
 	/**
 	 * Displays a "Browse to Save File" dialog that lets the user select a single file or enter a new filename to save. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected) type - specify a list of filetypes to populate the "Save as Type" dropdown in the save dialog.window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. The optional type parameter consists of one or more pairs of strings, separated by exclamation marks (!). The first string of each pair is the plain text string shown in the drop-down, and the second string of each pair is the actual file extension. You can also specify multiple extensions for the one type by separating them with semicolon. If you want the default "All files" item to be added to the list, add a # character at the start of the string. For example, #Text Files!*.txt!Doc Files!*.doc.A Path object is returned to indicate the file chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
 	 */
-	save(title?: string, defaultValue?: string, window?: object, type?: string): DOpusPath;
+	save(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab, type?: string): DOpusPath;
 
 	/**
 	 * Used to change how custom dialogs are grouped with other Opus windows on the taskbar. Specify a group name to move the window into an alternative group, or omit the group argument to reset back to the default group. If one or more windows are moved into the same group, they will be grouped together, separate from other the default group. This only works on Windows 7 and above, and only when taskbar grouping is enabled. Group names are limited to 103 characters and will be truncated if longer. Spaces and dots in group names are automatically converted to underscores. Only works with custom script dialogs (i.e. when you are using the template property). Must be called after the dialog has been created (i.e. after Show has been called -- see the RunDlg method if you want to avoid writing your own message loop just for this). Returns true on success.
@@ -1981,12 +1985,12 @@ interface DOpusDialog {
 	/**
 	 * Allows a script dialog to monitor events in a folder tab. You will receive notifications of the requested events through your message loop. The tab parameter specifies the Tab you want to watch. The events string is a comma-separated list of events you want to watch for. The id string is an optional parameter; it lets you assign your own ID to the tab to make it easier to tell where events are coming from (if you're monitoring multiple tabs, for instance). These are the events you can watch for are. Note that some are equivalent to the existing script events (e.g. OnActivateTab): select - items in the tab are selected or deselected navigate - the folder is changed in the tab add - items are added to the folder delete - items are deleted from the folder change - items in the folder are changed (size, date, name, etc) activate - tab activated or deactivated srcdst - source/destination state changed view - view mode changed flat - flat view state changed Once notification has been established you will be notified of all requested events when they occur. Note that no specific information is sent with notifications - e.g. for the "change" event, you aren't told which items have changed, only that something has. You will receive notification events in your message loop. The various properties of the Msg object let you determine what happened. The Msg.event property will be set to tab for notifications from a watched folder tab. The Msg.control property tells you which tab the change occurred in; if you specified an ID when you called the WatchTab function, this will be in the Msg.control property - otherwise, it will be the numeric handle of the tab. Note that it's *not* the actual Tab object. You can access the Tab object via the Msg.tab property but this can be inefficient, as it requires a new Tab object to be created every time. If you're only monitoring one tab it's better to store the Tab object in your own variable - and if you're monitoring multiple tabs you could, e.g. use a unique ID for each one and keep the objects in a Map. The Msg.value property tells you which notification event occurred. Possible values are select, navigate, filechange, activate, srcdst, view, flat, and close (sent if the tab is closed while you are monitoring it). For the filechange event, the Msg.data property contains a bit mask indicating which file events occurred. 1 = add, 2 = delete, 4 = change. The values will be added together (so e.g. 6 indicates at least one item was changed and at least one was deleted). It's up to your script to determine exactly what changed. You can change the events you're monitoring for by calling the WatchTab method again with the same tab and new event list. To stop monitoring an existing tab, call WatchTab with the second parameter set to stop. Monitoring is automatically cancelled if your dialog closes (and also if the tab closes).
 	 */
-	WatchTab(Tab?: object, events?: string, id?: string): boolean;
+	WatchTab(Tab?: DOpusTab, events?: string, id?: string): boolean;
 
 	/**
 	 * Allows a script dialog to monitor events in a folder tab. You will receive notifications of the requested events through your message loop. The tab parameter specifies the Tab you want to watch. The events string is a comma-separated list of events you want to watch for. The id string is an optional parameter; it lets you assign your own ID to the tab to make it easier to tell where events are coming from (if you're monitoring multiple tabs, for instance). These are the events you can watch for are. Note that some are equivalent to the existing script events (e.g. OnActivateTab): select - items in the tab are selected or deselected navigate - the folder is changed in the tab add - items are added to the folder delete - items are deleted from the folder change - items in the folder are changed (size, date, name, etc) activate - tab activated or deactivated srcdst - source/destination state changed view - view mode changed flat - flat view state changed Once notification has been established you will be notified of all requested events when they occur. Note that no specific information is sent with notifications - e.g. for the "change" event, you aren't told which items have changed, only that something has. You will receive notification events in your message loop. The various properties of the Msg object let you determine what happened. The Msg.event property will be set to tab for notifications from a watched folder tab. The Msg.control property tells you which tab the change occurred in; if you specified an ID when you called the WatchTab function, this will be in the Msg.control property - otherwise, it will be the numeric handle of the tab. Note that it's *not* the actual Tab object. You can access the Tab object via the Msg.tab property but this can be inefficient, as it requires a new Tab object to be created every time. If you're only monitoring one tab it's better to store the Tab object in your own variable - and if you're monitoring multiple tabs you could, e.g. use a unique ID for each one and keep the objects in a Map. The Msg.value property tells you which notification event occurred. Possible values are select, navigate, filechange, activate, srcdst, view, flat, and close (sent if the tab is closed while you are monitoring it). For the filechange event, the Msg.data property contains a bit mask indicating which file events occurred. 1 = add, 2 = delete, 4 = change. The values will be added together (so e.g. 6 indicates at least one item was changed and at least one was deleted). It's up to your script to determine exactly what changed. You can change the events you're monitoring for by calling the WatchTab method again with the same tab and new event list. To stop monitoring an existing tab, call WatchTab with the second parameter set to stop. Monitoring is automatically cancelled if your dialog closes (and also if the tab closes).
 	 */
-	watchtab(Tab?: object, events?: string, id?: string): boolean;
+	watchtab(Tab?: DOpusTab, events?: string, id?: string): boolean;
 
 }
 
@@ -4461,6 +4465,17 @@ interface DOpusItem extends String {
 	readonly realpath: DOpusPath;
 
 	/**
+	 * This property is set by DOpusDialog.open() & DOpusDialog.multi()
+	 *
+	 * A single Item object is returned to indicate the file selected by the user.
+	 * This object will have an additional result property that will be False if the user cancelled the dialog
+	 * the other normal Item properties will only be valid if result is True.
+	 *
+	 * @see {DOpusDialog}
+	 */
+	readonly result: boolean;
+
+	/**
 	 * Returns True if the item was selected, or False otherwise.
 	 */
 	readonly selected: boolean;
@@ -5247,6 +5262,16 @@ interface DOpusPath extends String {
 	 * Returns the path minus the last component.
 	 */
 	readonly pathpart: string;
+
+	/**
+	 * This property is set by DOpusDialog.save() & DOpusDialog.folder()
+	 *
+	 * A Path object is returned to indicate the file chosen by the user.
+	 * This object will have an additional result property that will be False if the user cancelled the dialog
+	 * the other normal Path properties will only be valid if result is True.
+	 * @see {DOpusDialog}
+	 */
+	readonly result: boolean;
 
 	/**
 	 * If this object represents a long pathname, this property returns the "short" equivalent, if it has one. Note that short paths are disabled by default in Windows 10.
