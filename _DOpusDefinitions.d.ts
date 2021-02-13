@@ -71,12 +71,7 @@ interface DOpusAddCmdData {
 	/**
 	 * Adds a new internal command to Opus. The returned ScriptCommand object must be properly initialized. A script add-in can add as many internal commands as it likes to the Opus internal command set.
 	 */
-	AddCommand(): DOpusScriptCommand;
-
-	/**
-	 * Adds a new internal command to Opus. The returned ScriptCommand object must be properly initialized. A script add-in can add as many internal commands as it likes to the Opus internal command set.
-	 */
-	addcommand(): DOpusScriptCommand;
+	addCommand(): DOpusScriptCommand;
 
 }
 
@@ -88,12 +83,7 @@ interface DOpusAddColData {
 	/**
 	 * Adds a new information column to Opus. The returned ScriptColumn object must be properly initialized. A script add-in can add as many columns as it likes, and these will be available in file displays, infotips and the Advanced Find function.
 	 */
-	AddColumn(): DOpusScriptColumn;
-
-	/**
-	 * Adds a new information column to Opus. The returned ScriptColumn object must be properly initialized. A script add-in can add as many columns as it likes, and these will be available in file displays, infotips and the Advanced Find function.
-	 */
-	addcolumn(): DOpusScriptColumn;
+	addColumn(): DOpusScriptColumn;
 
 }
 
@@ -162,27 +152,12 @@ interface DOpusAliases extends DOpusAlias {
 	/**
 	 * Adds a new alias to the system with the specified name and path. Note that you should not provide the leading forward-slash (/) in the alias name.
 	 */
-	Add(name?: string, path?: string): void;
-
-	/**
-	 * Adds a new alias to the system with the specified name and path. Note that you should not provide the leading forward-slash (/) in the alias name.
-	 */
 	add(name?: string, path?: string): void;
 
 	/**
 	 * Deletes the specified alias.
 	 */
-	Delete(name?: string): void;
-
-	/**
-	 * Deletes the specified alias.
-	 */
 	delete(name?: string): void;
-
-	/**
-	 * Updates the state of this object. When the Aliases object is first retrieved via DOpus.aliases, a snapshot is taken of the aliases at that time. If you make changes via the object it will reflect them but any changes made outside the script (e.g. via the Favorites ADD=alias command) will not be detected unless you call the Update method.
-	 */
-	Update(): void;
 
 	/**
 	 * Updates the state of this object. When the Aliases object is first retrieved via DOpus.aliases, a snapshot is taken of the aliases at that time. If you make changes via the object it will reflect them but any changes made outside the script (e.g. via the Favorites ADD=alias command) will not be detected unless you call the Update method.
@@ -467,27 +442,12 @@ interface DOpusBlob {
 	/**
 	 * Compares the contents of this Blob against another Blob (or array). By default the entire contents of the two blobs are compared. The optional parameters that let you configure the operation are:to - specifies the byte offset within this Blob to compare against. Defaults to 0.from - specifies the byte offset within the source Blob to compare with. Defaults to 0.size - specifies the number of bytes to compare. Defaults to the full size of the source Blob.The return value is 0 if the two blobs are the same. A value of -1 indicates this blob is less than the other blob, and 1 indicates this blob is greater than the other blob.
 	 */
-	Compare(source?: DOpusBlob, to?: number, from?: number, size?: number): number;
-
-	/**
-	 * Compares the contents of this Blob against another Blob (or array). By default the entire contents of the two blobs are compared. The optional parameters that let you configure the operation are:to - specifies the byte offset within this Blob to compare against. Defaults to 0.from - specifies the byte offset within the source Blob to compare with. Defaults to 0.size - specifies the number of bytes to compare. Defaults to the full size of the source Blob.The return value is 0 if the two blobs are the same. A value of -1 indicates this blob is less than the other blob, and 1 indicates this blob is greater than the other blob.
-	 */
 	compare(source?: DOpusBlob, to?: number, from?: number, size?: number): number;
 
 	/**
 	 * Copies data from the source Blob (or array) into this Blob. By default the entire contents of the source Blob will be copied over the top of this one. The optional parameters that let you configure the operation are:to - specifies the byte offset within this Blob to copy to. Defaults to 0.from - specifies the byte offset within the source Blob to copy from. Defaults to 0.size - specifies the number of bytes to copy. Defaults to the full size of the source Blob. As well as copying from another Blob, you can use this method to initialise a Blob from a string. By default the Blob will be set to the Unicode form of the string; if you pass "utf8" as the second parameter it will initialise the Blob with the UTF8-encoded form of the string.If this Blob is not currently large enough to contain the copied data it will be resized automatically.
 	 */
-	CopyFrom(sourceOrString?: DOpusBlob | string, toOrType?: number | string, from?: number, size?: number): void;
-
-	/**
-	 * Copies data from the source Blob (or array) into this Blob. By default the entire contents of the source Blob will be copied over the top of this one. The optional parameters that let you configure the operation are:to - specifies the byte offset within this Blob to copy to. Defaults to 0.from - specifies the byte offset within the source Blob to copy from. Defaults to 0.size - specifies the number of bytes to copy. Defaults to the full size of the source Blob. As well as copying from another Blob, you can use this method to initialise a Blob from a string. By default the Blob will be set to the Unicode form of the string; if you pass "utf8" as the second parameter it will initialise the Blob with the UTF8-encoded form of the string.If this Blob is not currently large enough to contain the copied data it will be resized automatically.
-	 */
-	copyfrom(sourceOrString?: DOpusBlob | string, toOrType?: number | string, from?: number, size?: number): void;
-
-	/**
-	 * Searches the contents of this Blob for the data contained in another Blob (or array). By default the entire contents of this Blob are searched. The optional from parameter lets you specify the starting position for the search, and the optional size parameter lets you specify the length of data in this Blob to search through. The return value is -1 if the search data were not found, otherwise the offset from the start of the Blob data is returned.
-	 */
-	Find(search?: DOpusBlob, from?: number, size?: number): DOpusFileSize;
+	copyFrom(sourceOrString?: DOpusBlob | string, toOrType?: number | string, from?: number, size?: number): void;
 
 	/**
 	 * Searches the contents of this Blob for the data contained in another Blob (or array). By default the entire contents of this Blob are searched. The optional from parameter lets you specify the starting position for the search, and the optional size parameter lets you specify the length of data in this Blob to search through. The return value is -1 if the search data were not found, otherwise the offset from the start of the Blob data is returned.
@@ -497,17 +457,7 @@ interface DOpusBlob {
 	/**
 	 * Frees the memory associated with this Blob and resets its size to 0.
 	 */
-	Free(): void;
-
-	/**
-	 * Frees the memory associated with this Blob and resets its size to 0.
-	 */
 	free(): void;
-
-	/**
-	 * Initialises the contents of the Blob (every byte within the blob will be set to 0). Equivalent to Set(0).
-	 */
-	Init(): void;
 
 	/**
 	 * Initialises the contents of the Blob (every byte within the blob will be set to 0). Equivalent to Set(0).
@@ -517,17 +467,7 @@ interface DOpusBlob {
 	/**
 	 * Resizes the Blob to the specified number of bytes.
 	 */
-	Resize(size?: number): void;
-
-	/**
-	 * Resizes the Blob to the specified number of bytes.
-	 */
 	resize(size?: number): void;
-
-	/**
-	 * Reverses the contents of the Blob.
-	 */
-	Reverse(): void;
 
 	/**
 	 * Reverses the contents of the Blob.
@@ -537,32 +477,17 @@ interface DOpusBlob {
 	/**
 	 * Sets the contents of the Blob to the specified byte value (every byte within the blob will be set to that value). By default the whole Blob will be affected. The option to parameter lets you specify a byte offset to start at, and the optional size parameter lets you control the number of bytes affected.
 	 */
-	Set(value?: number, to?: number, size?: number): void;
-
-	/**
-	 * Sets the contents of the Blob to the specified byte value (every byte within the blob will be set to that value). By default the whole Blob will be affected. The option to parameter lets you specify a byte offset to start at, and the optional size parameter lets you control the number of bytes affected.
-	 */
 	set(value?: number, to?: number, size?: number): void;
 
 	/**
 	 * Converts the contents of this Blob to a SAFEARRAY of type VT_UI1. By default the entire contents of the Blob will be copied to the array. The optional parameters that let you configure the operation are: from - specifies the byte offset within the source Blob to copy from. Defaults to 0.size - specifies the number of bytes to copy. Defaults to the full size of the source Blob.
 	 */
-	ToArray(from?: number, size?: number): object;
-
-	/**
-	 * Converts the contents of this Blob to a SAFEARRAY of type VT_UI1. By default the entire contents of the Blob will be copied to the array. The optional parameters that let you configure the operation are: from - specifies the byte offset within the source Blob to copy from. Defaults to 0.size - specifies the number of bytes to copy. Defaults to the full size of the source Blob.
-	 */
-	toarray(from?: number, size?: number): object;
+	toArray(from?: number, size?: number): object;
 
 	/**
 	 * Converts the contents of this Blob to a SAFEARRAY of type VT_VARIANT. Each variant in the array contains a VT_UI1. By default the entire contents of the Blob will be copied to the array. The optional parameters that let you configure the operation are: from - specifies the byte offset within the source Blob to copy from. Defaults to 0.size - specifies the number of bytes to copy. Defaults to the full size of the source Blob.
 	 */
-	ToVBArray(from?: number, size?: number): object;
-
-	/**
-	 * Converts the contents of this Blob to a SAFEARRAY of type VT_VARIANT. Each variant in the array contains a VT_UI1. By default the entire contents of the Blob will be copied to the array. The optional parameters that let you configure the operation are: from - specifies the byte offset within the source Blob to copy from. Defaults to 0.size - specifies the number of bytes to copy. Defaults to the full size of the source Blob.
-	 */
-	tovbarray(from?: number, size?: number): object;
+	toVBArray(from?: number, size?: number): object;
 
 }
 
@@ -595,17 +520,7 @@ interface DOpusBusyIndicator {
 	/**
 	 * Removes the busy indicator from display and destroys its internal data structures. The BusyIndicator object itself can be re-used by calling the Init method again.
 	 */
-	Destroy(): void;
-
-	/**
-	 * Removes the busy indicator from display and destroys its internal data structures. The BusyIndicator object itself can be re-used by calling the Init method again.
-	 */
 	destroy(): void;
-
-	/**
-	 * Removes the busy indicator from display, but does not destroy its internal data. The indicator can be re-displayed by calling the Show method.
-	 */
-	Hide(): void;
 
 	/**
 	 * Removes the busy indicator from display, but does not destroy its internal data. The indicator can be re-displayed by calling the Show method.
@@ -615,27 +530,12 @@ interface DOpusBusyIndicator {
 	/**
 	 * Initializes a BusyIndicator object and optionally displays it. The window parameter specifies the Lister that the indicator is to be attached to - you can pass either a Lister or a Tab object. The optional description parameter lets you specify a text string that is displayed to the user when they click the spinning circle. The optional visible parameter lets you make the indicator visible immediately by passing True. Alternatively, call the Show method to make the indicator visible.
 	 */
-	Init(window?: object, description?: string, visible?: boolean): boolean;
-
-	/**
-	 * Initializes a BusyIndicator object and optionally displays it. The window parameter specifies the Lister that the indicator is to be attached to - you can pass either a Lister or a Tab object. The optional description parameter lets you specify a text string that is displayed to the user when they click the spinning circle. The optional visible parameter lets you make the indicator visible immediately by passing True. Alternatively, call the Show method to make the indicator visible.
-	 */
 	init(window?: object, description?: string, visible?: boolean): boolean;
 
 	/**
 	 * Displays the busy indicator.
 	 */
-	Show(): void;
-
-	/**
-	 * Displays the busy indicator.
-	 */
 	show(): void;
-
-	/**
-	 * Updates the busy indicator. The description parameter lets you specify a new description string, and the optional percentage parameter lets you specify a new percentage complete value from 0 to 100.
-	 */
-	Update(description?: string, percentage?: number): void;
 
 	/**
 	 * Updates the busy indicator. The description parameter lets you specify a new description string, and the optional percentage parameter lets you specify a new percentage complete value from 0 to 100.
@@ -833,71 +733,34 @@ interface DOpusCommand {
 	/**
 	 * Adds the specified item to the collection of items this command is to act upon. You can pass the item's path as either a string or a Path object, and you can also pass an Item object directly.This method returns the total number of items in the collection.
 	 */
-	AddFile(pathStringOrPathOrItem?: string | DOpusPath | DOpusItem): number;
-
-	/**
-	 * Adds the specified item to the collection of items this command is to act upon. You can pass the item's path as either a string or a Path object, and you can also pass an Item object directly.This method returns the total number of items in the collection.
-	 */
-	addfile(pathStringOrPathOrItem?: string | DOpusPath | DOpusItem): number;
+	addFile(pathStringOrPathOrItem?: string | DOpusPath | DOpusItem): number;
 
 	/**
 	 * Adds the items in the specified collection to the list of items this command is to act upon. The return value is the new number of items in the collection.You can also pass a Vector of Item or Path objects, or of strings (full paths), instead of a collection.
 	 */
-	AddFiles(): number;
-
-	/**
-	 * Adds the items in the specified collection to the list of items this command is to act upon. The return value is the new number of items in the collection.You can also pass a Vector of Item or Path objects, or of strings (full paths), instead of a collection.
-	 */
-	addfiles(): number;
+	addFiles(): number;
 
 	/**
 	 * Adds the contents of the clipboard to the collection of items this command is to act upon. This method supports both files and file paths copied to the clipboard as text. The return value is the new number of items in the collection.
 	 */
-	AddFilesFromClipboard(): number;
-
-	/**
-	 * Adds the contents of the clipboard to the collection of items this command is to act upon. This method supports both files and file paths copied to the clipboard as text. The return value is the new number of items in the collection.
-	 */
-	addfilesfromclipboard(): number;
+	addFilesFromClipboard(): number;
 
 	/**
 	 * Reads file paths from the contents of the specified file and adds them to the item collection. You can provide the file's path as either a string or a Path object. The file must consist of one absolute path per line. The encoding of the file is assumed to be ANSI, unless it has a BOM (byte-order-mark) at the start, or you specify the encoding argument. If you specify the encoding this must be a string equal to one of the following: utf16be, utf16le, utf8, ansi or cp:
 	 *  where
 	 *  specifies the code page number). The return value is the new number of items in the collection.
 	 */
-	AddFilesFromFile(path?: string, encoding?: string): number;
-
-	/**
-	 * Reads file paths from the contents of the specified file and adds them to the item collection. You can provide the file's path as either a string or a Path object. The file must consist of one absolute path per line. The encoding of the file is assumed to be ANSI, unless it has a BOM (byte-order-mark) at the start, or you specify the encoding argument. If you specify the encoding this must be a string equal to one of the following: utf16be, utf16le, utf8, ansi or cp:
-	 *  where
-	 *  specifies the code page number). The return value is the new number of items in the collection.
-	 */
-	addfilesfromfile(path?: string, encoding?: string): number;
+	addFilesFromFile(path?: string, encoding?: string): number;
 
 	/**
 	 * Adds the contents of the specified folder to the collection of items this command is to act upon. You can pass the folder's path as either a string or a Path object. You can also append a wildcard pattern to the path to only add files matching the specified pattern.
 	 */
-	AddFilesFromFolder(path?: string): number;
-
-	/**
-	 * Adds the contents of the specified folder to the collection of items this command is to act upon. You can pass the folder's path as either a string or a Path object. You can also append a wildcard pattern to the path to only add files matching the specified pattern.
-	 */
-	addfilesfromfolder(path?: string): number;
+	addFilesFromFolder(path?: string): number;
 
 	/**
 	 * Adds the specified instruction line to the command that this object will run. The AddLine method lets you build up complicated multiple line commands - add each line in turn and then run the command using the Run method. For a single line command it is simpler to use the RunCommand method.
 	 */
-	AddLine(instruction?: string): void;
-
-	/**
-	 * Adds the specified instruction line to the command that this object will run. The AddLine method lets you build up complicated multiple line commands - add each line in turn and then run the command using the Run method. For a single line command it is simpler to use the RunCommand method.
-	 */
-	addline(instruction?: string): void;
-
-	/**
-	 * Clears all instruction lines from the command.
-	 */
-	Clear(): void;
+	addLine(instruction?: string): void;
 
 	/**
 	 * Clears all instruction lines from the command.
@@ -907,47 +770,22 @@ interface DOpusCommand {
 	/**
 	 * Clears the failure flags from the Item collection. Any items that fail when a command is run will have their failed property set to True, and once this has happened the file will be skipped over by any subsequent commands. You can call this method to reset all the failure flags.
 	 */
-	ClearFailed(): void;
-
-	/**
-	 * Clears the failure flags from the Item collection. Any items that fail when a command is run will have their failed property set to True, and once this has happened the file will be skipped over by any subsequent commands. You can call this method to reset all the failure flags.
-	 */
-	clearfailed(): void;
+	clearFailed(): void;
 
 	/**
 	 * Clears the collection of items this command is to act upon.
 	 */
-	ClearFiles(): void;
-
-	/**
-	 * Clears the collection of items this command is to act upon.
-	 */
-	clearfiles(): void;
+	clearFiles(): void;
 
 	/**
 	 * Clears any modifiers that have been set for this command. The supported modifiers are a subset of the full list of command modifiers - see the SetModifier method for a list of these. You can also pass * to clear all modifiers that have been set.
 	 */
-	ClearModifier(modifier?: string): void;
-
-	/**
-	 * Clears any modifiers that have been set for this command. The supported modifiers are a subset of the full list of command modifiers - see the SetModifier method for a list of these. You can also pass * to clear all modifiers that have been set.
-	 */
-	clearmodifier(modifier?: string): void;
+	clearModifier(modifier?: string): void;
 
 	/**
 	 * Returns a StringSet containing the names of all the Opus commands. You can optionally filter this set by providing one or more of the following flags as an argument to the CommandList method:i - internal (built-in) commandss - script commandsu - user commands
 	 */
-	CommandList(types?: string): DOpusStringSet;
-
-	/**
-	 * Returns a StringSet containing the names of all the Opus commands. You can optionally filter this set by providing one or more of the following flags as an argument to the CommandList method:i - internal (built-in) commandss - script commandsu - user commands
-	 */
-	commandlist(types?: string): DOpusStringSet;
-
-	/**
-	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to the source tab.
-	 */
-	Dlg(): DOpusDialog;
+	commandList(types?: string): DOpusStringSet;
 
 	/**
 	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to the source tab.
@@ -957,37 +795,17 @@ interface DOpusCommand {
 	/**
 	 * Returns a Map of the modifiers that have been set for this command (either by the SetModifier method, or in the case of script add-ins any modifiers that were set on the button that invoked the script).
 	 */
-	GetModifiers(): DOpusMap;
-
-	/**
-	 * Returns a Map of the modifiers that have been set for this command (either by the SetModifier method, or in the case of script add-ins any modifiers that were set on the button that invoked the script).
-	 */
-	getmodifiers(): DOpusMap;
+	getModifiers(): DOpusMap;
 
 	/**
 	 * Returns True if the specified Set command condition is true. This is the equivalent of the @ifset command modifiers. The optional second parameter lets you test a condition based on a command other than Set - for example, IsSet("VIEWERCMD=mark", "Show") in the viewer to test if the current image is marked.
 	 */
-	IsSet(condition?: string, command?: string): boolean;
-
-	/**
-	 * Returns True if the specified Set command condition is true. This is the equivalent of the @ifset command modifiers. The optional second parameter lets you test a condition based on a command other than Set - for example, IsSet("VIEWERCMD=mark", "Show") in the viewer to test if the current image is marked.
-	 */
-	isset(condition?: string, command?: string): boolean;
+	isSet(condition?: string, command?: string): boolean;
 
 	/**
 	 * Removes the specified file from the Item collection. You can pass the file's path as either a string or a Path object. You can also pass the Item itself, or its index (starting from 0) within the collection. The return value is the new number of items in the collection.
 	 */
-	RemoveFile(path?: string | DOpusPath, item?: DOpusItem, index?: number): number;
-
-	/**
-	 * Removes the specified file from the Item collection. You can pass the file's path as either a string or a Path object. You can also pass the Item itself, or its index (starting from 0) within the collection. The return value is the new number of items in the collection.
-	 */
-	removefile(path?: string | DOpusPath, item?: DOpusItem, index?: number): number;
-
-	/**
-	 * Runs the command that has been built up with this object. The return value indicates whether or not the command ran successfully. Zero indicates the command could not be run or was aborted; any other number indicates the command was run for at least some files. (Note that this is not the "exit code" for external commands. For external commands it only indicates whether or not Opus launched the command. If you need the exit code of an external command, use the WScript.Shell Run or Exec methods to run the command.) You can use the Results property to find out more information about the results of the command, and also discover which files (if any) failed using the failed property of each Item in the files collection.
-	 */
-	Run(): number;
+	removeFile(path?: string | DOpusPath, item?: DOpusItem, index?: number): number;
 
 	/**
 	 * Runs the command that has been built up with this object. The return value indicates whether or not the command ran successfully. Zero indicates the command could not be run or was aborted; any other number indicates the command was run for at least some files. (Note that this is not the "exit code" for external commands. For external commands it only indicates whether or not Opus launched the command. If you need the exit code of an external command, use the WScript.Shell Run or Exec methods to run the command.) You can use the Results property to find out more information about the results of the command, and also discover which files (if any) failed using the failed property of each Item in the files collection.
@@ -997,112 +815,57 @@ interface DOpusCommand {
 	/**
 	 * Runs the single line command given by the instruction argument. Calling this method is the equivalent of adding the single line with the AddLine method and then calling the Run method.
 	 */
-	RunCommand(instruction?: string): number;
-
-	/**
-	 * Runs the single line command given by the instruction argument. Calling this method is the equivalent of adding the single line with the AddLine method and then calling the Run method.
-	 */
-	runcommand(instruction?: string): number;
+	runCommand(instruction?: string): number;
 
 	/**
 	 * Sets the command's destination to the specified path. You can provide the path as either a string or a Path object. Calling this method clears the destination tab property from the command.
 	 */
-	SetDest(path?: string): void;
-
-	/**
-	 * Sets the command's destination to the specified path. You can provide the path as either a string or a Path object. Calling this method clears the destination tab property from the command.
-	 */
-	setdest(path?: string): void;
+	setDest(path?: string): void;
 
 	/**
 	 * Sets the command's destination to the specified tab. The destination path will be initialized from the tab automatically (so you don't need to call SetDest as well as SetDestTab).
 	 */
-	SetDestTab(tab?: DOpusTab): void;
-
-	/**
-	 * Sets the command's destination to the specified tab. The destination path will be initialized from the tab automatically (so you don't need to call SetDest as well as SetDestTab).
-	 */
-	setdesttab(tab?: DOpusTab): void;
+	setDestTab(tab?: DOpusTab): void;
 
 	/**
 	 * Configures the command to use the files in the specified Item collection as the items the command will act upon.You can also pass a Vector of Item objects instead of a collection.
 	 */
-	SetFiles(): void;
-
-	/**
-	 * Configures the command to use the files in the specified Item collection as the items the command will act upon.You can also pass a Vector of Item objects instead of a collection.
-	 */
-	setfiles(): void;
+	setFiles(): void;
 
 	/**
 	 * Turns on a modifier for this command. The supported modifiers are a subset of the full list of command modifiers: admin, async, codepage, externalonly, leavedoswindowopen, nodeselect, noexpandenv, nofilenamequoting, nolocalizefiles, noprogress, norunbatch, resolvelinks, runmode Using this method is the equivalent of using the AddLine method to add the modifier to the command as an instruction; e.g. Command.SetModifier("async") is the same as Command.AddLine("@async"). If the modifier requires a value it is passed as the second argument, e.g. Command.SetModifier("runmode", "hide").
 	 */
-	SetModifier(modifier?: string, value?: string): void;
-
-	/**
-	 * Turns on a modifier for this command. The supported modifiers are a subset of the full list of command modifiers: admin, async, codepage, externalonly, leavedoswindowopen, nodeselect, noexpandenv, nofilenamequoting, nolocalizefiles, noprogress, norunbatch, resolvelinks, runmode Using this method is the equivalent of using the AddLine method to add the modifier to the command as an instruction; e.g. Command.SetModifier("async") is the same as Command.AddLine("@async"). If the modifier requires a value it is passed as the second argument, e.g. Command.SetModifier("runmode", "hide").
-	 */
-	setmodifier(modifier?: string, value?: string): void;
+	setModifier(modifier?: string, value?: string): void;
 
 	/**
 	 * Lets you share the progress indicator from one command with another command. You can pass this method the value of progress property obtained from another Command object.
 	 */
-	SetProgress(progress?: DOpusProgress): void;
-
-	/**
-	 * Lets you share the progress indicator from one command with another command. You can pass this method the value of progress property obtained from another Command object.
-	 */
-	setprogress(progress?: DOpusProgress): void;
+	setProgress(progress?: DOpusProgress): void;
 
 	/**
 	 * This method lets you control which qualifier keys the command run by this object will consider to have been pressed when it was invoked. For example, several internal commands change their behavior when certain qualifier keys are held down - calling this method allows you to set which keys they will see.The qualifiers argument must consist of one or more of the following strings (comma-separated): none, shift, ctrl, alt, lwin, rwin, win.
 	 */
-	SetQualifiers(qualifiers?: string): void;
-
-	/**
-	 * This method lets you control which qualifier keys the command run by this object will consider to have been pressed when it was invoked. For example, several internal commands change their behavior when certain qualifier keys are held down - calling this method allows you to set which keys they will see.The qualifiers argument must consist of one or more of the following strings (comma-separated): none, shift, ctrl, alt, lwin, rwin, win.
-	 */
-	setqualifiers(qualifiers?: string): void;
+	setQualifiers(qualifiers?: string): void;
 
 	/**
 	 * Sets the command's source to the specified path. You can provide the path as either a string or a Path object. Calling this method clears the source tab property from the command.
 	 */
-	SetSource(path?: string): void;
-
-	/**
-	 * Sets the command's source to the specified path. You can provide the path as either a string or a Path object. Calling this method clears the source tab property from the command.
-	 */
-	setsource(path?: string): void;
+	setSource(path?: string): void;
 
 	/**
 	 * Sets the command's source to the specified tab. The source path will be initialized from the tab automatically (so you don't need to call SetSource as well as SetSourceTab).
 	 */
-	SetSourceTab(tab?: DOpusTab): void;
-
-	/**
-	 * Sets the command's source to the specified tab. The source path will be initialized from the tab automatically (so you don't need to call SetSource as well as SetSourceTab).
-	 */
-	setsourcetab(tab?: DOpusTab): void;
+	setSourceTab(tab?: DOpusTab): void;
 
 	/**
 	 * Sets the type of function that this command will run. This is equivalent to the drop-down control in the Advanced Command Editor. The type argument must be one of the following strings: std, msdos, script, wsl. Standard (std) is the default if the type is not specifically set.
 	 */
-	SetType(type?: string): void;
-
-	/**
-	 * Sets the type of function that this command will run. This is equivalent to the drop-down control in the Advanced Command Editor. The type argument must be one of the following strings: std, msdos, script, wsl. Standard (std) is the default if the type is not specifically set.
-	 */
-	settype(type?: string): void;
+	setType(type?: string): void;
 
 	/**
 	 * This method can be used to update the appearance of toolbar buttons that use @toggle:if to set their selection state based on the existence of a global-, tab- or Lister-scoped variable. You would call this method if you have changed such a variable from a script to force buttons that use it to update their selection status.
 	 */
-	UpdateToggle(): void;
-
-	/**
-	 * This method can be used to update the appearance of toolbar buttons that use @toggle:if to set their selection state based on the existence of a global-, tab- or Lister-scoped variable. You would call this method if you have changed such a variable from a script to force buttons that use it to update their selection status.
-	 */
-	updatetoggle(): void;
+	updateToggle(): void;
 
 }
 
@@ -1228,164 +991,88 @@ interface DOpusControl {
 	/**
 	 * Adds a new group to a list view control. Items you add to the list can optionally be placed in groups. Each group must have a unique ID. The optional flags are "c" (group is collapsible) and "d" (group starts out collapsed). E.g. AddGroup("Unimportant", 100, "cd") would add a group called Unimportant that is initially collapsed.
 	 */
-	AddGroup(name?: string, id?: number, flags?: string): number;
-
-	/**
-	 * Adds a new group to a list view control. Items you add to the list can optionally be placed in groups. Each group must have a unique ID. The optional flags are "c" (group is collapsible) and "d" (group starts out collapsed). E.g. AddGroup("Unimportant", 100, "cd") would add a group called Unimportant that is initially collapsed.
-	 */
-	addgroup(name?: string, id?: number, flags?: string): number;
+	addGroup(name?: string, id?: number, flags?: string): number;
 
 	/**
 	 * Adds a new item to the control (list box, combo box or list view). The first parameter is the item's name, and the optional second parameter is a data value to associate with the item. When adding to a grouped list view, the optional third parameter provides the ID of the group you want to add the item to (the second parameter must be provided in this case, and can be set to 0 if no value is required). The item is added to the end of the list.You can also pass a DialogListItem object obtained from another control. The return value indicates the position in the list of the new item. If you are adding to a listview control and need to add an item with multiple columns, you can do it like this (JScript): var i = listview.AddItem("This is col 1"); listview.GetItemAt(i).subitems(0) = "This is col 2"; listview.GetItemAt(i).subitems(1) = "This is col 3";
 	 */
-	AddItem(name?: string, value?: number, groupid?: number, item?: object): number;
-
-	/**
-	 * Adds a new item to the control (list box, combo box or list view). The first parameter is the item's name, and the optional second parameter is a data value to associate with the item. When adding to a grouped list view, the optional third parameter provides the ID of the group you want to add the item to (the second parameter must be provided in this case, and can be set to 0 if no value is required). The item is added to the end of the list.You can also pass a DialogListItem object obtained from another control. The return value indicates the position in the list of the new item. If you are adding to a listview control and need to add an item with multiple columns, you can do it like this (JScript): var i = listview.AddItem("This is col 1"); listview.GetItemAt(i).subitems(0) = "This is col 2"; listview.GetItemAt(i).subitems(1) = "This is col 3";
-	 */
-	additem(name?: string, value?: number, groupid?: number, item?: object): number;
+	addItem(name?: string, value?: number, groupid?: number, item?: object): number;
 
 	/**
 	 * This method is mainly for use with multiple-selection list box and list view controls. It lets you deselect individual items in the control while leaving other items selected (or unaffected). You can specify either the index of the item to select (0 means the first item, 1 means the second and so on) or a DialogListItem object obtained from the GetItemAt or GetItemByName methods. You can also specify -1 to deselect all items in the list box.
 	 */
-	DeselectItem(position?: number, item?: object): number;
-
-	/**
-	 * This method is mainly for use with multiple-selection list box and list view controls. It lets you deselect individual items in the control while leaving other items selected (or unaffected). You can specify either the index of the item to select (0 means the first item, 1 means the second and so on) or a DialogListItem object obtained from the GetItemAt or GetItemByName methods. You can also specify -1 to deselect all items in the list box.
-	 */
-	deselectitem(position?: number, item?: object): number;
+	deselectItem(position?: number, item?: object): number;
 
 	/**
 	 * Only applies to list view controls. By default group view is off; after adding groups with the AddGroup method, use EnableGroupView to turn group view on.
 	 */
-	EnableGroupView(enable?: boolean): void;
-
-	/**
-	 * Only applies to list view controls. By default group view is off; after adding groups with the AddGroup method, use EnableGroupView to turn group view on.
-	 */
-	enablegroupview(enable?: boolean): void;
+	enableGroupView(enable?: boolean): void;
 
 	/**
 	 * Returns a DialogListGroup object representing the group with the specified ID that you've previous added to a list view control using the AddGroup method.
 	 */
-	GetGroupById(id?: number): DOpusDialogListGroup;
-
-	/**
-	 * Returns a DialogListGroup object representing the group with the specified ID that you've previous added to a list view control using the AddGroup method.
-	 */
-	getgroupbyid(id?: number): DOpusDialogListGroup;
+	getGroupById(id?: number): DOpusDialogListGroup;
 
 	/**
 	 * Returns a DialogListItem object representing the item contained in the control at the specified index (list box, combo box or list view). Item 0 represents the first item in the list, item 1 the second, and so on.
 	 */
-	GetItemAt(position?: number): DOpusDialogListItem;
-
-	/**
-	 * Returns a DialogListItem object representing the item contained in the control at the specified index (list box, combo box or list view). Item 0 represents the first item in the list, item 1 the second, and so on.
-	 */
-	getitemat(position?: number): DOpusDialogListItem;
+	getItemAt(position?: number): DOpusDialogListItem;
 
 	/**
 	 * Returns a DialogListItem object representing the item contained in the control with the specified name (list box, combo box or list view). This method has two names (...Label and ...Name) for historical reasons, you can use either method name interchangeably).
 	 */
-	GetItemByLabelGetItemByName(name?: string): DOpusDialogListItem;
+	getItemByLabel(name?: string): DOpusDialogListItem;
 
 	/**
 	 * Returns a DialogListItem object representing the item contained in the control with the specified name (list box, combo box or list view). This method has two names (...Label and ...Name) for historical reasons, you can use either method name interchangeably).
 	 */
-	getitembylabelgetitembyname(name?: string): DOpusDialogListItem;
+	getItemByName(name?: string): DOpusDialogListItem;
 
 	// TODO - REVIEW
 	/**
 	 * Inserts a new item in the control (list box, combo box or list view). The first parameter is the position to insert the item at (0 means the beginning of the list, 1 means the second position and so on). The second parameter is the item's name, and the optional third parameter is a data value to associate with the item. When adding to a grouped list view, the optional fourth parameter provides the ID of the group you want to add the item to (the third parameter must be provided in this case, and can be set to 0 if no value is required). Instead of the name and value you can also pass a DialogListItem object obtained from another control. The return value indicates the position in the list of the new item.
 	 */
-	InsertItemAt(position?: number, name?: string, value?: number, groupid?: number, item?: object): number;
-
-	// TODO - REVIEW
-	/**
-	 * Inserts a new item in the control (list box, combo box or list view). The first parameter is the position to insert the item at (0 means the beginning of the list, 1 means the second position and so on). The second parameter is the item's name, and the optional third parameter is a data value to associate with the item. When adding to a grouped list view, the optional fourth parameter provides the ID of the group you want to add the item to (the third parameter must be provided in this case, and can be set to 0 if no value is required). Instead of the name and value you can also pass a DialogListItem object obtained from another control. The return value indicates the position in the list of the new item.
-	 */
-	insertitemat(position?: number, name?: string, value?: number, groupid?: number, item?: object): number;
+	insertItemAt(position?: number, name?: string, value?: number, groupid?: number, item?: object): number;
 
 	/**
 	 * Moves an existing item to a new location (list box, combo box or list view). The first parameter is the item to move (you can pass either its index or a DialogListItem object), and the second parameter is the new position the item should be moved to. The return value indicates the position in the list of the moved item.
 	 */
-	MoveItem(position?: number, item?: object, newposition?: number): number;
-
-	/**
-	 * Moves an existing item to a new location (list box, combo box or list view). The first parameter is the item to move (you can pass either its index or a DialogListItem object), and the second parameter is the new position the item should be moved to. The return value indicates the position in the list of the moved item.
-	 */
-	moveitem(position?: number, item?: object, newposition?: number): number;
+	moveItem(position?: number, item?: object, newposition?: number): number;
 
 	/**
 	 * Removes the specified group from a list view control.
 	 */
-	RemoveGroup(id?: number): void;
-
-	/**
-	 * Removes the specified group from a list view control.
-	 */
-	removegroup(id?: number): void;
+	removeGroup(id?: number): void;
 
 	/**
 	 * Removes an item from the control (list box, combo box or list view). You can provide either the index of the item to remove (0 means the first item, 1 means the second and so on) or a DialogListItem object obtained from the GetItemAt or GetItemByName methods. You can also specify -1 to completely clear the contents of the control, removing all items at once.
 	 */
-	RemoveItem(position?: number, item?: object): void;
-
-	/**
-	 * Removes an item from the control (list box, combo box or list view). You can provide either the index of the item to remove (0 means the first item, 1 means the second and so on) or a DialogListItem object obtained from the GetItemAt or GetItemByName methods. You can also specify -1 to completely clear the contents of the control, removing all items at once.
-	 */
-	removeitem(position?: number, item?: object): void;
+	removeItem(position?: number, item?: object): void;
 
 	/**
 	 * Selects an item in the control. For a list box, combo box or list view, you can specify either the index of the item to select (0 means the first item, 1 means the second and so on) or a DialogListItem object obtained from the GetItemAt or GetItemByName methods. For a multiple-selection list box or list view you can also specify -1 to select all items in the control. For a tab control, you can change which page is visible by specifying the name of the page (i.e. the name of the child dialog) to show. The return value indicates the new selected index.
 	 */
-	SelectItem(position?: number, item?: object, tab?: string): number;
-
-	/**
-	 * Selects an item in the control. For a list box, combo box or list view, you can specify either the index of the item to select (0 means the first item, 1 means the second and so on) or a DialogListItem object obtained from the GetItemAt or GetItemByName methods. For a multiple-selection list box or list view you can also specify -1 to select all items in the control. For a tab control, you can change which page is visible by specifying the name of the page (i.e. the name of the child dialog) to show. The return value indicates the new selected index.
-	 */
-	selectitem(position?: number, item?: object, tab?: string): number;
+	selectItem(position?: number, item?: object, tab?: string): number;
 
 	/**
 	 * Selects text within an edit control (or the edit field in a combo box control). The two parameters represent the start and end position of the desired selection. To select the entire contents, use 0 for the start and -1 for the end. The return value is a Vector with two members that provide the current start and end of the selection. To query the range without changing it, simply call the SelectRange method with no arguments. In a list box or list view control, this method selects a range of items.
 	 */
-	SelectRange(start?: number, end?: number, item1?: object, item2?: object): DOpusVector<object>;
-
-	/**
-	 * Selects text within an edit control (or the edit field in a combo box control). The two parameters represent the start and end position of the desired selection. To select the entire contents, use 0 for the start and -1 for the end. The return value is a Vector with two members that provide the current start and end of the selection. To query the range without changing it, simply call the SelectRange method with no arguments. In a list box or list view control, this method selects a range of items.
-	 */
-	selectrange(start?: number, end?: number, item1?: object, item2?: object): DOpusVector<object>;
+	selectRange(start?: number, end?: number, item1?: object, item2?: object): DOpusVector<object>;
 
 	/**
 	 * Sets the position of this control. The x and y coordinates are specified in pixels.
 	 */
-	SetPos(x?: number, y?: number): void;
-
-	/**
-	 * Sets the position of this control. The x and y coordinates are specified in pixels.
-	 */
-	setpos(x?: number, y?: number): void;
+	setPos(x?: number, y?: number): void;
 
 	/**
 	 * Sets the position and size of the control, in a single operation. All coordinates are specified in pixels.
 	 */
-	SetPosAndSize(x?: number, y?: number, cx?: number, cy?: number): void;
-
-	/**
-	 * Sets the position and size of the control, in a single operation. All coordinates are specified in pixels.
-	 */
-	setposandsize(x?: number, y?: number, cx?: number, cy?: number): void;
+	setPosAndSize(x?: number, y?: number, cx?: number, cy?: number): void;
 
 	/**
 	 * Sets the size of this control. The cx (width) and cy (height) values are specified in pixels.
 	 */
-	SetSize(cx?: number, cy?: number): void;
-
-	/**
-	 * Sets the size of this control. The cx (width) and cy (height) values are specified in pixels.
-	 */
-	setsize(cx?: number, cy?: number): void;
+	setSize(cx?: number, cy?: number): void;
 
 }
 
@@ -1463,17 +1150,7 @@ interface DOpusDate extends Date {
 	/**
 	 * Adds the specified value to the date. The interpretation of the specified value is controlled by the type string:l - millisecondss - secondsm - minutesh - hoursd - daysw - weeksM - monthsy - years
 	 */
-	Add(value?: number, type?: string): void;
-
-	/**
-	 * Adds the specified value to the date. The interpretation of the specified value is controlled by the type string:l - millisecondss - secondsm - minutesh - hoursd - daysw - weeksM - monthsy - years
-	 */
 	add(value?: number, type?: string): void;
-
-	/**
-	 * Returns a new Date object set to the same date as this one.
-	 */
-	Clone(): Date;
 
 	/**
 	 * Returns a new Date object set to the same date as this one.
@@ -1483,17 +1160,7 @@ interface DOpusDate extends Date {
 	/**
 	 * Compares this date against the other date. The return value will be 0 (equal), 1 (greater) or -1 (less).The optional type string controls how the comparison is performed:s - ignore seconds. If specified, the optional tolerance argument specifies the comparison tolerance in seconds.sD - ignore seconds, and compensate automatically for daylight savings.t - compare times onlyd - compare dates only
 	 */
-	Compare(other?: Date, type?: string, tolerance?: number): number;
-
-	/**
-	 * Compares this date against the other date. The return value will be 0 (equal), 1 (greater) or -1 (less).The optional type string controls how the comparison is performed:s - ignore seconds. If specified, the optional tolerance argument specifies the comparison tolerance in seconds.sD - ignore seconds, and compensate automatically for daylight savings.t - compare times onlyd - compare dates only
-	 */
 	compare(other?: Date, type?: string, tolerance?: number): number;
-
-	/**
-	 * Returns a formatted date or time string. The format and flags arguments are both optional. If you do not give a format, the result will include both date and time, formatted the same as date-time columns in the file display. If you give a format of just "d" or "t" then the result will be just the date or time part, formatted the same as date or time columns in the file display. The file display's formats depend on the user's locale and Windows settings. You should use those options if you wish to present a date/time to the user in the way they expect them to look, but not if you need to store them in a specific format. When using the file display's format (that is, the format argument is empty, "d" or "t"), you can optionally pass one or more case-sensitive flags in the second flags argument to override a few settings: N - Force day names on in dates within the last week. "Today", "Monday", etc. n - Force day names off. S - Force seconds on in times. s - Force seconds off. M - Force milliseconds on in times. (Milliseconds will be zero if the stored time does not have millisecond accuracy.) m - Force milliseconds off. P - Force time hours to be padded to two digits. p - Do not force time hours to be padded. For example, to get just the date, using the user's locale, but with day names forced off: myDate.Format("d","n"). To get the date and time, using the user's locale, but with day names forced on and seconds forced off: myDate.Format("","Ns"). The format can also use the syntax shown in Codes for date and time, allowing for arbitrary formats. For example, myDate.Format("D#yyyy-MM-dd T#HH:mm:ss") would return a string like 2016-07-28 15:45:26. When explicitly specifying a format, the flags argument should not be used and will be ignored.
-	 */
-	Format(format?: string, flags?: string): string;
 
 	/**
 	 * Returns a formatted date or time string. The format and flags arguments are both optional. If you do not give a format, the result will include both date and time, formatted the same as date-time columns in the file display. If you give a format of just "d" or "t" then the result will be just the date or time part, formatted the same as date or time columns in the file display. The file display's formats depend on the user's locale and Windows settings. You should use those options if you wish to present a date/time to the user in the way they expect them to look, but not if you need to store them in a specific format. When using the file display's format (that is, the format argument is empty, "d" or "t"), you can optionally pass one or more case-sensitive flags in the second flags argument to override a few settings: N - Force day names on in dates within the last week. "Today", "Monday", etc. n - Force day names off. S - Force seconds on in times. s - Force seconds off. M - Force milliseconds on in times. (Milliseconds will be zero if the stored time does not have millisecond accuracy.) m - Force milliseconds off. P - Force time hours to be padded to two digits. p - Do not force time hours to be padded. For example, to get just the date, using the user's locale, but with day names forced off: myDate.Format("d","n"). To get the date and time, using the user's locale, but with day names forced on and seconds forced off: myDate.Format("","Ns"). The format can also use the syntax shown in Codes for date and time, allowing for arbitrary formats. For example, myDate.Format("D#yyyy-MM-dd T#HH:mm:ss") would return a string like 2016-07-28 15:45:26. When explicitly specifying a format, the flags argument should not be used and will be ignored.
@@ -1503,17 +1170,7 @@ interface DOpusDate extends Date {
 	/**
 	 * Returns a new Date object with the date converted from UTC (based on the local time zone).
 	 */
-	FromUTC(): Date;
-
-	/**
-	 * Returns a new Date object with the date converted from UTC (based on the local time zone).
-	 */
-	fromutc(): Date;
-
-	/**
-	 * Resets the date to the current local date/time.
-	 */
-	Reset(): void;
+	fromUTC(): Date;
 
 	/**
 	 * Resets the date to the current local date/time.
@@ -1523,17 +1180,7 @@ interface DOpusDate extends Date {
 	/**
 	 * Sets the value of this Date object to the supplied date.
 	 */
-	Set(newdate?: Date): void;
-
-	/**
-	 * Sets the value of this Date object to the supplied date.
-	 */
 	set(newdate?: Date): void;
-
-	/**
-	 * Subtracts the specified value from the date. The parameters are the same as for the Add method.
-	 */
-	Sub(value?: number, type?: string): void;
 
 	/**
 	 * Subtracts the specified value from the date. The parameters are the same as for the Add method.
@@ -1543,12 +1190,7 @@ interface DOpusDate extends Date {
 	/**
 	 * Returns a new Date object with the date converted to UTC (based on the local time zone).
 	 */
-	ToUTC(): Date;
-
-	/**
-	 * Returns a new Date object with the date converted to UTC (based on the local time zone).
-	 */
-	toutc(): Date;
+	toUTC(): Date;
 
 }
 
@@ -1588,7 +1230,7 @@ interface DOpusDialog {
 	 *
 	 * dlg.buttons = "OK|Retry+Retry All=Retry All|Skip+Skip if same modified time=Skip Same Time|Cancel"
 	 */
-	readonly buttons: string;
+	buttons: string;
 
 	/**
 	 * This property uses either a Vector or an array of strings to provide a list of multiple options that can be shown to the user. The list can be presented in one of three ways:
@@ -1599,67 +1241,67 @@ interface DOpusDialog {
 	 *
 	 * When shown as a checkbox list the dialog is resizable; you can set the initial size using the cx and cy properties (and retrieve them afterwards if you want to save the size).
 	 */
-	readonly choices: string | string[];
+	choices: string | string[];
 
 	/**
 	 * In a text entry dialog (i.e. the max property has been specified) setting confirm to True will require that the user types the entered text again (in a second text field) to confirm it (e.g. for a password).
 	 */
-	readonly confirm: boolean;
+	confirm: boolean;
 
 	/**
 	 * For script dialogs marked as resizable, this property lets you override the width of the dialog defined in the resource - although note you can't resize a dialog smaller than its initial size.
 	 */
-	readonly cx: number;
+	cx: number;
 
 	/**
 	 * For script dialogs marked as resizable, this property lets you override the height of the dialog defined in the resource - although note you can't resize a dialog smaller than its initial size.
 	 */
-	readonly cy: number;
+	cy: number;
 
 	/**
 	 * In a text entry dialog (i.e. the max property has been specified) this property allows you to initialize the text field with a default value. (Old scripts may use "default" instead of "defvalue"; this is deprecated because it does not work in JScript where "default" is a reserved keyword.)
 	 */
-	readonly defvalue: string;
+	defValue: string;
 
 	/**
 	 * Allows you to change the default button (i.e. the action that will occur if the user hits enter) in the dialog. Normally the first button is the default - this has a defid of 1. The second button would have a defid of 2, and so on. If a dialog has more than one button then by definition the very last button is the "cancel" button, and this has a defid of 0.
 	 */
-	readonly defid: number;
+	defId: number;
 
 	/**
 	 * Set to True if you want a script dialog to run in “detached” mode, where your script provides its message loop.
 	 */
-	readonly detach: boolean;
+	detach: boolean;
 
 	/**
 	 * Use this to cause the dialog to automatically disable another window when it's displayed. The user will be unable to click or type in the disabled window until the dialog is closed. Normally if you use this you would set this to the same value as the window property.You can provide either a Lister or a Tab object, or another Dialog. If you are showing this dialog in response to the OnAboutScript event, you can also pass the value of the AboutData.window property.
 	 */
-	readonly disable_window: DOpusLister;
+	disable_window: DOpusLister;
 
 	/**
 	 * Displays one of several standard icons in the top-left corner of the dialog, which can be used, for example, to indicate the severity of an error condition. The valid values for this property are warning, error, info and question. When used with a script dialog this property lets you control the icon shown in the dialog's title bar. In this instance, instead of a string you can also provide an Image object that you obtained from the DOpus.LoadImage or Script.LoadImage methods. Note that the image must have been loaded from a .ico file.
 	 */
-	readonly icon: DOpusImage;
+	icon: DOpusImage;
 
 	/**
 	 * In a text entry dialog, this property returns the text string that the user entered (i.e. once the Show method has returned).
 	 */
-	readonly input: string;
+	input: string;
 
 	/**
 	 * Set this property to create a script dialog in a particular language (if one or more language overlays have been provided), rather than the currently selected language.
 	 */
-	readonly language: string;
+	language: string;
 
 	/**
 	 * In conjunction with the choices property, this will cause the choices to be presented as a checkbox list. You can initialize this Vector or array with the same number of items as the choices property, and set each one to True or False to control the default state of each checkbox. Or, simply set this value to 0 to activate the checkbox list without having to initialize the state of each checkbox.When the Show method returns, this property will return a Vector of bools that provide the state of each checkbox as set by the user.
 	 */
-	readonly list: boolean | boolean[] | number;
+	list: boolean | boolean[] | number;
 
 	/**
 	 * This property enables text entry in the dialog - a text field will be displayed allowing the user to enter a string. Set this property to the maximum length of the string you want the user to be able to enter (or 0 to have no limit).When the Show method returns the text the user entered will be available in the input property.
 	 */
-	readonly max: number;
+	max: number;
 
 	/**
 	 * In conjunction with the choices property, this will cause the choices to be presented as a popup menu rather than in a dialog. The menu will be displayed at the current mouse coordinates.
@@ -1676,37 +1318,37 @@ interface DOpusDialog {
 	 *
 	 * The Show method returns the index of the menu item the user chose (with 1 being the first item), or 0 if the menu was cancelled.
 	 */
-	readonly menu: number | number[] | number;
+	menu: number | number[] | number;
 
 	/**
 	 * Specifies the message text displayed in the dialog.
 	 */
-	readonly message: string;
+	message: string;
 
 	/**
 	 * For script dialogs this property retrieves or sets the current dialog opacity level, from 0 (totally transparent) to 255 (totally opaque).
 	 */
-	readonly opacity: number;
+	opacity: number;
 
 	/**
 	 * This is a collection of five options that will be displayed as checkboxes in the dialog. Unlike the choices / list scrolling checkbox list, these options are displayed as physical checkbox controls. By default the five checkboxes are uninitialized and won't be displayed, but if you assign a label to any of them they will be shown to the user. When the Show method returns you can obtain the state of the checkboxes using the state property of each DialogOption object.
 	 */
-	readonly options: DOpusDialogOption;
+	options: DOpusDialogOption;
 
 	/**
 	 * In a text entry dialog, set this property to True to make the text entry field a password field. In a password field the characters the user enters are not displayed.
 	 */
-	readonly password: boolean;
+	password: boolean;
 
 	/**
 	 * When used with a script dialog this property lets you control the dialog's position on screen. Accepted values are: center - center the dialog over the parent window (the default) absolute - specify an absolute position using the x and y properties parent - position relative to the parent window (using x and y) monitor - position relative to the current monitor (using x and y) Except when set to "center" the x and y properties can be used to adjust the dialog's position.
 	 */
-	readonly position: string;
+	position: string;
 
 	/**
 	 * By default, Opus checks the size and position of your dialog just before it opens and fixing them if they would place any of the dialog off-screen. Positioning a dialog off-screen is usually an accident caused by saving window positions on one system and restoring them on another with different monitor resolutions or arrangements. In the rare cases where you want your dialog to open off-screen, where the user cannot see some of all of it, set this property to False.
 	 */
-	readonly position_fix: boolean;
+	position_fix: boolean;
 
 	/**
 	 * This property returns the index of the button chosen by the user to close the dialog. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.If any buttons have associated drop-down menus then the contents of the menus also contribute to the index value. For example, if button index 2 has an additional item in a drop-down menu, then that item would be index 3, and the next button would be index 4.
@@ -1716,7 +1358,7 @@ interface DOpusDialog {
 	/**
 	 * In a text entry dialog, set this property to True to automatically select the contents of the input field (as specified by the defvalue property) when the dialog opens.
 	 */
-	readonly select: boolean;
+	select: boolean;
 
 	/**
 	 * In a drop-down list dialog (one with the choices property set without either list or menu), this property returns the index of the item chosen from the drop-down list after the Show method returns.
@@ -1726,62 +1368,52 @@ interface DOpusDialog {
 	/**
 	 * Set this property to True if the list of choices given by the choices property should be sorted alphabetically.
 	 */
-	readonly sort: boolean;
+	sort: boolean;
 
 	/**
 	 * Lets you create a script dialog. The template property can be set to the name of the script dialog to display (as defined in your script resources), or a string that contains raw XML defining the dialog.
 	 */
-	readonly template: string;
+	template: string;
 
 	/**
 	 * Specifies the title text of the dialog.
 	 */
-	readonly title: string;
+	title: string;
 
 	/**
 	 * Set this property to True to make the dialog "top level", or False to allow it to go behind other non-top level windows.
 	 */
-	readonly top: boolean;
+	top: boolean;
 
 	/**
 	 * Set this property to True if you want the script dialog to generate close events in your message loop when the user clicks the window close button. You'll need to close the dialog yourself using the EndDlg method.
 	 */
-	readonly want_close: boolean;
+	want_close: boolean;
 
 	/**
 	 * Set this property to True if you want the script dialog to generate resize events in your message loop when the user resizes the dialog.
 	 */
-	readonly want_resize: boolean;
+	want_resize: boolean;
 
 	/**
 	 * Use this to specify the parent window of the dialog. The dialog will appear centered over the top of the specified window. You can provide either a Lister or a Tab object, or another Dialog. If you are showing this dialog in response to the OnAboutScript event, you can also pass the value of the AboutData.window property.You only need to set this property if you obtain the Dialog option from the DOpus.Dlg method. If the Dialog object comes from one of the other objects (e.g. Tab.Dlg) then its parent window will already be set to the window which launched the action your script is responding to.
 	 */
-	readonly window: DOpusLister;
+	window: DOpusLister;
 
 	/**
 	 * Specifies the x-position of a script dialog. Use the position property to control how the position is interpreted. After the dialog has been displayed you can change this property to move the dialog around on-screen.
 	 */
-	readonly x: number;
+	x: number;
 
 	/**
 	 * Specifies the y-position of a script dialog. Use the position property to control how the position is interpreted. After the dialog has been displayed you can change this property to move the dialog around on-screen.
 	 */
-	readonly y: number;
+	y: number;
 
 	/**
 	 * Creates a hotkey (or keyboard accelerator) for the specified key combination. When the user presses this key combination in your dialog, a hotkey event will be triggered. The name parameter is a name you assign that lets you identify the hotkey. The key parameter specified the actual key combination; this can optionally combine the qualifiers ctrl, shift and alt with a character or name of a special key. For example, ctrl+t or alt+shift+F7.
 	 */
-	AddHotkey(name?: string, key?: string): void;
-
-	/**
-	 * Creates a hotkey (or keyboard accelerator) for the specified key combination. When the user presses this key combination in your dialog, a hotkey event will be triggered. The name parameter is a name you assign that lets you identify the hotkey. The key parameter specified the actual key combination; this can optionally combine the qualifiers ctrl, shift and alt with a character or name of a special key. For example, ctrl+t or alt+shift+F7.
-	 */
-	addhotkey(name?: string, key?: string): void;
-
-	/**
-	 * When creating a script dialog, calling this method creates the underlying dialog but does not display it. This lets you create the dialog and then initialize its controls before it is shown to the user. Using Create implies a detached dialog; the detach property will be set True automatically. However, you can call RunDlg afterwards if you don't need a custom message loop and just want to set up some controls before displaying the dialog. Once the dialog has been created and its controls initialized, you should call Show or RunDlg to make it visible to the user. It will also go visible at the first GetMsg call if it hasn't already been shown.
-	 */
-	Create(): void;
+	addHotkey(name?: string, key?: string): void;
 
 	/**
 	 * When creating a script dialog, calling this method creates the underlying dialog but does not display it. This lets you create the dialog and then initialize its controls before it is shown to the user. Using Create implies a detached dialog; the detach property will be set True automatically. However, you can call RunDlg afterwards if you don't need a custom message loop and just want to set up some controls before displaying the dialog. Once the dialog has been created and its controls initialized, you should call Show or RunDlg to make it visible to the user. It will also go visible at the first GetMsg call if it hasn't already been shown.
@@ -1791,27 +1423,12 @@ interface DOpusDialog {
 	/**
 	 * Returns a Control object corresponding to one of the controls on a script dialog. The control is identified by its name, as defined in the script dialog resource. The optional second and third parameters are only used when the control is in a tab control (that is, when it's in a dialog that's a child of another dialog). The dialog parameter specifies the name of its parent dialog. The tab parameter specifies the name of the tab control hosting the child dialog. You would only need to specify the name of the tab if you have multiple tab controls and the same dialog is hosted inside more than one of them (this would be quite a rare occurrence). Note that none of the controls will exist until Create has been called.
 	 */
-	Control(name?: string, dialog?: string, tab?: string): DOpusControl;
-
-	/**
-	 * Returns a Control object corresponding to one of the controls on a script dialog. The control is identified by its name, as defined in the script dialog resource. The optional second and third parameters are only used when the control is in a tab control (that is, when it's in a dialog that's a child of another dialog). The dialog parameter specifies the name of its parent dialog. The tab parameter specifies the name of the tab control hosting the child dialog. You would only need to specify the name of the tab if you have multiple tab controls and the same dialog is hosted inside more than one of them (this would be quite a rare occurrence). Note that none of the controls will exist until Create has been called.
-	 */
 	control(name?: string, dialog?: string, tab?: string): DOpusControl;
 
 	/**
 	 * Deletes a hotkey you previously created with the AddHotkey method.
 	 */
-	DelHotkey(name?: string): void;
-
-	/**
-	 * Deletes a hotkey you previously created with the AddHotkey method.
-	 */
-	delhotkey(name?: string): void;
-
-	/**
-	 * Allows the user to drag and drop one or more files from your dialog (and drop them in another window or application). You would usually call this in response to a drag event you receive from a static or list view control. The first parameter is an Item collection (or Vector of Item objects) representing the files to be dragged. The optional second parameter lets you control which actions are available. This should be a string containing one or more of copy, move, link. The default action can be indicated by prefixing it with a * (e.g. copy,*move,link). If you don't specify this parameter the default is to only allow copy. The string this method returns indicates the result of the drag. For a left button drag, this will be "copy", "move", "link" or "drop". For a right-button drag it will always be "drop". If the drag is cancelled it will return "cancel".
-	 */
-	Drag(actions?: string): string;
+	delHotkey(name?: string): void;
 
 	/**
 	 * Allows the user to drag and drop one or more files from your dialog (and drop them in another window or application). You would usually call this in response to a drag event you receive from a static or list view control. The first parameter is an Item collection (or Vector of Item objects) representing the files to be dragged. The optional second parameter lets you control which actions are available. This should be a string containing one or more of copy, move, link. The default action can be indicated by prefixing it with a * (e.g. copy,*move,link). If you don't specify this parameter the default is to only allow copy. The string this method returns indicates the result of the drag. For a left button drag, this will be "copy", "move", "link" or "drop". For a right-button drag it will always be "drop". If the drag is cancelled it will return "cancel".
@@ -1821,17 +1438,7 @@ interface DOpusDialog {
 	/**
 	 * Ends a script dialog running in detached mode. Normally dialogs end automatically when the user clicks the close button or another button that has its Close Dialog property set to True. This method lets you end a dialog under script control. The optional parameter specifies the result code that the Dialog.result property will return.
 	 */
-	EndDlg(result?: number): void;
-
-	/**
-	 * Ends a script dialog running in detached mode. Normally dialogs end automatically when the user clicks the close button or another button that has its Close Dialog property set to True. This method lets you end a dialog under script control. The optional parameter specifies the result code that the Dialog.result property will return.
-	 */
-	enddlg(result?: number): void;
-
-	/**
-	 * Displays a "Browse for Folder" dialog letting the user select a folder. The optional parameters are: title - specify title of the dialogdefault - specify the default path selected in the dialogexpand - specify True to automatically expand the initial pathwindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. A Path object is returned to indicate the folder chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
-	 */
-	Folder(title?: string, defaultValue?: string, expand?: boolean, window?: DOpusLister|DOpusTab): DOpusPath;
+	endDlg(result?: number): void;
 
 	/**
 	 * Displays a "Browse for Folder" dialog letting the user select a folder. The optional parameters are: title - specify title of the dialogdefault - specify the default path selected in the dialogexpand - specify True to automatically expand the initial pathwindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. A Path object is returned to indicate the folder chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
@@ -1841,47 +1448,22 @@ interface DOpusDialog {
 	/**
 	 * Returns a Msg object representing the most recent input event in a script dialog (only used in detached mode). The return value will evaluate to False when the dialog is closed, which is when you should exit your message loop. If the dialog is not already visible (because Show has not been called) then it will become visible when you first call GetMsg.
 	 */
-	GetMsg(): DOpusMsg;
-
-	/**
-	 * Returns a Msg object representing the most recent input event in a script dialog (only used in detached mode). The return value will evaluate to False when the dialog is closed, which is when you should exit your message loop. If the dialog is not already visible (because Show has not been called) then it will become visible when you first call GetMsg.
-	 */
-	getmsg(): DOpusMsg;
+	getMsg(): DOpusMsg;
 
 	/**
 	 * Displays a text entry dialog allowing the user to enter a string. The optional parameters are: message - specify message string in the dialogdefault - specify default string valuemax - specify maximum string lengthbuttons - specify button labels (in the same format as the buttons property described above)title - specify dialog window titlewindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.result - for scripting languages that support ByRef parameters, this can specify a variable to receive the string the user enters.The return value is the entered string, or an empty value if the dialog was cancelled. The index of the button selected by the user will be available via the result property once this method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
 	 */
-	GetString(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab, result?: string): string;
-
-	/**
-	 * Displays a text entry dialog allowing the user to enter a string. The optional parameters are: message - specify message string in the dialogdefault - specify default string valuemax - specify maximum string lengthbuttons - specify button labels (in the same format as the buttons property described above)title - specify dialog window titlewindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.result - for scripting languages that support ByRef parameters, this can specify a variable to receive the string the user enters.The return value is the entered string, or an empty value if the dialog was cancelled. The index of the button selected by the user will be available via the result property once this method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
-	 */
-	getstring(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab, result?: string): string;
+	getString(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab, result?: string): string;
 
 	/**
 	 * Stops the specified timer. The timer must previously have been created by a call to the SetTimer method.
 	 */
-	KillTimer(name?: string): void;
-
-	/**
-	 * Stops the specified timer. The timer must previously have been created by a call to the SetTimer method.
-	 */
-	killtimer(name?: string): void;
+	killTimer(name?: string): void;
 
 	/**
 	 * Restores the previously saved position of a script dialog. The position must have previously been saved by a call to the SavePosition method. The id string is a string that Opus can use to identify your dialog or the script it comes from. The template name of the dialog will be automatically appended to this. For example, you might specify id as "kundal" - Opus would then internally save the position of a dialog called "dialog1" as "kundal!dialog1". Make sure you pick a string that other script authors are unlikely to use as Opus has no other way of telling the saved positions apart. The optional type parameter lets you control which position elements are restored - specify "pos" to only restore the position, "size" to only restore the size, or "pos,size" to restore both (this is also the default, so you can also omit the argument all together).
 	 */
-	LoadPosition(id?: string, type?: string): void;
-
-	/**
-	 * Restores the previously saved position of a script dialog. The position must have previously been saved by a call to the SavePosition method. The id string is a string that Opus can use to identify your dialog or the script it comes from. The template name of the dialog will be automatically appended to this. For example, you might specify id as "kundal" - Opus would then internally save the position of a dialog called "dialog1" as "kundal!dialog1". Make sure you pick a string that other script authors are unlikely to use as Opus has no other way of telling the saved positions apart. The optional type parameter lets you control which position elements are restored - specify "pos" to only restore the position, "size" to only restore the size, or "pos,size" to restore both (this is also the default, so you can also omit the argument all together).
-	 */
-	loadposition(id?: string, type?: string): void;
-
-	/**
-	 * Displays a "Browse to Open File" dialog that lets the user select one or more files. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected)window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. A collection of Item objects is returned to indicate the files selected by the user. The returned object will have a result property that you should check first - the collection of items is only valid if result returns True. If it returns False it means the user cancelled the dialog.
-	 */
-	Multi(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab): DOpusItem;
+	loadPosition(id?: string, type?: string): void;
 
 	/**
 	 * Displays a "Browse to Open File" dialog that lets the user select one or more files. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected)window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. A collection of Item objects is returned to indicate the files selected by the user. The returned object will have a result property that you should check first - the collection of items is only valid if result returns True. If it returns False it means the user cancelled the dialog.
@@ -1891,21 +1473,9 @@ interface DOpusDialog {
 	/**
 	 * Displays a "Browse to Open File" dialog that lets the user select a single file. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected)window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.A single Item object is returned to indicate the file selected by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Item properties will only be valid if result is True.
 	 *
-	 * README - the documentation on this seems to be wrong: when as 3rd parameter allowed file extension, e.g. '*.txt', is given it also seems to work
-	 */
-	Open(title?: string, defaultValue?: string, windowOrFileExt?: DOpusLister|DOpusTab|string): DOpusItem;
-
-	/**
-	 * Displays a "Browse to Open File" dialog that lets the user select a single file. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected)window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.A single Item object is returned to indicate the file selected by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Item properties will only be valid if result is True.
-	 *
-	 * README - the documentation on this seems to be wrong: when as 3rd parameter allowed file extension, e.g. '*.txt', is given it also seems to work
+	 * CYREADME - the documentation on this seems to be wrong: when as 3rd parameter allowed file extension, e.g. '*.txt', is given it also seems to work
 	 */
 	open(title?: string, defaultValue?: string, windowOrFileExt?: DOpusLister|DOpusTab|string): DOpusItem;
-
-	/**
-	 * Displays a dialog with one or more buttons. The optional parameters are: message - specify message string in the dialogbuttons - specify button labels (in the same format as the buttons property described above)title - specify dialog window titlewindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.The return value is the index of the button selected by the user, and this is also available in the result property once the method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
-	 */
-	Request(message?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab): number;
 
 	/**
 	 * Displays a dialog with one or more buttons. The optional parameters are: message - specify message string in the dialogbuttons - specify button labels (in the same format as the buttons property described above)title - specify dialog window titlewindow - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used.The return value is the index of the button selected by the user, and this is also available in the result property once the method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
@@ -1915,37 +1485,17 @@ interface DOpusDialog {
 	/**
 	 * Turns a previously detached dialog into a non-detached one, by taking over and running the default message loop. The RunDlg method won't return until the dialog has closed. You might use this if you created a dialog using Create, in order to initialize its controls, but don't actually want to run an interactive message loop. The return value is the same as the object's result property, and represents the index of the close button selected by the user. If the dialog is not already visible (because neither Show nor GetMsg were called) then it will become visible when you call RunDlg. (Compatibility note: Prior to Opus 12.22, scripts needed to call Show explicitly.)
 	 */
-	RunDlg(): number;
-
-	/**
-	 * Turns a previously detached dialog into a non-detached one, by taking over and running the default message loop. The RunDlg method won't return until the dialog has closed. You might use this if you created a dialog using Create, in order to initialize its controls, but don't actually want to run an interactive message loop. The return value is the same as the object's result property, and represents the index of the close button selected by the user. If the dialog is not already visible (because neither Show nor GetMsg were called) then it will become visible when you call RunDlg. (Compatibility note: Prior to Opus 12.22, scripts needed to call Show explicitly.)
-	 */
-	rundlg(): number;
+	runDlg(): number;
 
 	/**
 	 * Saves the position (and size) of the dialog to your Opus configuration. The position can then be restored later on by a call to LoadPosition. Normally you would call LoadPosition before displaying your dialog, and SavePosition after the dialog has been closed. The id string is a string that Opus can use to identify your dialog or the script it comes from. The template name of the dialog will be automatically appended to this. For example, you might specify id as "kundal" - Opus would then internally save the position of a dialog called "dialog1" as "kundal!dialog1". Make sure you pick a string that other script authors are unlikely to use as Opus has no other way of telling the saved positions apart.
 	 */
-	SavePosition(id?: string): void;
-
-	/**
-	 * Saves the position (and size) of the dialog to your Opus configuration. The position can then be restored later on by a call to LoadPosition. Normally you would call LoadPosition before displaying your dialog, and SavePosition after the dialog has been closed. The id string is a string that Opus can use to identify your dialog or the script it comes from. The template name of the dialog will be automatically appended to this. For example, you might specify id as "kundal" - Opus would then internally save the position of a dialog called "dialog1" as "kundal!dialog1". Make sure you pick a string that other script authors are unlikely to use as Opus has no other way of telling the saved positions apart.
-	 */
-	saveposition(id?: string): void;
+	savePosition(id?: string): void;
 
 	/**
 	 * Creates a timer that will generate a periodic timer event for your script. The period must be specified in milliseconds (e.g. 1000 would equal one second). You can optionally specify a name for the timer - if you don't provide a name, one will be generated automatically (and the name of the new timer will be returned).
 	 */
-	SetTimer(period?: number, name?: string): string;
-
-	/**
-	 * Creates a timer that will generate a periodic timer event for your script. The period must be specified in milliseconds (e.g. 1000 would equal one second). You can optionally specify a name for the timer - if you don't provide a name, one will be generated automatically (and the name of the new timer will be returned).
-	 */
-	settimer(period?: number, name?: string): string;
-
-	/**
-	 * Displays the dialog that has been pre-configured using the various properties of this object. See the properties section above for a full description of these. If the detach property is False, the call will not return until the dialog has been closed. The return value is the index of the button selected by the user, and this is also available in the result property once the method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0. If the detach property is True, the call will return immediately and the return value is meaningless. You should then either run a message loop for the “detached” dialog, or call RunDlg to run the standard loop.
-	 */
-	Show(): number;
+	setTimer(period?: number, name?: string): string;
 
 	/**
 	 * Displays the dialog that has been pre-configured using the various properties of this object. See the properties section above for a full description of these. If the detach property is False, the call will not return until the dialog has been closed. The return value is the index of the button selected by the user, and this is also available in the result property once the method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0. If the detach property is True, the call will return immediately and the return value is meaningless. You should then either run a message loop for the “detached” dialog, or call RunDlg to run the standard loop.
@@ -1955,27 +1505,12 @@ interface DOpusDialog {
 	/**
 	 * Displays a "Browse to Save File" dialog that lets the user select a single file or enter a new filename to save. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected) type - specify a list of filetypes to populate the "Save as Type" dropdown in the save dialog.window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. The optional type parameter consists of one or more pairs of strings, separated by exclamation marks (!). The first string of each pair is the plain text string shown in the drop-down, and the second string of each pair is the actual file extension. You can also specify multiple extensions for the one type by separating them with semicolon. If you want the default "All files" item to be added to the list, add a # character at the start of the string. For example, #Text Files!*.txt!Doc Files!*.doc.A Path object is returned to indicate the file chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
 	 */
-	Save(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab, type?: string): DOpusPath;
-
-	/**
-	 * Displays a "Browse to Save File" dialog that lets the user select a single file or enter a new filename to save. The optional parameters are: title - specify title of the dialogdefault - specify the default file selected in the dialog (if a folder is specified this specifies the default location but no file will be selected) type - specify a list of filetypes to populate the "Save as Type" dropdown in the save dialog.window - specify parent window for the dialog (a Lister or a Tab). If not specified, the Dialog object's window property will be used. The optional type parameter consists of one or more pairs of strings, separated by exclamation marks (!). The first string of each pair is the plain text string shown in the drop-down, and the second string of each pair is the actual file extension. You can also specify multiple extensions for the one type by separating them with semicolon. If you want the default "All files" item to be added to the list, add a # character at the start of the string. For example, #Text Files!*.txt!Doc Files!*.doc.A Path object is returned to indicate the file chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
-	 */
 	save(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab, type?: string): DOpusPath;
 
 	/**
 	 * Used to change how custom dialogs are grouped with other Opus windows on the taskbar. Specify a group name to move the window into an alternative group, or omit the group argument to reset back to the default group. If one or more windows are moved into the same group, they will be grouped together, separate from other the default group. This only works on Windows 7 and above, and only when taskbar grouping is enabled. Group names are limited to 103 characters and will be truncated if longer. Spaces and dots in group names are automatically converted to underscores. Only works with custom script dialogs (i.e. when you are using the template property). Must be called after the dialog has been created (i.e. after Show has been called -- see the RunDlg method if you want to avoid writing your own message loop just for this). Returns true on success.
 	 */
-	SetTaskbarGroup(group?: string): boolean;
-
-	/**
-	 * Used to change how custom dialogs are grouped with other Opus windows on the taskbar. Specify a group name to move the window into an alternative group, or omit the group argument to reset back to the default group. If one or more windows are moved into the same group, they will be grouped together, separate from other the default group. This only works on Windows 7 and above, and only when taskbar grouping is enabled. Group names are limited to 103 characters and will be truncated if longer. Spaces and dots in group names are automatically converted to underscores. Only works with custom script dialogs (i.e. when you are using the template property). Must be called after the dialog has been created (i.e. after Show has been called -- see the RunDlg method if you want to avoid writing your own message loop just for this). Returns true on success.
-	 */
-	settaskbargroup(group?: string): boolean;
-
-	/**
-	 * Returns a Vars object that represents the variables that are scoped to this particular dialog. This allows scripts to use variables that persist from one use of the dialog to another. The id string is a string that Opus can use to identify your dialog or the script it comes from. The template name of the dialog will be automatically appended to this. For example, you might specify id as "kundal" - Opus would then internally save these variables for a dialog called "dialog1" as "kundal!dialog1". Make sure you pick a string that other script authors are unlikely to use as Opus has no other way of telling the saved variables apart.
-	 */
-	Vars(id?: string): DOpusVars;
+	setTaskbarGroup(group?: string): boolean;
 
 	/**
 	 * Returns a Vars object that represents the variables that are scoped to this particular dialog. This allows scripts to use variables that persist from one use of the dialog to another. The id string is a string that Opus can use to identify your dialog or the script it comes from. The template name of the dialog will be automatically appended to this. For example, you might specify id as "kundal" - Opus would then internally save these variables for a dialog called "dialog1" as "kundal!dialog1". Make sure you pick a string that other script authors are unlikely to use as Opus has no other way of telling the saved variables apart.
@@ -1985,12 +1520,7 @@ interface DOpusDialog {
 	/**
 	 * Allows a script dialog to monitor events in a folder tab. You will receive notifications of the requested events through your message loop. The tab parameter specifies the Tab you want to watch. The events string is a comma-separated list of events you want to watch for. The id string is an optional parameter; it lets you assign your own ID to the tab to make it easier to tell where events are coming from (if you're monitoring multiple tabs, for instance). These are the events you can watch for are. Note that some are equivalent to the existing script events (e.g. OnActivateTab): select - items in the tab are selected or deselected navigate - the folder is changed in the tab add - items are added to the folder delete - items are deleted from the folder change - items in the folder are changed (size, date, name, etc) activate - tab activated or deactivated srcdst - source/destination state changed view - view mode changed flat - flat view state changed Once notification has been established you will be notified of all requested events when they occur. Note that no specific information is sent with notifications - e.g. for the "change" event, you aren't told which items have changed, only that something has. You will receive notification events in your message loop. The various properties of the Msg object let you determine what happened. The Msg.event property will be set to tab for notifications from a watched folder tab. The Msg.control property tells you which tab the change occurred in; if you specified an ID when you called the WatchTab function, this will be in the Msg.control property - otherwise, it will be the numeric handle of the tab. Note that it's *not* the actual Tab object. You can access the Tab object via the Msg.tab property but this can be inefficient, as it requires a new Tab object to be created every time. If you're only monitoring one tab it's better to store the Tab object in your own variable - and if you're monitoring multiple tabs you could, e.g. use a unique ID for each one and keep the objects in a Map. The Msg.value property tells you which notification event occurred. Possible values are select, navigate, filechange, activate, srcdst, view, flat, and close (sent if the tab is closed while you are monitoring it). For the filechange event, the Msg.data property contains a bit mask indicating which file events occurred. 1 = add, 2 = delete, 4 = change. The values will be added together (so e.g. 6 indicates at least one item was changed and at least one was deleted). It's up to your script to determine exactly what changed. You can change the events you're monitoring for by calling the WatchTab method again with the same tab and new event list. To stop monitoring an existing tab, call WatchTab with the second parameter set to stop. Monitoring is automatically cancelled if your dialog closes (and also if the tab closes).
 	 */
-	WatchTab(Tab?: DOpusTab, events?: string, id?: string): boolean;
-
-	/**
-	 * Allows a script dialog to monitor events in a folder tab. You will receive notifications of the requested events through your message loop. The tab parameter specifies the Tab you want to watch. The events string is a comma-separated list of events you want to watch for. The id string is an optional parameter; it lets you assign your own ID to the tab to make it easier to tell where events are coming from (if you're monitoring multiple tabs, for instance). These are the events you can watch for are. Note that some are equivalent to the existing script events (e.g. OnActivateTab): select - items in the tab are selected or deselected navigate - the folder is changed in the tab add - items are added to the folder delete - items are deleted from the folder change - items in the folder are changed (size, date, name, etc) activate - tab activated or deactivated srcdst - source/destination state changed view - view mode changed flat - flat view state changed Once notification has been established you will be notified of all requested events when they occur. Note that no specific information is sent with notifications - e.g. for the "change" event, you aren't told which items have changed, only that something has. You will receive notification events in your message loop. The various properties of the Msg object let you determine what happened. The Msg.event property will be set to tab for notifications from a watched folder tab. The Msg.control property tells you which tab the change occurred in; if you specified an ID when you called the WatchTab function, this will be in the Msg.control property - otherwise, it will be the numeric handle of the tab. Note that it's *not* the actual Tab object. You can access the Tab object via the Msg.tab property but this can be inefficient, as it requires a new Tab object to be created every time. If you're only monitoring one tab it's better to store the Tab object in your own variable - and if you're monitoring multiple tabs you could, e.g. use a unique ID for each one and keep the objects in a Map. The Msg.value property tells you which notification event occurred. Possible values are select, navigate, filechange, activate, srcdst, view, flat, and close (sent if the tab is closed while you are monitoring it). For the filechange event, the Msg.data property contains a bit mask indicating which file events occurred. 1 = add, 2 = delete, 4 = change. The values will be added together (so e.g. 6 indicates at least one item was changed and at least one was deleted). It's up to your script to determine exactly what changed. You can change the events you're monitoring for by calling the WatchTab method again with the same tab and new event list. To stop monitoring an existing tab, call WatchTab with the second parameter set to stop. Monitoring is automatically cancelled if your dialog closes (and also if the tab closes).
-	 */
-	watchtab(Tab?: DOpusTab, events?: string, id?: string): boolean;
+	watchTab(Tab?: DOpusTab, events?: string, id?: string): boolean;
 
 }
 
@@ -2038,52 +1568,27 @@ interface DOpusDialogListColumns {
 	/**
 	 * Adds a new column to the list view, and returns the index of the new column.
 	 */
-	AddColumn(name?: string): number;
-
-	/**
-	 * Adds a new column to the list view, and returns the index of the new column.
-	 */
-	addcolumn(name?: string): number;
+	addColumn(name?: string): number;
 
 	/**
 	 * Automatically sizes all columns in the list view to fit their content.
 	 */
-	AutoSize(): void;
-
-	/**
-	 * Automatically sizes all columns in the list view to fit their content.
-	 */
-	autosize(): void;
+	autoSize(): void;
 
 	/**
 	 * Deletes the specified column.
 	 */
-	DeleteColumn(index?: number): void;
-
-	/**
-	 * Deletes the specified column.
-	 */
-	deletecolumn(index?: number): void;
+	deleteColumn(index?: number): void;
 
 	/**
 	 * Returns a DialogListColumn object representing the column in the specified position.
 	 */
-	GetColumnAt(index?: number): DOpusDialogListColumn;
-
-	/**
-	 * Returns a DialogListColumn object representing the column in the specified position.
-	 */
-	getcolumnat(index?: number): DOpusDialogListColumn;
+	getColumnAt(index?: number): DOpusDialogListColumn;
 
 	/**
 	 * Inserts a new column in the list view at the specified position, and returns the index of the new column.
 	 */
-	InsertColumn(name?: string, position?: number): number;
-
-	/**
-	 * Inserts a new column in the list view at the specified position, and returns the index of the new column.
-	 */
-	insertcolumn(name?: string, position?: number): number;
+	insertColumn(name?: string, position?: number): number;
 
 }
 
@@ -2394,17 +1899,7 @@ interface DOpusDPI {
 	/**
 	 * Divides the provided size by the system DPI; e.g. if the system DPI was set to 150%, DPI.Divide(60) would return 40.
 	 */
-	Divide(value?: number): number;
-
-	/**
-	 * Divides the provided size by the system DPI; e.g. if the system DPI was set to 150%, DPI.Divide(60) would return 40.
-	 */
 	divide(value?: number): number;
-
-	/**
-	 * Scales the provided size by the system DPI; e.g. if the system DPI was set to 200%, DPI.Scale(75) would return 150.
-	 */
-	Scale(value?: number): number;
 
 	/**
 	 * Scales the provided size by the system DPI; e.g. if the system DPI was set to 200%, DPI.Scale(75) would return 150.
@@ -2532,22 +2027,12 @@ interface DOpusFavorite extends String {
 	/**
 	 * Changes the name of this favorite folder. Note that changes you make to the list are not saved until you call the Favorites.Save method.
 	 */
-	SetName(name?: string): void;
-
-	/**
-	 * Changes the name of this favorite folder. Note that changes you make to the list are not saved until you call the Favorites.Save method.
-	 */
-	setname(name?: string): void;
+	setName(name?: string): void;
 
 	/**
 	 * Changes the path this favorite folder refers to. Note that changes you make to the list are not saved until you call the Favorites.Save method.
 	 */
-	SetPath(path?: string, Path?: object): void;
-
-	/**
-	 * Changes the path this favorite folder refers to. Note that changes you make to the list are not saved until you call the Favorites.Save method.
-	 */
-	setpath(path?: string, Path?: object): void;
+	setPath(path?: string, Path?: object): void;
 
 }
 
@@ -2562,17 +2047,7 @@ interface DOpusFavorites extends DOpusFavorite {
 	/**
 	 * Adds a new favorite folder to the favorites list. Note that changes you make to the list are not saved until you call the Save method. This method performs three separate functions; it can add a separator, a sub-folder or a favorite folder. To add a separator, the parameters should be the type string sep, optionally followed by the insertion position (see below).For example, Favorites.Add("sep"); To add a folder, the first parameter should be the string folder: followed by the name of the folder (as a single parameter), optionally followed by the insertion position.For example, Favorites.Add("folder:Picture Locations"); To add a new favorite, the first parameter can optionally be the name of the favorite, and the second parameter can be the path of the folder to add, or the name can be omitted and only the path can be provided. In either case you can optionally include the insertion position as the last parameter.For example, Favorites.Add("myfave", "c:\folder\path");or Favorites.Add("c:\folder\path"); In all three cases the new item is added to the end by default, but you can optionally specify a position to insert the item somewhere else. E.g. specifying 0 for the insertion position would add it at the top of the list. You can provide either a number or another Favorite object. For example, Favorites.Add("myfave", "c:\folder\path", 0); The return value is either a Favorite or a Favorites object (depending on whether you added a sub-folder or a favorite folder).
 	 */
-	Add(typeOrName?: string, path?: string, insertpos?: number, Favorite?: object): DOpusFavorite;
-
-	/**
-	 * Adds a new favorite folder to the favorites list. Note that changes you make to the list are not saved until you call the Save method. This method performs three separate functions; it can add a separator, a sub-folder or a favorite folder. To add a separator, the parameters should be the type string sep, optionally followed by the insertion position (see below).For example, Favorites.Add("sep"); To add a folder, the first parameter should be the string folder: followed by the name of the folder (as a single parameter), optionally followed by the insertion position.For example, Favorites.Add("folder:Picture Locations"); To add a new favorite, the first parameter can optionally be the name of the favorite, and the second parameter can be the path of the folder to add, or the name can be omitted and only the path can be provided. In either case you can optionally include the insertion position as the last parameter.For example, Favorites.Add("myfave", "c:\folder\path");or Favorites.Add("c:\folder\path"); In all three cases the new item is added to the end by default, but you can optionally specify a position to insert the item somewhere else. E.g. specifying 0 for the insertion position would add it at the top of the list. You can provide either a number or another Favorite object. For example, Favorites.Add("myfave", "c:\folder\path", 0); The return value is either a Favorite or a Favorites object (depending on whether you added a sub-folder or a favorite folder).
-	 */
 	add(typeOrName?: string, path?: string, insertpos?: number, Favorite?: object): DOpusFavorite;
-
-	/**
-	 * Deletes the specified favorite or sub-folder. Note that changes you make to the list are not saved until you call the Save method.
-	 */
-	Delete(Favorite?: object, Favorites?: object): void;
 
 	/**
 	 * Deletes the specified favorite or sub-folder. Note that changes you make to the list are not saved until you call the Save method.
@@ -2582,17 +2057,7 @@ interface DOpusFavorites extends DOpusFavorite {
 	/**
 	 * Lets you locate a sub-folder one or more levels below the current one. The name parameter is the name or path and name of the sub-folder to look for (e.g. "myfave", "pictures/local", etc).The optional index parameter lets you handle the case when there might be more than one sub-folder with the same name. Favorites.Find("pictures", 1); would find the second sub-folder called "pictures" below the current level.
 	 */
-	Find(name?: string, index?: number): DOpusFavorites;
-
-	/**
-	 * Lets you locate a sub-folder one or more levels below the current one. The name parameter is the name or path and name of the sub-folder to look for (e.g. "myfave", "pictures/local", etc).The optional index parameter lets you handle the case when there might be more than one sub-folder with the same name. Favorites.Find("pictures", 1); would find the second sub-folder called "pictures" below the current level.
-	 */
 	find(name?: string, index?: number): DOpusFavorites;
-
-	/**
-	 * Saves any changes you've made to the favorites list. Once you call this method changes you have made will be reflected in Preferences and the favorites list in Listers. Note that you can only call this method on the main "root" Favorites object obtained from the DOpus.favorites property
-	 */
-	Save(): void;
 
 	/**
 	 * Saves any changes you've made to the favorites list. Once you call this method changes you have made will be reflected in Preferences and the favorites list in Listers. Note that you can only call this method on the main "root" Favorites object obtained from the DOpus.favorites property
@@ -2602,12 +2067,7 @@ interface DOpusFavorites extends DOpusFavorite {
 	/**
 	 * Changes the name of this sub-folder. Note that changes you make to the list are not saved until you call the Save method. You can only call this method on Favorites objects that refer to sub-folders, and not the main "root" folder.
 	 */
-	SetName(name?: string): void;
-
-	/**
-	 * Changes the name of this sub-folder. Note that changes you make to the list are not saved until you call the Save method. You can only call this method on Favorites objects that refer to sub-folders, and not the main "root" folder.
-	 */
-	setname(name?: string): void;
+	setName(name?: string): void;
 
 }
 
@@ -2649,17 +2109,7 @@ interface DOpusFile extends String {
 	/**
 	 * Closes the underlying file handle. After this call the File object is still valid but it can no longer read or write data.If you want to use the SetAttr method to modify the attributes of a file you have created, you may want to call Close first otherwise the file system will set the A (archive) attribute on the file whether you want it set or not.You may also want to close a file manually if you want to delete it, as some scripting languages (e.g. JScript) have lazy garbage collection and otherwise may keep the file handle open much longer than you intend.
 	 */
-	Close(): void;
-
-	/**
-	 * Closes the underlying file handle. After this call the File object is still valid but it can no longer read or write data.If you want to use the SetAttr method to modify the attributes of a file you have created, you may want to call Close first otherwise the file system will set the A (archive) attribute on the file whether you want it set or not.You may also want to close a file manually if you want to delete it, as some scripting languages (e.g. JScript) have lazy garbage collection and otherwise may keep the file handle open much longer than you intend.
-	 */
 	close(): void;
-
-	/**
-	 * Reads data from the file. If you provide a target Blob as the first parameter, the data will be stored in that Blob. Otherwise, a Blob will be created automatically.The optional size parameter specifies the number of bytes to read - the default behavior is to read the remaining contents of the file.If you provide a Blob then the return value indicates the number of bytes read successfully from the file. If a Blob isn't provided then the return value is the automatically created Blob - you can use its size property to discover the number of bytes that were read.
-	 */
-	Read(target?: DOpusBlob, size?: number): DOpusBlob;
 
 	/**
 	 * Reads data from the file. If you provide a target Blob as the first parameter, the data will be stored in that Blob. Otherwise, a Blob will be created automatically.The optional size parameter specifies the number of bytes to read - the default behavior is to read the remaining contents of the file.If you provide a Blob then the return value indicates the number of bytes read successfully from the file. If a Blob isn't provided then the return value is the automatically created Blob - you can use its size property to discover the number of bytes that were read.
@@ -2669,61 +2119,27 @@ interface DOpusFile extends String {
 	/**
 	 * Moves the read or write cursor within this file. The delta parameter specifies how many bytes to move - how this is interpreted depends on the optional method parameter:b - move relative to the beginning of the filee - move relative to the end of the filec - move relative to the current position (this is the default method)The return value is a FileSize object indicating the new cursor position.
 	 */
-	Seek(delta?: number, method?: string): DOpusFileSize;
-
-	/**
-	 * Moves the read or write cursor within this file. The delta parameter specifies how many bytes to move - how this is interpreted depends on the optional method parameter:b - move relative to the beginning of the filee - move relative to the end of the filec - move relative to the current position (this is the default method)The return value is a FileSize object indicating the new cursor position.
-	 */
 	seek(delta?: number, method?: string): DOpusFileSize;
 
 	/**
 	 * Modifies the attributes of this file. You can either pass a string indicating the attributes to set, or a FileAttr object. When using a string, valid attributes are:a - archivec - compressede - encryptedh - hiddenn - normalr - read-onlys - systemp - pinnedi - non-content indexedNote that both c and e attributes cannot be set at the same time. When you pass a string you can also use + and - to turn some attributes on or off without affecting others. For example, SetAttr("-r") would turn off the read-only attribute.The return value is True if the operation was successful.
 	 */
-	SetAttr(attributes?: string): boolean;
-
-	/**
-	 * Modifies the attributes of this file. You can either pass a string indicating the attributes to set, or a FileAttr object. When using a string, valid attributes are:a - archivec - compressede - encryptedh - hiddenn - normalr - read-onlys - systemp - pinnedi - non-content indexedNote that both c and e attributes cannot be set at the same time. When you pass a string you can also use + and - to turn some attributes on or off without affecting others. For example, SetAttr("-r") would turn off the read-only attribute.The return value is True if the operation was successful.
-	 */
-	setattr(attributes?: string): boolean;
+	setAttr(attributes?: string): boolean;
 
 	/**
 	 * Modifies one or more of the file's timestamps. The create and access parameters are optional. If you wish to specify no change for a timestamp, specify 0.Timestamps are specified as local time - use SetTimeUTC to specify them as UTC.The return value is True for success.
 	 */
-	SetTime(modify?: Date, create?: Date, access?: Date): boolean;
-
-	/**
-	 * Modifies one or more of the file's timestamps. The create and access parameters are optional. If you wish to specify no change for a timestamp, specify 0.Timestamps are specified as local time - use SetTimeUTC to specify them as UTC.The return value is True for success.
-	 */
-	settime(modify?: Date, create?: Date, access?: Date): boolean;
+	setTime(modify?: Date, create?: Date, access?: Date): boolean;
 
 	/**
 	 * Modifies one or more of the file's timestamps. The create and access parameters are optional. If you wish to specify no change for a timestamp, specify 0.Timestamps are specified as UTC time - use SetTime to specify them as local time.The return value is True for success.
 	 */
-	SetTimeUTC(modify?: Date, create?: Date, access?: Date): boolean;
-
-	/**
-	 * Modifies one or more of the file's timestamps. The create and access parameters are optional. If you wish to specify no change for a timestamp, specify 0.Timestamps are specified as UTC time - use SetTime to specify them as local time.The return value is True for success.
-	 */
-	settimeutc(modify?: Date, create?: Date, access?: Date): boolean;
-
-	/**
-	 * Truncates the file at the current position of the write cursor. You can use this in conjunction with the Seek method to pre-allocate a file's space on disk, for greater performance (i.e. seek to the final size of the file, truncate at that point, and then seek back to the start and write the data).The return value is True for success.
-	 */
-	Truncate(): boolean;
+	setTimeUTC(modify?: Date, create?: Date, access?: Date): boolean;
 
 	/**
 	 * Truncates the file at the current position of the write cursor. You can use this in conjunction with the Seek method to pre-allocate a file's space on disk, for greater performance (i.e. seek to the final size of the file, truncate at that point, and then seek back to the start and write the data).The return value is True for success.
 	 */
 	truncate(): boolean;
-
-	/**
-	 * Writes data from the specified Blob (or array) or string to the file. By default the entire contents of the Blob will be written - you can use the optional from parameter to specify the source byte offset, and the size parameter to specify the number of bytes to write.
-	 *
-	 * If you provide a string rather than a Blob the string will be automatically encoded as UTF-8.
-	 *
-	 * The return value indicates the number of bytes successfully written to the file.
-	 */
-	Write(sourceStringOrBlob?: string | DOpusBlob, from?: number, size?: number): number;
 
 	/**
 	 * Writes data from the specified Blob (or array) or string to the file. By default the entire contents of the Blob will be written - you can use the optional from parameter to specify the source byte offset, and the size parameter to specify the number of bytes to write.
@@ -2840,27 +2256,12 @@ interface DOpusFileAttr extends String {
 	/**
 	 * Assigns a new set of attributes to this object. You can pass another FileAttr object, or a string (e.g. "hsr").
 	 */
-	Assign(): void;
-
-	/**
-	 * Assigns a new set of attributes to this object. You can pass another FileAttr object, or a string (e.g. "hsr").
-	 */
 	assign(): void;
 
 	/**
 	 * Given a single character representing an attribute (e.g. "a") this method returns the name of the attribute in the user's current language (e.g. "Archive").
 	 */
-	AttrName(): string;
-
-	/**
-	 * Given a single character representing an attribute (e.g. "a") this method returns the name of the attribute in the user's current language (e.g. "Archive").
-	 */
-	attrname(): string;
-
-	/**
-	 * Clears (turns off) the specified attributes in this object. You can pass another FileAttr object, or a string representing the attributes to turn off.
-	 */
-	Clear(): void;
+	attrName(): string;
 
 	/**
 	 * Clears (turns off) the specified attributes in this object. You can pass another FileAttr object, or a string representing the attributes to turn off.
@@ -2870,22 +2271,12 @@ interface DOpusFileAttr extends String {
 	/**
 	 * Sets (turns on) the specified attributes in this object. You can pass another FileAttr object, or a string representing the attributes to turn on.
 	 */
-	Set(): void;
-
-	/**
-	 * Sets (turns on) the specified attributes in this object. You can pass another FileAttr object, or a string representing the attributes to turn on.
-	 */
 	set(): void;
 
 	/**
 	 * Returns a string representing the attributes that are set (similar to the format displayed in the Attr column in the file display).
 	 */
-	ToString(): void;
-
-	/**
-	 * Returns a string representing the attributes that are set (similar to the format displayed in the Attr column in the file display).
-	 */
-	tostring(): void;
+	toString(): void;
 
 }
 
@@ -2995,16 +2386,6 @@ interface DOpusFileSize extends String {
 	readonly fmt: string;
 
 	/**
-	 * Returns the highest (most significant) 32 bits of the file size.
-	 */
-	readonly high: number;
-
-	/**
-	 * Returns the lowest (least significant) 32 bits of the file size.
-	 */
-	readonly low: number;
-
-	/**
 	 * Returns the highest (most significant) 32 bits of the file size. Not all scripting languages support this data type (e.g. VBScript does not).
 	 */
 	readonly high: number;
@@ -3037,17 +2418,7 @@ interface DOpusFileSize extends String {
 	/**
 	 * Adds the supplied value to the value of this FileSize object. You can pass a string, int or currency type, or another FileSize object.
 	 */
-	Add(): void;
-
-	/**
-	 * Adds the supplied value to the value of this FileSize object. You can pass a string, int or currency type, or another FileSize object.
-	 */
 	add(): void;
-
-	/**
-	 * Clones this FileSize object and returns a new one set to the same value.
-	 */
-	Clone(): DOpusFileSize;
 
 	/**
 	 * Clones this FileSize object and returns a new one set to the same value.
@@ -3057,17 +2428,7 @@ interface DOpusFileSize extends String {
 	/**
 	 * Compares the supplied value with the value of this FileSize object. The return value will be 0 (equal), 1 (greater) or -1 (less).
 	 */
-	Compare(): number;
-
-	/**
-	 * Compares the supplied value with the value of this FileSize object. The return value will be 0 (equal), 1 (greater) or -1 (less).
-	 */
 	compare(): number;
-
-	/**
-	 * Divides the value of this FileSize object with the supplied value. You can pass a string, int or currency type, or another FileSize object.
-	 */
-	Div(): void;
 
 	/**
 	 * Divides the value of this FileSize object with the supplied value. You can pass a string, int or currency type, or another FileSize object.
@@ -3077,17 +2438,7 @@ interface DOpusFileSize extends String {
 	/**
 	 * Multiplies the value of this FileSize object with the supplied value. You can pass a string, int or currency type, or another FileSize object.
 	 */
-	Mult(): void;
-
-	/**
-	 * Multiplies the value of this FileSize object with the supplied value. You can pass a string, int or currency type, or another FileSize object.
-	 */
 	mult(): void;
-
-	/**
-	 * Sets the FileSize to the supplied value. You can pass a string, int or currency type, or another FileSize object. You can also pass a Blob consisting of exactly 1, 2, 4 or 8 bytes, in which case the data contained in the Blob will be used to form the number.
-	 */
-	Set(): void;
 
 	/**
 	 * Sets the FileSize to the supplied value. You can pass a string, int or currency type, or another FileSize object. You can also pass a Blob consisting of exactly 1, 2, 4 or 8 bytes, in which case the data contained in the Blob will be used to form the number.
@@ -3099,23 +2450,12 @@ interface DOpusFileSize extends String {
 	 *
 	 * @returns nothing but string is needed for default value compatibility
 	 */
-	Sub(): string;
-
-	/**
-	 * Subtracts the supplied value from the value of this FileSize object. You can pass a string, int or currency type, or another FileSize object. Note that the FileSize object is unsigned and so the value cannot go below zero.
-	 * @returns nothing but string is needed for default value compatibility
-	 */
 	sub(): string;
 
 	/**
 	 * Returns a Blob containing the bytes that make up the current value. By default 8 bytes will be copied to the Blob (the full 64 bit number) but you can pass an alternative number of bytes (1, 2 or 4) as a parameter to truncate the value.
 	 */
-	ToBlob(): DOpusBlob;
-
-	/**
-	 * Returns a Blob containing the bytes that make up the current value. By default 8 bytes will be copied to the Blob (the full 64 bit number) but you can pass an alternative number of bytes (1, 2 or 4) as a parameter to truncate the value.
-	 */
-	toblob(): DOpusBlob;
+	toBlob(): DOpusBlob;
 
 }
 
@@ -3149,12 +2489,7 @@ interface DOpusFiletypeGroup extends String {
 	/**
 	 * Tests the filename (or extension) for membership of this group. Returns True if the file is a member of the group, or False if it is not.
 	 */
-	MatchExt(filename?: string): boolean;
-
-	/**
-	 * Tests the filename (or extension) for membership of this group. Returns True if the file is a member of the group, or False if it is not.
-	 */
-	matchext(filename?: string): boolean;
+	matchExt(filename?: string): boolean;
 
 }
 
@@ -3173,13 +2508,7 @@ interface DOpusFiletypeGroups extends DOpusFiletypeGroup {
 	 * Searches the file type group collection for the named group. If Opus is not running in English, the translated name is compared first; if not found, it will search for the native English name for the built-in groups. Returns a FiletypeGroup object or False if not found.
 	 * @returns {DOpusFiletypeGroup|false}
 	 */
-	GetGroup(group?: string): DOpusFiletypeGroup;
-
-	/**
-	 * Searches the file type group collection for the named group. If Opus is not running in English, the translated name is compared first; if not found, it will search for the native English name for the built-in groups. Returns a FiletypeGroup object or False if not found.
-	 * @returns {DOpusFiletypeGroup|false}
-	 */
-	getgroup(group?: string): DOpusFiletypeGroup;
+	getGroup(group?: string): DOpusFiletypeGroup;
 
 
 	// DISABLED
@@ -3187,17 +2516,7 @@ interface DOpusFiletypeGroups extends DOpusFiletypeGroup {
 	// /**
 	//  *Returns a new FiletypeGroups object containing the subset of groups that the specified filename (or file extension) is a member of. You would normally only call this method on the object returned by the DOpus.filetypegroups property.
 	//  */
-	// MatchExt(filename?: string): DOpusFiletypeGroups;
-
-	// /**
-	//  *Returns a new FiletypeGroups object containing the subset of groups that the specified filename (or file extension) is a member of. You would normally only call this method on the object returned by the DOpus.filetypegroups property.
-	//  */
-	// matchext(filename?: string): DOpusFiletypeGroups;
-
-	/**
-	 * Returns the translated name of the named built-in file type group. If not found, or no translation exists, the input string is returned. For example, when running in French, calling this method with "Movies" as the input string would return "Vidéos".
-	 */
-	Translate(group?: string): string;
+	// matchExt(filename?: string): DOpusFiletypeGroups;
 
 	/**
 	 * Returns the translated name of the named built-in file type group. If not found, or no translation exists, the input string is returned. For example, when running in French, calling this method with "Movies" as the input string would return "Vidéos".
@@ -3248,17 +2567,7 @@ interface DOpusFolderEnum {
 	/**
 	 * Closes the underlying file system handle used to perform the enumeration. You might call this method if you want to delete the folder you just enumerated. After this method is called the complete property will return True.
 	 */
-	Close(): void;
-
-	/**
-	 * Closes the underlying file system handle used to perform the enumeration. You might call this method if you want to delete the folder you just enumerated. After this method is called the complete property will return True.
-	 */
 	close(): void;
-
-	/**
-	 * Returns the next item in the enumeration.By default (with no arguments provided) a single Item object is returned. For higher performance, you can specify a number as the first argument to return more than one item at once - in this case, a Vector of Item objects is returned instead. Specify -1 to return all items in the folder in one call. You can also create your own Vector and pass it as the second argument to stop Opus creating a new Vector each time.
-	 */
-	Next(count?: number, vector?: DOpusVector<any>): DOpusItem;
 
 	/**
 	 * Returns the next item in the enumeration.By default (with no arguments provided) a single Item object is returned. For higher performance, you can specify a number as the first argument to return more than one item at once - in this case, a Vector of Item objects is returned instead. Specify -1 to return all items in the folder in one call. You can also create your own Vector and pass it as the second argument to stop Opus creating a new Vector each time.
@@ -3524,11 +2833,6 @@ interface DOpusFormat {
 	/**
 	 * The first time a script accesses a particular Format object, a snapshot is taken of the tab's format. If the script then makes changes to that tab (e.g. it changes the sort field, etc), these changes will not be reflected by the object. To re-synchronize the object with the tab, call the Format.Update method.
 	 */
-	Update(): void;
-
-	/**
-	 * The first time a script accesses a particular Format object, a snapshot is taken of the tab's format. If the script then makes changes to that tab (e.g. it changes the sort field, etc), these changes will not be reflected by the object. To re-synchronize the object with the tab, call the Format.Update method.
-	 */
 	update(): void;
 
 }
@@ -3542,29 +2846,13 @@ interface DOpusFSUtil {
 	/**
 	 * Compares the two provided path strings for equality - returns True if the two paths are equal, or False if otherwise.The optional flags parameter lets you modify the comparison behavior. This parameter is a string containing one or more of the following letters:c - case sensitive (makes the comparison case sensitive)p - parent (tests if path2 is a parent of, or equal to, path1)
 	 */
-	ComparePath(path1?: string, path2?: string, flags?: string): boolean;
-
-	/**
-	 * Compares the two provided path strings for equality - returns True if the two paths are equal, or False if otherwise.The optional flags parameter lets you modify the comparison behavior. This parameter is a string containing one or more of the following letters:c - case sensitive (makes the comparison case sensitive)p - parent (tests if path2 is a parent of, or equal to, path1)
-	 */
-	comparepath(path1?: string, path2?: string, flags?: string): boolean;
+	comparePath(path1?: string, path2?: string, flags?: string): boolean;
 
 	/**
 	 * Retrieves the display name of a path. This is the form of a path that is intended to be displayed to the user, rather than used internally by Opus. For example, for a library path it will strip off the internal ?
 	 * xxx notation that Opus uses to identify library member folders.The optional flags parameter lets you modify the behavior. This parameter is a string containing one or more of the following letters:e - for editing (returns a string designed for editing rather than for display)f - file part (returns the display filename rather than the entire path)r - resolve (resolves library paths to their underlying file system folder)
 	 */
-	DisplayName(path?: string, flags?: string): string;
-
-	/**
-	 * Retrieves the display name of a path. This is the form of a path that is intended to be displayed to the user, rather than used internally by Opus. For example, for a library path it will strip off the internal ?
-	 * xxx notation that Opus uses to identify library member folders.The optional flags parameter lets you modify the behavior. This parameter is a string containing one or more of the following letters:e - for editing (returns a string designed for editing rather than for display)f - file part (returns the display filename rather than the entire path)r - resolve (resolves library paths to their underlying file system folder)
-	 */
-	displayname(path?: string, flags?: string): string;
-
-	/**
-	 * Returns a Vector of Drive objects, one for each drive on the system.
-	 */
-	Drives(): DOpusVector<DOpusDrive>;
+	displayName(path?: string, flags?: string): string;
 
 	/**
 	 * Returns a Vector of Drive objects, one for each drive on the system.
@@ -3574,62 +2862,32 @@ interface DOpusFSUtil {
 	/**
 	 * Returns True if the specified file, folder or device exists, or False otherwise.
 	 */
-	Exists(path?: string): boolean;
-
-	/**
-	 * Returns True if the specified file, folder or device exists, or False otherwise.
-	 */
 	exists(path?: string): boolean;
 
 	/**
 	 * Returns the localized text description for a system error code.
 	 */
-	GetErrorMsg(error?: number): string;
-
-	/**
-	 * Returns the localized text description for a system error code.
-	 */
-	geterrormsg(error?: number): string;
+	getErrorMsg(error?: number): string;
 
 	/**
 	 * Creates an Item object for the specified file path.
 	 */
-	GetItem(path?: string): DOpusItem;
-
-	/**
-	 * Creates an Item object for the specified file path.
-	 */
-	getitem(path?: string): DOpusItem;
+	getItem(path?: string): DOpusItem;
 
 	/**
 	 * Returns a Metadata object representing the metadata for the specified file.
 	 */
-	GetMetadata(path?: string): DOpusMetadata;
-
-	/**
-	 * Returns a Metadata object representing the metadata for the specified file.
-	 */
-	getmetadata(path?: string): DOpusMetadata;
+	getMetadata(path?: string): DOpusMetadata;
 
 	/**
 	 * Returns the value of one or more shell properties for the specified file. The file path must be provided as the first parameter. If the second parameter is the name (or PKEY) of the property to retrieve, the value of the property will be returned as the return value from this method. Alternatively, the second argument can be a Map object which lets you retrieve multiple properties at once. Each property you want to retrieve should be added to the Map with its name as a key, with an empty string as its value. The values in the Map will be replaced by the property values. The optional type argument lets you control how the properties are looked up by name. If the value of type is "R" then the first property whose raw name matches the supplied name will be used. If the value is "D" then the first property whose display name matches the supplied name will be used. If type is omitted then both raw and display names can match. Note that if a shell property is returned by the system as a SAFEARRAY type, it will be converted automatically to a Vector object.
 	 */
-	GetShellProperty(path?: string, property?: string, properties?: DOpusMap, type?: string): any;
-
-	/**
-	 * Returns the value of one or more shell properties for the specified file. The file path must be provided as the first parameter. If the second parameter is the name (or PKEY) of the property to retrieve, the value of the property will be returned as the return value from this method. Alternatively, the second argument can be a Map object which lets you retrieve multiple properties at once. Each property you want to retrieve should be added to the Map with its name as a key, with an empty string as its value. The values in the Map will be replaced by the property values. The optional type argument lets you control how the properties are looked up by name. If the value of type is "R" then the first property whose raw name matches the supplied name will be used. If the value is "D" then the first property whose display name matches the supplied name will be used. If type is omitted then both raw and display names can match. Note that if a shell property is returned by the system as a SAFEARRAY type, it will be converted automatically to a Vector object.
-	 */
-	getshellproperty(path?: string, property?: string, properties?: DOpusMap, type?: string): any;
+	getShellProperty(path?: string, property?: string, properties?: DOpusMap, type?: string): any;
 
 	/**
 	 * Returns a Vector of ShellProperty objects which represents all the possible shell properties available on the system. You can optionally provide a wildcard pattern as the first argument - if you do, only properties whose names match the supplied pattern will be returned. The optional second argument lets you restrict the list of properties further. If the value of type is "R" then only properties whose raw name match the pattern will be returned. If the value is "D" then only properties whose display names match the pattern will be returned. If type is omitted then both raw and display names will be compared.
 	 */
-	GetShellPropertyList(pattern?: string, type?: string): DOpusShellProperty;
-
-	/**
-	 * Returns a Vector of ShellProperty objects which represents all the possible shell properties available on the system. You can optionally provide a wildcard pattern as the first argument - if you do, only properties whose names match the supplied pattern will be returned. The optional second argument lets you restrict the list of properties further. If the value of type is "R" then only properties whose raw name match the pattern will be returned. If the value is "D" then only properties whose display names match the pattern will be returned. If type is omitted then both raw and display names will be compared.
-	 */
-	getshellpropertylist(pattern?: string, type?: string): DOpusShellProperty;
+	getShellPropertyList(pattern?: string, type?: string): DOpusShellProperty;
 
 	/**
 	 * Creates a temporary folder (with a unique name) and returns the path to it in a Path object. Temporary folders created with this method have a limited lifetime after which Opus will automatically delete them (it will also clean them up when it's shutdown and restarted). The default lifetime is 20 minutes; you can change this using the optional parameter.
@@ -3667,17 +2925,7 @@ interface DOpusFSUtil {
 	/**
 	 * Returns a string indicating the type of the specified file path. The string will be either file, dir or invalid if the path doesn't exist. The optional flags argument is used to control the behavior with archives - normally an archive will be reported as dir, but if you specify "a" for the flags parameter it will be reported as file.
 	 */
-	GetType(path?: string, flags?: string): string;
-
-	/**
-	 * Returns a string indicating the type of the specified file path. The string will be either file, dir or invalid if the path doesn't exist. The optional flags argument is used to control the behavior with archives - normally an archive will be reported as dir, but if you specify "a" for the flags parameter it will be reported as file.
-	 */
-	gettype(path?: string, flags?: string): string;
-
-	/**
-	 * Calculates a checksum for the specified file or Blob. By default the MD5 checksum is calculated, but you can use the optional type parameter to change the checksum algorithm - valid values are "md5", "sha1", "sha256", "sha512", "crc32", "crc32_php", and "crc32_php_rev".You can also specify multiple types (e.g. "md5,sha1,sha256") as the type, in which case then all checksums will be calculated at the same time, and the result will be returned as a Vector of strings (in the same order as you requested them).Unlike the other algorithms, CRC32 is a concept rather than a well-defined standard. We have provided the three CRC32 implementations you're most likely to encounter. "CRC32" is most common in the Windows world and matches what tools like 7-Zip and PKZip call "CRC32", and what PHP calls "CRC32b". "CRC32_PHP" is less common and matches what BZIP2 uses and what PHP outputs by default; "CRC32_PHP_REV" is the same but with the result's byte-order reversed, as output by some tools.Example (VBScript): DOpus.FSUtil.Hash("C:\Windows\Notepad.exe","md5")
-	 */
-	Hash(pathOrBlob?: string | DOpusBlob, type?: string): string | DOpusVector<any>;
+	getType(path?: string, flags?: string): string;
 
 	/**
 	 * Calculates a checksum for the specified file or Blob. By default the MD5 checksum is calculated, but you can use the optional type parameter to change the checksum algorithm - valid values are "md5", "sha1", "sha256", "sha512", "crc32", "crc32_php", and "crc32_php_rev".You can also specify multiple types (e.g. "md5,sha1,sha256") as the type, in which case then all checksums will be calculated at the same time, and the result will be returned as a Vector of strings (in the same order as you requested them).Unlike the other algorithms, CRC32 is a concept rather than a well-defined standard. We have provided the three CRC32 implementations you're most likely to encounter. "CRC32" is most common in the Windows world and matches what tools like 7-Zip and PKZip call "CRC32", and what PHP calls "CRC32b". "CRC32_PHP" is less common and matches what BZIP2 uses and what PHP outputs by default; "CRC32_PHP_REV" is the same but with the result's byte-order reversed, as output by some tools.Example (VBScript): DOpus.FSUtil.Hash("C:\Windows\Notepad.exe","md5")
@@ -3687,42 +2935,22 @@ interface DOpusFSUtil {
 	/**
 	 * Creates a new FileAttr object, which represents file attributes. You can initialize the new object by passing either a string representing the attributes to turn on (e.g. "hsr") or another FileAttr object. If you don't pass a value the new object will default to all attributes turned off.
 	 */
-	NewFileAttr(): DOpusFileAttr;
-
-	/**
-	 * Creates a new FileAttr object, which represents file attributes. You can initialize the new object by passing either a string representing the attributes to turn on (e.g. "hsr") or another FileAttr object. If you don't pass a value the new object will default to all attributes turned off.
-	 */
-	newfileattr(): DOpusFileAttr;
+	newFileAttr(): DOpusFileAttr;
 
 	/**
 	 * Creates a new FileSize object, which makes it easier to handle 64 bit file sizes. You can initialize this with a number of data types (int, string, currency, another FileSize object, or a Blob containing exactly 1, 2, 4 or 8 bytes).If the optional "s" flag is specified, the FileSize object will use a signed 64 bit value rather than unsigned.
 	 */
-	NewFileSize(s?: string, size?: number): DOpusFileSize;
-
-	/**
-	 * Creates a new FileSize object, which makes it easier to handle 64 bit file sizes. You can initialize this with a number of data types (int, string, currency, another FileSize object, or a Blob containing exactly 1, 2, 4 or 8 bytes).If the optional "s" flag is specified, the FileSize object will use a signed 64 bit value rather than unsigned.
-	 */
-	newfilesize(s?: string, size?: number): DOpusFileSize;
+	newFileSize(s?: string, size?: number): DOpusFileSize;
 
 	/**
 	 * Creates a new Path object initialised to the provided path string.
 	 */
-	NewPath(path?: string): DOpusPath;
-
-	/**
-	 * Creates a new Path object initialised to the provided path string.
-	 */
-	newpath(path?: string): DOpusPath;
+	newPath(path?: string): DOpusPath;
 
 	/**
 	 * Creates a new Wild object. If a pattern and flags are provided the pattern will be parsed automatically, otherwise you must call the Parse method to parse a pattern before using the object.See the description of the Wild.Parse method for a list of the valid flags.
 	 */
-	NewWild(pattern?: string, flags?: string): DOpusWild;
-
-	/**
-	 * Creates a new Wild object. If a pattern and flags are provided the pattern will be parsed automatically, otherwise you must call the Parse method to parse a pattern before using the object.See the description of the Wild.Parse method for a list of the valid flags.
-	 */
-	newwild(pattern?: string, flags?: string): DOpusWild;
+	newWild(pattern?: string, flags?: string): DOpusWild;
 
 	/**
 	 *
@@ -3748,48 +2976,12 @@ interface DOpusFSUtil {
 	 * A File object is always returned, even if the file could not be opened. Check File.error on the returned object immediately after creating it to see if opening the file succeeded. Even if the file was not be opened, some of the object's methods may still work. For example, if a file doesn't exist then you can't open it or set its attributes, but permissions on an existing file may allow you to set its attributes while blocking you from modifying it or vice versa.
 	 *
 	 */
-	OpenFile(pathOrBlob?: string | DOpusBlob, mode?: string, window?: object, elevation?: string): DOpusFile;
-
-	/**
-	 *
-	 * Opens or creates a file and returns a File object that lets you access its contents as binary data. You can pass a string or Path object representing a file to open, and you can also pass an existing Blob object to create a File object that gives you read/write stream access to a chunk of memory.
-	 *
-	 * By default the file will be opened in read mode - specify "w" for the optional mode parameter to open the file in write mode. Note that you cannot both read and write with the same File object, unless it was opened on a Blob.
-	 *
-	 * When opening in write mode, you can also specify optional flags that control how the file is opened:
-	 *
-	 * * **wc** - create a new file, only if it doesn't already exist.
-	 * * **wa** - create a new file, always. If the file already exists it will be overwritten. (This is the default.)
-	 * * **we** - open existing file. The file will not be created if it doesn't already exist.
-	 * * **wo** - open existing file. If the file doesn't exist it will be created.
-	 * * **wt** - truncate existing file. If the file exists it will be truncated. The file will not be created if it doesn't already exist.
-	 * * **d**  - delete-on-close. The file will be automatically deleted when closed.
-	 *
-	 * When using write mode, you may add f (force) to any of the above mode strings to tell Opus to clear the read-only file attribute if it blocks modifying an existing file; otherwise, attempting to open a read-only file for writing will fail. For example, "wof" is like "wo" mode but also clears the read-only attribute.
-	 *
-	 * If you only want to make changes to a file's attributes without modifying its data you can also specify "m" to open it in modify mode.
-	 *
-	 * The optional third parameter lets you associate the File object with a Tab or a Lister, which will be used if Opus needs to display any dialogs (e.g. a UAC elevation dialog). You may also specify the string "NoElevate" for the third parameter to prevent UAC elevation entirely, or "ElevateNoAsk" to prevent UAC prompts while still gaining elevation if something else has already performed it.
-	 *
-	 * A File object is always returned, even if the file could not be opened. Check File.error on the returned object immediately after creating it to see if opening the file succeeded. Even if the file was not be opened, some of the object's methods may still work. For example, if a file doesn't exist then you can't open it or set its attributes, but permissions on an existing file may allow you to set its attributes while blocking you from modifying it or vice versa.
-	 *
-	 */
-	openfile(pathOrBlob?: string | DOpusBlob, mode?: string, window?: object, elevation?: string): DOpusFile;
+	openFile(pathOrBlob?: string | DOpusBlob, mode?: string, window?: object, elevation?: string): DOpusFile;
 
 	/**
 	 * Returns a FolderEnum object that lets you enumerate the contents of the specified folder. The optional flags string consists of one or more flag characters: "r" - recurse. Recursively enumerate the folder (i.e. to enumerate the contents of all its sub-folders, and their sub-folders, and so on). "l" - skip links. Prevents the traversal of links and junctions when recursively enumerating folders. "s" - use shell. Lets you use ReadDir to enumerate shell (non-filesystem) folders; for example, the Quick Access folder on Windows 10 could be enumerated by passing "/quickaccess" for the path and "s" for the flags. If you don't need any flags, skip the second argument entirely. You may see older scripts pass True and False as the second argument, to turn recursion on and off; that is deprecated but remains supported for compatibility.
 	 */
-	ReadDir(path?: string, flags?: string): DOpusFolderEnum;
-
-	/**
-	 * Returns a FolderEnum object that lets you enumerate the contents of the specified folder. The optional flags string consists of one or more flag characters: "r" - recurse. Recursively enumerate the folder (i.e. to enumerate the contents of all its sub-folders, and their sub-folders, and so on). "l" - skip links. Prevents the traversal of links and junctions when recursively enumerating folders. "s" - use shell. Lets you use ReadDir to enumerate shell (non-filesystem) folders; for example, the Quick Access folder on Windows 10 could be enumerated by passing "/quickaccess" for the path and "s" for the flags. If you don't need any flags, skip the second argument entirely. You may see older scripts pass True and False as the second argument, to turn recursion on and off; that is deprecated but remains supported for compatibility.
-	 */
-	readdir(path?: string, flags?: string): DOpusFolderEnum;
-
-	/**
-	 * Resolves the specified library or file collection path to its underlying file system path. This method can also be used to resolve a folder alias, as well as application paths in the form {apppath|appname}.The optional flags are:j - resolve junctions and links to their target folder
-	 */
-	Resolve(path?: string, flags?: string): DOpusPath;
+	readDir(path?: string, flags?: string): DOpusFolderEnum;
 
 	/**
 	 * Resolves the specified library or file collection path to its underlying file system path. This method can also be used to resolve a folder alias, as well as application paths in the form {apppath|appname}.The optional flags are:j - resolve junctions and links to their target folder
@@ -3799,12 +2991,7 @@ interface DOpusFSUtil {
 	/**
 	 * Returns True if this path refers to the same drive or partition as the supplied path. The optional flags are:c - treat CD burning staging area as the CD itselfm - consider mount pointsr - real paths onlyu - compare user for FTP drivesz - consider zip foldersZ - consider zip folders (target)
 	 */
-	SameDrive(path?: string, flags?: string): boolean;
-
-	/**
-	 * Returns True if this path refers to the same drive or partition as the supplied path. The optional flags are:c - treat CD burning staging area as the CD itselfm - consider mount pointsr - real paths onlyu - compare user for FTP drivesz - consider zip foldersZ - consider zip folders (target)
-	 */
-	samedrive(path?: string, flags?: string): boolean;
+	sameDrive(path?: string, flags?: string): boolean;
 
 }
 
@@ -3860,11 +3047,6 @@ interface DOpusFunc {
 	 * If this button was run from the standalone image viewer, this object represents the viewer window.
 	 */
 	readonly viewer: DOpusViewer;
-
-	/**
-	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to the source tab.
-	 */
-	Dlg(): DOpusDialog;
 
 	/**
 	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to the source tab.
@@ -3958,22 +3140,12 @@ interface DOpusGetHelpContentData {
 	/**
 	 * Adds a PNG or JPG image and makes it available for your help pages. You can use any name you like for your images, although they must have either a .png or a .jpg suffix. Your help content can then refer to images by name, e.g. if you add an image and call it myimage.jpg, your html content could show it using: If your script is bundled as a script package you can include image files in a sub-directory of the package called help, and then load them easily using the Script.LoadHelpImage method.
 	 */
-	AddHelpImage(name?: string, image?: DOpusBlob): void;
-
-	/**
-	 * Adds a PNG or JPG image and makes it available for your help pages. You can use any name you like for your images, although they must have either a .png or a .jpg suffix. Your help content can then refer to images by name, e.g. if you add an image and call it myimage.jpg, your html content could show it using: If your script is bundled as a script package you can include image files in a sub-directory of the package called help, and then load them easily using the Script.LoadHelpImage method.
-	 */
-	addhelpimage(name?: string, image?: DOpusBlob): void;
+	addHelpImage(name?: string, image?: DOpusBlob): void;
 
 	/**
 	 * Adds a page of help content for your script to the F1 help file. You can call this method as many times as you like. If you add more than one page of help the first page will become the topic header and all subsequent pages will appear underneath it in the index. The name parameter is optional; if not supplied, a default name will be assigned automatically to each page you add. You can use the Script.ShowHelp method to trigger the display of a specific page of your help by name. The title parameter specifies the page title; this is shown in the help index and should be descriptive enough that the user can recognise it as referring to your script. The body parameter specifies the actual HTML content for the help page. This should be everything you would normally find between the <body>...</body> tags of an HTML page. If your script is bundled as a script package you can include HTML files in a sub-directory of the package called help, and then load them easily using the Script.LoadHelpFile method.
 	 */
-	AddHelpPage(name?: string, title?: string, body?: string): void;
-
-	/**
-	 * Adds a page of help content for your script to the F1 help file. You can call this method as many times as you like. If you add more than one page of help the first page will become the topic header and all subsequent pages will appear underneath it in the index. The name parameter is optional; if not supplied, a default name will be assigned automatically to each page you add. You can use the Script.ShowHelp method to trigger the display of a specific page of your help by name. The title parameter specifies the page title; this is shown in the help index and should be descriptive enough that the user can recognise it as referring to your script. The body parameter specifies the actual HTML content for the help page. This should be everything you would normally find between the <body>...</body> tags of an HTML page. If your script is bundled as a script package you can include HTML files in a sub-directory of the package called help, and then load them easily using the Script.LoadHelpFile method.
-	 */
-	addhelppage(name?: string, title?: string, body?: string): void;
+	addHelpPage(name?: string, title?: string, body?: string): void;
 
 }
 
@@ -4493,17 +3665,7 @@ interface DOpusItem extends String {
 	/**
 	 * Tests the file for membership of the specified file type group. Each file type group has two names: An internal name which is always the same in all languages, and a display name which may be translated differently for each language. The display name is what you see in the File Types editor. Groups that come pre-defined when you install Opus have internal names like "Archives" and "Music" (which are also their English display names). User-defined groups have internal names which are unique, automatically generated GUID strings like "{C4B716ED-2A9C-43C6-B325-7DADDEEFADA9}". The group argument should be the name of the group you wish to test against, e.g. "Music". By default, both the internal name and the display name are checked, and a match on either will return true. Prefix the group argument with "name:" to restrict the search to internal names, or with "disp:" to restrict the search to display names. To get a list of all file type groups which the file matches, use the groups property instead (see the section above).
 	 */
-	InGroup(group?: string): boolean;
-
-	/**
-	 * Tests the file for membership of the specified file type group. Each file type group has two names: An internal name which is always the same in all languages, and a display name which may be translated differently for each language. The display name is what you see in the File Types editor. Groups that come pre-defined when you install Opus have internal names like "Archives" and "Music" (which are also their English display names). User-defined groups have internal names which are unique, automatically generated GUID strings like "{C4B716ED-2A9C-43C6-B325-7DADDEEFADA9}". The group argument should be the name of the group you wish to test against, e.g. "Music". By default, both the internal name and the display name are checked, and a match on either will return true. Prefix the group argument with "name:" to restrict the search to internal names, or with "disp:" to restrict the search to display names. To get a list of all file type groups which the file matches, use the groups property instead (see the section above).
-	 */
-	ingroup(group?: string): boolean;
-
-	/**
-	 * This method returns a Vector of strings representing any labels that have been assigned to the item. Both arguments are optional. The first is a wildcard pattern that lets you filter the returned labels based on their category. For example, pass "Status" to only retrieve a list of status icons assigned to a file. The second optional argument contains flags keywords that control how the labels are returned. The only defined flag is "explicit" - if specified, wildcard and label filters will not be considered - only explicitly assigned labels will be returned. Note that if you want to provide the second argument but don't want to filter by category you should pass "*" for the first argument to match all categories.
-	 */
-	Labels(category?: string, flags?: string): DOpusVector<string>;
+	inGroup(group?: string): boolean;
 
 	/**
 	 * This method returns a Vector of strings representing any labels that have been assigned to the item. Both arguments are optional. The first is a wildcard pattern that lets you filter the returned labels based on their category. For example, pass "Status" to only retrieve a list of status icons assigned to a file. The second optional argument contains flags keywords that control how the labels are returned. The only defined flag is "explicit" - if specified, wildcard and label filters will not be considered - only explicitly assigned labels will be returned. Note that if you want to provide the second argument but don't want to filter by category you should pass "*" for the first argument to match all categories.
@@ -4532,46 +3694,12 @@ interface DOpusItem extends String {
 	 *
 	 * A File object is always returned, even if the file could not be opened. Check File.error on the returned object immediately after creating it to see if opening the file succeeded. Even if the file was not be opened, some of the object's methods may still work. For example, if a file doesn't exist then you can't open it or set its attributes, but permissions on an existing file may allow you to set its attributes while blocking you from modifying it or vice versa.
 	 */
-	Open(mode?: string, window?: object): DOpusFile;
-
-	/**
-	 * Opens this file and returns a File object that lets you access its contents as binary data.
-	 *
-	 * By default the file will be opened in read mode - specify "w" for the optional mode parameter to open the file in write mode. Note that you cannot both read and write with the same File object.
-	 *
-	 * When opening in write mode, you can also specify optional flags that control how the file is opened:
-	 *
-	 * * **wc** - create a new file, only if it doesn't already exist.
-	 * * **wa** - create a new file, always. If the file already exists it will be overwritten. (This is the default.)
-	 * * **we** - open existing file. The file will not be created if it doesn't already exist.
-	 * * **wo** - open existing file. If the file doesn't exist it will be created.
-	 * * **wt** - truncate existing file. If the file exists it will be truncated. The file will not be created if it doesn't already exist.
-	 * * **d** - delete-on-close. The file will be automatically deleted when closed.
-	 *
-	 * When using write mode, you may add f (force) to any of the above mode strings to tell Opus to clear the read-only file attribute if it blocks modifying an existing file; otherwise, attempting to open a read-only file for writing will fail. For example, "wof" is like "wo" mode but also clears the read-only attribute.
-	 *
-	 * If you only want to make changes to the file's attributes without modifying its data you can also specify "m" to open it in modify mode.
-	 *
-	 * The optional window parameter lets you associate the File object with a Tab or a Lister, which will be used if Opus needs to display any dialogs (e.g. a UAC elevation dialog). You may also specify the string "NoElevate" to prevent UAC elevation entirely, or "ElevateNoAsk" to prevent UAC prompts while still gaining elevation if something else has already performed it.
-	 *
-	 * A File object is always returned, even if the file could not be opened. Check File.error on the returned object immediately after creating it to see if opening the file succeeded. Even if the file was not be opened, some of the object's methods may still work. For example, if a file doesn't exist then you can't open it or set its attributes, but permissions on an existing file may allow you to set its attributes while blocking you from modifying it or vice versa.
-	 */
 	open(mode?: string, window?: object): DOpusFile;
 
 	/**
 	 * Returns the value of the specified shell property for the item. The property argument can be the property's PKEY or its name. If you provide a name then the optional second argument lets you control how the properties are looked up by name. If the value of type is "R" then the first property whose raw name matches the supplied name will be used. If the value is "D" then the first property whose display name matches the supplied name will be used. If type is omitted then both raw and display names can match. Note that if a shell property is returned by the system as a SAFEARRAY type, it will be converted automatically to a Vector object.
 	 */
-	ShellProp(property?: string, type?: string): any;
-
-	/**
-	 * Returns the value of the specified shell property for the item. The property argument can be the property's PKEY or its name. If you provide a name then the optional second argument lets you control how the properties are looked up by name. If the value of type is "R" then the first property whose raw name matches the supplied name will be used. If the value is "D" then the first property whose display name matches the supplied name will be used. If type is omitted then both raw and display names can match. Note that if a shell property is returned by the system as a SAFEARRAY type, it will be converted automatically to a Vector object.
-	 */
-	shellprop(property?: string, type?: string): any;
-
-	/**
-	 * Updates the Item object from the file on disk. You might use this if you had run a command to change an item's timestamp or attributes, and wanted to retrieve the new information.
-	 */
-	Update(): void;
+	shellProp(property?: string, type?: string): any;
 
 	/**
 	 * Updates the Item object from the file on disk. You might use this if you had run a command to change an item's timestamp or attributes, and wanted to retrieve the new information.
@@ -4725,27 +3853,12 @@ interface DOpusLister {
 	/**
 	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to this Lister.
 	 */
-	Dlg(): DOpusDialog;
-
-	/**
-	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to this Lister.
-	 */
 	dlg(): DOpusDialog;
 
 	/**
 	 * Used to change how the lister window is grouped with other Opus windows on the taskbar. Specify a group name to move the window into an alternative group, or omit the group argument to reset back to the default group. If one or more windows are moved into the same group, they will be grouped together, separate from other the default group. This only works on Windows 7 and above, and only when taskbar grouping is enabled. Group names are limited to 103 characters and will be truncated if longer. Spaces and dots in group names are automatically converted to underscores. Returns true on success.
 	 */
-	SetTaskbarGroup(group?: string): boolean;
-
-	/**
-	 * Used to change how the lister window is grouped with other Opus windows on the taskbar. Specify a group name to move the window into an alternative group, or omit the group argument to reset back to the default group. If one or more windows are moved into the same group, they will be grouped together, separate from other the default group. This only works on Windows 7 and above, and only when taskbar grouping is enabled. Group names are limited to 103 characters and will be truncated if longer. Spaces and dots in group names are automatically converted to underscores. Returns true on success.
-	 */
-	settaskbargroup(group?: string): boolean;
-
-	/**
-	 * The first time a script accesses a particular Lister object, a snapshot is taken of the Lister state. If the script then makes changes to that Lister (e.g. it opens a new tab, or moves the window), these changes will not be reflected by the object. To re-synchronize the object with the Lister, call the Lister.Update method.
-	 */
-	Update(): void;
+	setTaskbarGroup(group?: string): boolean;
 
 	/**
 	 * The first time a script accesses a particular Lister object, a snapshot is taken of the Lister state. If the script then makes changes to that Lister (e.g. it opens a new tab, or moves the window), these changes will not be reflected by the object. To re-synchronize the object with the Lister, call the Lister.Update method.
@@ -4799,11 +3912,6 @@ interface DOpusListers extends DOpusLister {
 	 * Returns a Lister object representing the most recently active Lister window. Do not assume that DOpus.listers.lastactive is the window which launched your script. See the note near the top of the page.
 	 */
 	readonly lastactive: DOpusLister;
-
-	/**
-	 * The first time a script accesses the DOpus.listers property, a snapshot is taken of all currently open Listers. If the script then opens or closes Listers itself, these changes will not be reflected by this collection. To re-synchronize the collection, call the Update method.
-	 */
-	Update(): void;
 
 	/**
 	 * The first time a script accesses the DOpus.listers property, a snapshot is taken of all currently open Listers. If the script then opens or closes Listers itself, these changes will not be reflected by this collection. To re-synchronize the collection, call the Update method.
@@ -5301,17 +4409,7 @@ interface DOpusPath extends String {
 	/**
 	 * Adds the specified name to the path (it will become the last component). As well as a string, you can pass a Vector of strings and all items in the vector will be added to the path.
 	 */
-	Add(name?: string, string?: DOpusVector<any>): void;
-
-	/**
-	 * Adds the specified name to the path (it will become the last component). As well as a string, you can pass a Vector of strings and all items in the vector will be added to the path.
-	 */
 	add(name?: string, string?: DOpusVector<any>): void;
-
-	/**
-	 * Removes the last component of the path. Returns False if the path does not have a valid parent.
-	 */
-	Parent(): boolean;
 
 	/**
 	 * Removes the last component of the path. Returns False if the path does not have a valid parent.
@@ -5321,17 +4419,7 @@ interface DOpusPath extends String {
 	/**
 	 * Compares the beginning of the path with the "old" string, and if it matches replaces it with the "new" string. The match is performed at the path component level - for example, an "old" string of "C:\Foo" would match the path "C:\Foo\Bar" but not "C:\FooBar". If the optional "wholepath" argument is set to True then the whole path must match rather than just its beginning. Returns True if the string matched the path or False otherwise.
 	 */
-	ReplaceStart(oldval?: string, newval?: string, wholepath?: boolean): boolean;
-
-	/**
-	 * Compares the beginning of the path with the "old" string, and if it matches replaces it with the "new" string. The match is performed at the path component level - for example, an "old" string of "C:\Foo" would match the path "C:\Foo\Bar" but not "C:\FooBar". If the optional "wholepath" argument is set to True then the whole path must match rather than just its beginning. Returns True if the string matched the path or False otherwise.
-	 */
-	replacestart(oldval?: string, newval?: string, wholepath?: boolean): boolean;
-
-	/**
-	 * Strips off all but the first component of the path. Returns False if the path is already at the root.
-	 */
-	Root(): boolean;
+	replaceStart(oldval?: string, newval?: string, wholepath?: boolean): boolean;
 
 	/**
 	 * Strips off all but the first component of the path. Returns False if the path is already at the root.
@@ -5341,17 +4429,7 @@ interface DOpusPath extends String {
 	/**
 	 * Sets the path represented by the Path object to the specified string. You can also set one Path object to the value of another. If you pass a Vector of strings the path will be built from the items in the vector.
 	 */
-	Set(path?: string | DOpusPath, string?: DOpusVector<any>): void;
-
-	/**
-	 * Sets the path represented by the Path object to the specified string. You can also set one Path object to the value of another. If you pass a Vector of strings the path will be built from the items in the vector.
-	 */
 	set(path?: string | DOpusPath, string?: DOpusVector<any>): void;
-
-	/**
-	 * Returns a Vector of strings representing the components of the path. For example, if the path is C:\Foo\Bar, the vector will contain three items - "C:\", "Foo" and "Bar". By default all components of the path are returned, but you can optionally provide the index of the first component and also the number of components to return.
-	 */
-	Split(first?: number, count?: number): DOpusVector<string>;
 
 	/**
 	 * Returns a Vector of strings representing the components of the path. For example, if the path is C:\Foo\Bar, the vector will contain three items - "C:\", "Foo" and "Bar". By default all components of the path are returned, but you can optionally provide the index of the first component and also the number of components to return.
@@ -5419,57 +4497,27 @@ interface DOpusProgress {
 	/**
 	 * Adds the specified number of files to the operation total. The bytes argument is optional - in a "full size" progress indicator this lets you add to the total byte size of the operation.
 	 */
-	AddFiles(count?: number, bytes?: DOpusFileSize): void;
-
-	/**
-	 * Adds the specified number of files to the operation total. The bytes argument is optional - in a "full size" progress indicator this lets you add to the total byte size of the operation.
-	 */
-	addfiles(count?: number, bytes?: DOpusFileSize): void;
+	addFiles(count?: number, bytes?: DOpusFileSize): void;
 
 	/**
 	 * Clears the state of the three "control" buttons (Abort / Pause / Skip) so they no longer register as being clicked when GetAbortState is called. If you only want to clear the Skip state, you should normally do that as part of a call to EnableSkip instead. That way you avoid accidentally clearing one of the other states if they become set between you calling GetAbortState and ClearAbortState. In fact, there are very few situations where you should call ClearAbortState.
 	 */
-	ClearAbortState(): void;
-
-	/**
-	 * Clears the state of the three "control" buttons (Abort / Pause / Skip) so they no longer register as being clicked when GetAbortState is called. If you only want to clear the Skip state, you should normally do that as part of a call to EnableSkip instead. That way you avoid accidentally clearing one of the other states if they become set between you calling GetAbortState and ClearAbortState. In fact, there are very few situations where you should call ClearAbortState.
-	 */
-	clearabortstate(): void;
+	clearAbortState(): void;
 
 	/**
 	 * Enables the progress dialog's Skip button. For EnableSkip to work, you must have set the skip property to True before the progress dialog was created by the Init method. enable: If True, the Skip button should be enabled; otherwise, it should be disabled. delay (optional, True by default): If True, there will be a short delay before the Skip button is enabled, with it temporarily disabled during the delay; otherwise, the change is instant. See below for why a delay is usually a good idea. clear (optional, True by default): If True, any record of the user pushing the Skip will be cleared, such that GetAbortState no longer returns "s". You usually want this if the progress dialog just moved to a new item. If you support the Skip button, you should normally call EnableSkip once per file, just after you call SetName and similar methods. When used that way, you'll usually want delay and clear to both be True, otherwise clicks of the Skip button intended for one file could affect the file(s) that come after it. For example, if a file takes a long time but then finishes just as the user gets tired of waiting and clicks Skip, the delay and cleared state ensure the unwanted click is harmless.
 	 */
-	EnableSkip(enable?: boolean, delay?: boolean, clear?: boolean): void;
-
-	/**
-	 * Enables the progress dialog's Skip button. For EnableSkip to work, you must have set the skip property to True before the progress dialog was created by the Init method. enable: If True, the Skip button should be enabled; otherwise, it should be disabled. delay (optional, True by default): If True, there will be a short delay before the Skip button is enabled, with it temporarily disabled during the delay; otherwise, the change is instant. See below for why a delay is usually a good idea. clear (optional, True by default): If True, any record of the user pushing the Skip will be cleared, such that GetAbortState no longer returns "s". You usually want this if the progress dialog just moved to a new item. If you support the Skip button, you should normally call EnableSkip once per file, just after you call SetName and similar methods. When used that way, you'll usually want delay and clear to both be True, otherwise clicks of the Skip button intended for one file could affect the file(s) that come after it. For example, if a file takes a long time but then finishes just as the user gets tired of waiting and clicks Skip, the delay and cleared state ensure the unwanted click is harmless.
-	 */
-	enableskip(enable?: boolean, delay?: boolean, clear?: boolean): void;
+	enableSkip(enable?: boolean, delay?: boolean, clear?: boolean): void;
 
 	/**
 	 * Finish the current file. If the byte size of the current file has been set the total progress will be advanced by any remaining bytes.
 	 */
-	FinishFile(): void;
-
-	/**
-	 * Finish the current file. If the byte size of the current file has been set the total progress will be advanced by any remaining bytes.
-	 */
-	finishfile(): void;
+	finishFile(): void;
 
 	/**
 	 * Polls the state of the three "control" buttons. This returns a string that indicates which, if any, of the three buttons have been clicked by the user. The button states are represented by the following letters in the returned string:a - Abortp - Pauses - SkipIf none of the states apply, an empty string is returned. autoPause (optional, False by default): If True, pausing is handled for you automatically. Calls to GetAbortState(True) block while paused and don't return until unpaused; the "p" state is never returned. (Note that clicking Skip or Abort will implicitly unpause the operation.) wanted (optional): If you only want to check one or two of the states, pass a string with their letters. For example, GetAbortState(True,"ap") will test for the Abort and Pause states, but not the Skip one. All states will be checked if the argument is an empty string or not given at all. simple (optional, True by default): If True, the result string will have at most one letter, indicating the most important state. If False, it is possible for multiple states to be indicated at once. For example if Skip and then Pause are clicked, in that order, without the script clearing the Skip state, then GetAbortState(False,"",False) would return "ps" while GetAbortState(False) would return just "p". To clear the state of the three buttons, call the ClearAbortState method. To clear just the Skip button's state, use the EnableSkip method.
 	 */
-	GetAbortState(autoPause?: boolean, wanted?: string, simple?: boolean): string;
-
-	/**
-	 * Polls the state of the three "control" buttons. This returns a string that indicates which, if any, of the three buttons have been clicked by the user. The button states are represented by the following letters in the returned string:a - Abortp - Pauses - SkipIf none of the states apply, an empty string is returned. autoPause (optional, False by default): If True, pausing is handled for you automatically. Calls to GetAbortState(True) block while paused and don't return until unpaused; the "p" state is never returned. (Note that clicking Skip or Abort will implicitly unpause the operation.) wanted (optional): If you only want to check one or two of the states, pass a string with their letters. For example, GetAbortState(True,"ap") will test for the Abort and Pause states, but not the Skip one. All states will be checked if the argument is an empty string or not given at all. simple (optional, True by default): If True, the result string will have at most one letter, indicating the most important state. If False, it is possible for multiple states to be indicated at once. For example if Skip and then Pause are clicked, in that order, without the script clearing the Skip state, then GetAbortState(False,"",False) would return "ps" while GetAbortState(False) would return just "p". To clear the state of the three buttons, call the ClearAbortState method. To clear just the Skip button's state, use the EnableSkip method.
-	 */
-	getabortstate(autoPause?: boolean, wanted?: string, simple?: boolean): string;
-
-	/**
-	 * Hides the progress indicator dialog. The dialog object itself remains valid, and can be redisplayed with the Show method if desired.
-	 */
-	Hide(): void;
+	getAbortState(autoPause?: boolean, wanted?: string, simple?: boolean): string;
 
 	/**
 	 * Hides the progress indicator dialog. The dialog object itself remains valid, and can be redisplayed with the Show method if desired.
@@ -5479,17 +4527,7 @@ interface DOpusProgress {
 	/**
 	 * Hides or shows the "XX bytes / YY bytes" string in the progress dialog. You can use this to hide the string if the progress does not indicate a number of bytes (e.g. when it indicates a percentage). Pass True for the show argument to show the string and False to hide it.
 	 */
-	HideFileByteCounts(show?: boolean): void;
-
-	/**
-	 * Hides or shows the "XX bytes / YY bytes" string in the progress dialog. You can use this to hide the string if the progress does not indicate a number of bytes (e.g. when it indicates a percentage). Pass True for the show argument to show the string and False to hide it.
-	 */
-	hidefilebytecounts(show?: boolean): void;
-
-	/**
-	 * Initializes the dialog. This method causes the actual dialog to be created, although it will not be displayed until the Show method is called. The fundamental properties shown above must be set before this method is called - once the dialog has been created they can not be altered. The parent parameter can be either a Tab or a Lister - this controls which window the dialog is centered over, and if the owned property is set to True which window it is owned by (always appears on top of). If no parent is provided the dialog will not be associated with any particular window. The title parameter specifies the window title of the dialog.
-	 */
-	Init(parent?: DOpusTab | DOpusLister, title?: string): void;
+	hideFileByteCounts(show?: boolean): void;
 
 	/**
 	 * Initializes the dialog. This method causes the actual dialog to be created, although it will not be displayed until the Show method is called. The fundamental properties shown above must be set before this method is called - once the dialog has been created they can not be altered. The parent parameter can be either a Tab or a Lister - this controls which window the dialog is centered over, and if the owned property is set to True which window it is owned by (always appears on top of). If no parent is provided the dialog will not be associated with any particular window. The title parameter specifies the window title of the dialog.
@@ -5499,17 +4537,7 @@ interface DOpusProgress {
 	/**
 	 * Resets the byte count for the current file to zero.
 	 */
-	InitFileSize(): void;
-
-	/**
-	 * Resets the byte count for the current file to zero.
-	 */
-	initfilesize(): void;
-
-	/**
-	 * Resets the total completed file and byte counts to zero.
-	 */
-	Restart(): void;
+	initFileSize(): void;
 
 	/**
 	 * Resets the total completed file and byte counts to zero.
@@ -5519,107 +4547,52 @@ interface DOpusProgress {
 	/**
 	 * Sets the total completed byte count.
 	 */
-	SetBytesProgress(bytes?: DOpusFileSize): void;
-
-	/**
-	 * Sets the total completed byte count.
-	 */
-	setbytesprogress(bytes?: DOpusFileSize): void;
+	setBytesProgress(bytes?: DOpusFileSize): void;
 
 	/**
 	 * Sets the size of the current file.
 	 */
-	SetFileSize(bytes?: DOpusFileSize): void;
-
-	/**
-	 * Sets the size of the current file.
-	 */
-	setfilesize(bytes?: DOpusFileSize): void;
+	setFileSize(bytes?: DOpusFileSize): void;
 
 	/**
 	 * Sets the total number of files.
 	 */
-	SetFiles(count?: number): void;
-
-	/**
-	 * Sets the total number of files.
-	 */
-	setfiles(count?: number): void;
+	setFiles(count?: number): void;
 
 	/**
 	 * Sets the total completed file count.
 	 */
-	SetFilesProgress(count?: number): void;
-
-	/**
-	 * Sets the total completed file count.
-	 */
-	setfilesprogress(count?: number): void;
+	setFilesProgress(count?: number): void;
 
 	/**
 	 * Sets the text at the top of the dialog that indicates the source and destination of an operation. The header argument refers to the string that normally says From: - this allows you to change it in case that term is not applicable to your action. The from argument is the source path, and the to argument (if there is one) is the destination path. Note that if you specify a destination path this always has a To: header appended to it. If you omit the to argument entirely (not just passing an empty string), the destination line will become blank, including the To: header. Use that if you want the second line to be used sometimes but not always. If you never want anything on the second line, use the SetStatus method instead as it will not add space for the extra line.
 	 */
-	SetFromTo(header?: string, from?: string, to?: string): void;
-
-	/**
-	 * Sets the text at the top of the dialog that indicates the source and destination of an operation. The header argument refers to the string that normally says From: - this allows you to change it in case that term is not applicable to your action. The from argument is the source path, and the to argument (if there is one) is the destination path. Note that if you specify a destination path this always has a To: header appended to it. If you omit the to argument entirely (not just passing an empty string), the destination line will become blank, including the To: header. Use that if you want the second line to be used sometimes but not always. If you never want anything on the second line, use the SetStatus method instead as it will not add space for the extra line.
-	 */
-	setfromto(header?: string, from?: string, to?: string): void;
+	setFromTo(header?: string, from?: string, to?: string): void;
 
 	/**
 	 * Sets the name of the current file.
 	 */
-	SetName(name?: string): void;
-
-	/**
-	 * Sets the name of the current file.
-	 */
-	setname(name?: string): void;
+	setName(name?: string): void;
 
 	/**
 	 * Sets the current progress as a percentage (from 0 to 100).
 	 */
-	SetPercentProgress(percent?: number): void;
-
-	/**
-	 * Sets the current progress as a percentage (from 0 to 100).
-	 */
-	setpercentprogress(percent?: number): void;
+	setPercentProgress(percent?: number): void;
 
 	/**
 	 * Sets the text displayed in the status line at the top of the dialog. This sets a single-line status message, while SetFromTo can be used to indicate source and destination paths on two lines.
 	 */
-	SetStatus(status?: string): void;
-
-	/**
-	 * Sets the text displayed in the status line at the top of the dialog. This sets a single-line status message, while SetFromTo can be used to indicate source and destination paths on two lines.
-	 */
-	setstatus(status?: string): void;
+	setStatus(status?: string): void;
 
 	/**
 	 * Sets the title of the dialog.
 	 */
-	SetTitle(title?: string): void;
-
-	/**
-	 * Sets the title of the dialog.
-	 */
-	settitle(title?: string): void;
+	setTitle(title?: string): void;
 
 	/**
 	 * Sets the type of the current item - either file or dir.
 	 */
-	SetType(type?: string): void;
-
-	/**
-	 * Sets the type of the current item - either file or dir.
-	 */
-	settype(type?: string): void;
-
-	/**
-	 * Displays the progress indicator dialog. Call this once you have created the dialog using the Init method.
-	 */
-	Show(): void;
+	setType(type?: string): void;
 
 	/**
 	 * Displays the progress indicator dialog. Call this once you have created the dialog using the Init method.
@@ -5629,32 +4602,17 @@ interface DOpusProgress {
 	/**
 	 * Skips over the current file. Set the complete argument to True to have the file counted as "complete", or False to count it as "skipped".
 	 */
-	SkipFile(complete?: boolean): void;
-
-	/**
-	 * Skips over the current file. Set the complete argument to True to have the file counted as "complete", or False to count it as "skipped".
-	 */
-	skipfile(complete?: boolean): void;
+	skipFile(complete?: boolean): void;
 
 	/**
 	 * Step the byte progress indicator the specified number of bytes.
 	 */
-	StepBytes(bytes?: DOpusFileSize): void;
-
-	/**
-	 * Step the byte progress indicator the specified number of bytes.
-	 */
-	stepbytes(bytes?: DOpusFileSize): void;
+	stepBytes(bytes?: DOpusFileSize): void;
 
 	/**
 	 * Step the file progress indicator the specified number of files.
 	 */
-	StepFiles(count?: number): void;
-
-	/**
-	 * Step the file progress indicator the specified number of files.
-	 */
-	stepfiles(count?: number): void;
+	stepFiles(count?: number): void;
 
 }
 
@@ -5778,12 +4736,7 @@ interface DOpusRect {
 	/**
 	 * Returns a string describing the rectangle's position and size, as a convenience when debugging scripts. The format is "(L,T - R,B; WxH)" i.e. Left, Top, Right, Bottom, Width, and Height.
 	 */
-	ToString(): string;
-
-	/**
-	 * Returns a string describing the rectangle's position and size, as a convenience when debugging scripts. The format is "(L,T - R,B; WxH)" i.e. Left, Top, Right, Bottom, Width, and Height.
-	 */
-	tostring(): string;
+	toString(): string;
 
 }
 
@@ -5839,92 +4792,47 @@ interface DOpusScript extends DOpusVars {
 	/**
 	 * Returns True if local HTTP help is enabled (that is, if help is shown in the user's web browser), False if the old HtmlHelp-style help is enabled. If HTTP help is enabled, your script is able to add its own help pages via the OnGetHelpContent event, and it can trigger the display of its own help pages using the ShowHelp method.
 	 */
-	HttpHelpEnabled(): boolean;
-
-	/**
-	 * Returns True if local HTTP help is enabled (that is, if help is shown in the user's web browser), False if the old HtmlHelp-style help is enabled. If HTTP help is enabled, your script is able to add its own help pages via the OnGetHelpContent event, and it can trigger the display of its own help pages using the ShowHelp method.
-	 */
-	httphelpenabled(): boolean;
+	httpHelpEnabled(): boolean;
 
 	/**
 	 * If your script implements the OnAddColumns event, you can call the InitColumns method at any time to reinitialize your columns. You may want to do this, for example, in response to the user modifying your script's configuration.
 	 */
-	InitColumns(): void;
-
-	/**
-	 * If your script implements the OnAddColumns event, you can call the InitColumns method at any time to reinitialize your columns. You may want to do this, for example, in response to the user modifying your script's configuration.
-	 */
-	initcolumns(): void;
+	initColumns(): void;
 
 	/**
 	 * If your script implements the OnAddCommands event, you can call the InitCommands method at any time to reinitialize your commands. You may want to do this, for example, in response to the user modifying your script's configuration.
 	 */
-	InitCommands(): void;
-
-	/**
-	 * If your script implements the OnAddCommands event, you can call the InitCommands method at any time to reinitialize your commands. You may want to do this, for example, in response to the user modifying your script's configuration.
-	 */
-	initcommands(): void;
+	initCommands(): void;
 
 	/**
 	 * Using the OnGetHelpContent event your script can add its own content to the F1 help. If your script is bundled as a script package you can include .html files in a sub-directory of the package called help, and then load them easily using this method. You can then pass the loaded data to the GetHelpContentData.AddHelpPage method to add the page.
 	 */
-	LoadHelpFile(name?: string): string;
-
-	/**
-	 * Using the OnGetHelpContent event your script can add its own content to the F1 help. If your script is bundled as a script package you can include .html files in a sub-directory of the package called help, and then load them easily using this method. You can then pass the loaded data to the GetHelpContentData.AddHelpPage method to add the page.
-	 */
-	loadhelpfile(name?: string): string;
+	loadHelpFile(name?: string): string;
 
 	/**
 	 * If your script is bundled as a script package you can include PNG and JPG image files in a sub-directory of the package called help, and then load them easily using this method. You can then pass the loaded data to the GetHelpContentData.AddHelpImage method to add the image.
 	 */
-	LoadHelpImage(name?: string): DOpusBlob;
-
-	/**
-	 * If your script is bundled as a script package you can include PNG and JPG image files in a sub-directory of the package called help, and then load them easily using this method. You can then pass the loaded data to the GetHelpContentData.AddHelpImage method to add the image.
-	 */
-	loadhelpimage(name?: string): DOpusBlob;
+	loadHelpImage(name?: string): DOpusBlob;
 
 	/**
 	 * Loads an image file from the specified external file. If your script is bundled as a script package you can place image files in a sub-directory of the package called images and then load them from your script by giving their name. You can optionally specify the desired size to load the image at, and whether the alpha channel (if any) should be loaded or not. The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
 	 */
-	LoadImage(name?: string, width?: number, height?: number, alpha?: boolean): DOpusImage;
-
-	/**
-	 * Loads an image file from the specified external file. If your script is bundled as a script package you can place image files in a sub-directory of the package called images and then load them from your script by giving their name. You can optionally specify the desired size to load the image at, and whether the alpha channel (if any) should be loaded or not. The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
-	 */
-	loadimage(name?: string, width?: number, height?: number, alpha?: boolean): DOpusImage;
+	loadImage(name?: string, width?: number, height?: number, alpha?: boolean): DOpusImage;
 
 	/**
 	 * Loads external script resources and makes them available to the script. You can either provide a filename or a raw XML string. If your script is bundled as a script package, the resource file must have a .odxml extension for LoadResources to be able to find it in the package.
 	 */
-	LoadResources(name?: string, XML?: string): void;
-
-	/**
-	 * Loads external script resources and makes them available to the script. You can either provide a filename or a raw XML string. If your script is bundled as a script package, the resource file must have a .odxml extension for LoadResources to be able to find it in the package.
-	 */
-	loadresources(name?: string, XML?: string): void;
+	loadResources(name?: string, XML?: string): void;
 
 	/**
 	 * If your script implements any custom columns, you can use this method to cause them to be regenerated if they are currently shown in any tabs. You may want to do this, for example, in response to the user modifying your script's configuration. Pass the name of the column you want to regenerate as the argument to this method.
 	 */
-	RefreshColumn(name?: string): void;
-
-	/**
-	 * If your script implements any custom columns, you can use this method to cause them to be regenerated if they are currently shown in any tabs. You may want to do this, for example, in response to the user modifying your script's configuration. Pass the name of the column you want to regenerate as the argument to this method.
-	 */
-	refreshcolumn(name?: string): void;
+	refreshColumn(name?: string): void;
 
 	/**
 	 * If your script adds its own help pages via the OnGetHelpContent event, and the user has http help enabled, you can call this method to display your help in the user's web browser. You might want to do this when the user clicks a Help button in your script dialog, for example. You can use the HttpHelpEnabled method to check if http help is enabled before calling this function.The optional parameter must be the name of the desired page to show, which corresponds to the name you supplied when you added it in the OnGetHelpContent event handler. If you omit this parameter then your first help page will be shown.
 	 */
-	ShowHelp(page?: string): void;
-
-	/**
-	 * If your script adds its own help pages via the OnGetHelpContent event, and the user has http help enabled, you can call this method to display your help in the user's web browser. You might want to do this when the user clicks a Help button in your script dialog, for example. You can use the HttpHelpEnabled method to check if http help is enabled before calling this function.The optional parameter must be the name of the desired page to show, which corresponds to the name you supplied when you added it in the OnGetHelpContent event handler. If you omit this parameter then your first help page will be shown.
-	 */
-	showhelp(page?: string): void;
+	showHelp(page?: string): void;
 
 }
 
@@ -6380,22 +5288,12 @@ interface DOpusScriptInitData {
 	/**
 	 * Adds a new information column to Opus. The returned ScriptColumn object must be properly initialized. A script add-in can add as many columns as it likes, and these will be available in file displays, infotips and the Advanced Find function.Instead of adding columns in OnInit, your script can implement the OnAddColumns method. This is more flexible as it allows you to access your script's configuration at the time you add columns, and columns can be dynamically added and removed while Opus is running. If OnAddColumns is implemented then this method is unavailable in OnInit.
 	 */
-	AddColumn(): DOpusScriptColumn;
-
-	/**
-	 * Adds a new information column to Opus. The returned ScriptColumn object must be properly initialized. A script add-in can add as many columns as it likes, and these will be available in file displays, infotips and the Advanced Find function.Instead of adding columns in OnInit, your script can implement the OnAddColumns method. This is more flexible as it allows you to access your script's configuration at the time you add columns, and columns can be dynamically added and removed while Opus is running. If OnAddColumns is implemented then this method is unavailable in OnInit.
-	 */
-	addcolumn(): DOpusScriptColumn;
+	addColumn(): DOpusScriptColumn;
 
 	/**
 	 * Adds a new internal command to Opus. The returned ScriptCommand object must be properly initialized. A script add-in can add as many internal commands as it likes to the Opus internal command set. Instead of adding commands in OnInit, your script can implement the OnAddCommands method. This is more flexible as it allows you to access your script's configuration at the time you add commands, and commands can be dynamically added and removed while Opus is running. If OnAddCommands is implemented then this method is unavailable in OnInit.
 	 */
-	AddCommand(): DOpusScriptCommand;
-
-	/**
-	 * Adds a new internal command to Opus. The returned ScriptCommand object must be properly initialized. A script add-in can add as many internal commands as it likes to the Opus internal command set. Instead of adding commands in OnInit, your script can implement the OnAddCommands method. This is more flexible as it allows you to access your script's configuration at the time you add commands, and commands can be dynamically added and removed while Opus is running. If OnAddCommands is implemented then this method is unavailable in OnInit.
-	 */
-	addcommand(): DOpusScriptCommand;
+	addCommand(): DOpusScriptCommand;
 
 }
 declare var ScriptInitData: DOpusScriptInitData;
@@ -6414,22 +5312,12 @@ interface DOpusScriptStrings {
 	/**
 	 * Returns the text of a string specified by name. The name must match the name used in the string resources. Optionally you can provide a language name as the second parameter, to retrieve a string from a particular language. Otherwise, the string is returned in the current language.
 	 */
-	Get(name?: string, language?: string): string;
-
-	/**
-	 * Returns the text of a string specified by name. The name must match the name used in the string resources. Optionally you can provide a language name as the second parameter, to retrieve a string from a particular language. Otherwise, the string is returned in the current language.
-	 */
 	get(name?: string, language?: string): string;
 
 	/**
 	 * Returns True if strings in the specified language are defined in the resources.
 	 */
-	HasLanguage(language?: string): boolean;
-
-	/**
-	 * Returns True if strings in the specified language are defined in the resources.
-	 */
-	haslanguage(language?: string): boolean;
+	hasLanguage(language?: string): boolean;
 
 }
 
@@ -6542,32 +5430,17 @@ interface DOpusSortOrder {
 	/**
 	 * Returns a Vector of strings representing the current sort order of files in the folder. If multiple manual sort orders have been defined, you can provide the name of a specific sort order as an argument to this method. If called with no arguments it returns the current sort order by default.
 	 */
-	GetOrder(name?: string): DOpusVector<string>;
-
-	/**
-	 * Returns a Vector of strings representing the current sort order of files in the folder. If multiple manual sort orders have been defined, you can provide the name of a specific sort order as an argument to this method. If called with no arguments it returns the current sort order by default.
-	 */
-	getorder(name?: string): DOpusVector<string>;
+	getOrder(name?: string): DOpusVector<string>;
 
 	/**
 	 * You can pass this method a Vector of strings to change the sort order of the current folder. You can optionally provide the name of a sort order as the second parameter if you’ve got more than one sort order defined.
 	 */
-	SetOrder(order?: DOpusVector<any>, name?: string): void;
-
-	/**
-	 * You can pass this method a Vector of strings to change the sort order of the current folder. You can optionally provide the name of a sort order as the second parameter if you’ve got more than one sort order defined.
-	 */
-	setorder(order?: DOpusVector<any>, name?: string): void;
+	setOrder(order?: DOpusVector<any>, name?: string): void;
 
 	/**
 	 * Resets the manual sort order to the currently selected sort order (e.g. if the file display header indicates that it is sorted by name, ResetOrder would reset to filename order). You can optionally provide the name of a sort order as the second parameter if you’ve got more than one sort order defined.
 	 */
-	ResetOrder(name?: string): void;
-
-	/**
-	 * Resets the manual sort order to the currently selected sort order (e.g. if the file display header indicates that it is sorted by name, ResetOrder would reset to filename order). You can optionally provide the name of a sort order as the second parameter if you’ve got more than one sort order defined.
-	 */
-	resetorder(name?: string): void;
+	resetOrder(name?: string): void;
 
 }
 
@@ -6645,24 +5518,9 @@ interface DOpusStringSet {
 	assign(from?: DOpusStringSet): void;
 
 	/**
-	 * Copies the contents of another StringSet to this one. You can also pass an array of strings or Vector object.
-	 */
-	assign(from?: DOpusStringSet): void;
-
-	/**
 	 * Clears the contents of the StringSet.
 	 */
 	clear(): void;
-
-	/**
-	 * Clears the contents of the StringSet.
-	 */
-	clear(): void;
-
-	/**
-	 * Erases the string if it exists in the set.
-	 */
-	erase(): void;
 
 	/**
 	 * Erases the string if it exists in the set.
@@ -6675,24 +5533,9 @@ interface DOpusStringSet {
 	exists(): boolean;
 
 	/**
-	 * Returns True if the specified string exists in the set.
-	 */
-	exists(): boolean;
-
-	/**
 	 * Inserts the string into the set if it doesn't already exist. Returns True if successful.
 	 */
 	insert(): boolean;
-
-	/**
-	 * Inserts the string into the set if it doesn't already exist. Returns True if successful.
-	 */
-	insert(): boolean;
-
-	/**
-	 * Merges the contents of another StringSet with this one.
-	 */
-	merge(from?: DOpusStringSet): void;
 
 	/**
 	 * Merges the contents of another StringSet with this one.
@@ -6711,17 +5554,7 @@ interface DOpusStringTools {
 	/**
 	 * Decodes an encoded string or data. You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned. If format is specified as "base64" the source will be Base64-decoded, and a Blob is returned. If format is specified as "quoted" the source will be Quoted-printable-decoded, and a Blob is returned. If format is specified as "auto" or not supplied, special handling is invoked to decode a MIME-encoded email subject (e.g. one beginning with =?), and a string is returned. If "auto" is specified it will also detect UTF-8 or UTF-16 encoded data if it has a BOM at the beginning. If format is specified as utf-8 the source will be converted from UTF-8 to a native string. Alternatively, if format is utf-16 or utf-16-le, the source will be converted from UTF-16 Little Endian to a native string. Or, if format is utf-16-be, the source will be converted from UTF-16 Big Endian to a native string. If decoding UTF-8 or UTF-16 (via "auto" or "utf-8", etc.), any byte-order-mark (BOM) will be skipped if one exists at the beginning of the input data. Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8"), or a Windows code-page ID (e.g. 936, 65001). The source will be decoded using the specified code-page and a string is returned.
 	 */
-	Decode(source?: DOpusBlob | string, format?: string): string | DOpusBlob;
-
-	/**
-	 * Decodes an encoded string or data. You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned. If format is specified as "base64" the source will be Base64-decoded, and a Blob is returned. If format is specified as "quoted" the source will be Quoted-printable-decoded, and a Blob is returned. If format is specified as "auto" or not supplied, special handling is invoked to decode a MIME-encoded email subject (e.g. one beginning with =?), and a string is returned. If "auto" is specified it will also detect UTF-8 or UTF-16 encoded data if it has a BOM at the beginning. If format is specified as utf-8 the source will be converted from UTF-8 to a native string. Alternatively, if format is utf-16 or utf-16-le, the source will be converted from UTF-16 Little Endian to a native string. Or, if format is utf-16-be, the source will be converted from UTF-16 Big Endian to a native string. If decoding UTF-8 or UTF-16 (via "auto" or "utf-8", etc.), any byte-order-mark (BOM) will be skipped if one exists at the beginning of the input data. Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8"), or a Windows code-page ID (e.g. 936, 65001). The source will be decoded using the specified code-page and a string is returned.
-	 */
 	decode(source?: DOpusBlob | string, format?: string): string | DOpusBlob;
-
-	/**
-	 * Encodes a string or data. You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned. If format is specified as "base64" the source will be Base64-encoded, and a string is returned. If format is specified as "quoted" the source will be Quoted-printable-encoded, and a string is returned. If format is specified as "utf-8 bom", the output data is encoded as UTF-8 with a byte-order-mark (BOM) at the start. Use "utf-8" if you want UTF-8 without the BOM. If format is specified as "utf-16 bom" or "utf-16-le bom", the output data is encoded as UTF-16 Little Endian with a byte-order-mark (BOM) at the start. Use "utf-16" or "utf-16-le" if you do not want the BOM. If format is specified as "utf-16-be bom", the output data is encoded as UTF-16 Big Endian with a byte-order-mark (BOM) at the start. Use "utf-16-be" if you do not want the BOM. Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8" etc.), or a Windows code-page ID (e.g. 936, 65001). The source will be encoded using the specified code-page and a Blob is returned.
-	 */
-	Encode(source?: DOpusBlob | string, format?: string): string | DOpusBlob;
 
 	/**
 	 * Encodes a string or data. You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned. If format is specified as "base64" the source will be Base64-encoded, and a string is returned. If format is specified as "quoted" the source will be Quoted-printable-encoded, and a string is returned. If format is specified as "utf-8 bom", the output data is encoded as UTF-8 with a byte-order-mark (BOM) at the start. Use "utf-8" if you want UTF-8 without the BOM. If format is specified as "utf-16 bom" or "utf-16-le bom", the output data is encoded as UTF-16 Little Endian with a byte-order-mark (BOM) at the start. Use "utf-16" or "utf-16-le" if you do not want the BOM. If format is specified as "utf-16-be bom", the output data is encoded as UTF-16 Big Endian with a byte-order-mark (BOM) at the start. Use "utf-16-be" if you do not want the BOM. Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8" etc.), or a Windows code-page ID (e.g. 936, 65001). The source will be encoded using the specified code-page and a Blob is returned.
@@ -6731,12 +5564,7 @@ interface DOpusStringTools {
 	/**
 	 * Tests the input string to see if it only contains characters that can be represented in ASCII. If the result is false, the string is not safe to save into a text file unless you use a Unicode format such as UTF-8. This check is not affected by locales or codepages. Instead, it tests whether the string consists of only 7-bit ASCII characters, such that no characters will be lost of modified if you save the string to a text file and then load it back on any other computer.
 	 */
-	IsASCII(input?: string): boolean;
-
-	/**
-	 * Tests the input string to see if it only contains characters that can be represented in ASCII. If the result is false, the string is not safe to save into a text file unless you use a Unicode format such as UTF-8. This check is not affected by locales or codepages. Instead, it tests whether the string consists of only 7-bit ASCII characters, such that no characters will be lost of modified if you save the string to a text file and then load it back on any other computer.
-	 */
-	isascii(input?: string): boolean;
+	isASCII(input?: string): boolean;
 
 }
 
@@ -6772,11 +5600,6 @@ interface DOpusSysInfo {
 	/**
 	 * Allows you to test if a named process is currently running, and returns the process's ID if so. If the process isn't running 0 is returned. You can use wildcards or (by prefixing the pattern with regex:) regular expressions.
 	 */
-	FindProcess(string): number;
-
-	/**
-	 * Allows you to test if a named process is currently running, and returns the process's ID if so. If the process isn't running 0 is returned. You can use wildcards or (by prefixing the pattern with regex:) regular expressions.
-	 */
 	findProcess(string): number;
 
 	/**
@@ -6786,21 +5609,7 @@ interface DOpusSysInfo {
 	 *
 	 * The WorkAreas method, documented below, is sometimes what you should use instead of this.
 	 */
-	Monitors(index?: number): Vector<Rect>|Rect;
-
-	/**
-	 * If called with no arguments, returns a Vector of Rect objects which provide information about the positions and sizes of the display monitors in the system.
-	 *
-	 * If called with an index argument, returns a single Rect with the information for just a particular monitor.
-	 *
-	 * The WorkAreas method, documented below, is sometimes what you should use instead of this.
-	 */
-	monitors(index?: number): Vector<Rect>|Rect;
-
-	/**
-	 * Returns the index of the monitor the mouse pointer is currently positioned on.
-	 * */
-	MouseMonitor(): number;
+	monitors(index?: number): DOpusVector<Rect>|Rect;
 
 	/**
 	 * Returns the index of the monitor the mouse pointer is currently positioned on.
@@ -6810,33 +5619,12 @@ interface DOpusSysInfo {
 	/**
 	 * Returns the current x-coordinate of the mouse pointer.
 	 */
-	MousePosX(): number;
-
-	/**
-	 * Returns the current x-coordinate of the mouse pointer.
-	 */
 	mousePosX(): number;
 
 	/**
 	 * Returns the current y-coordinate of the mouse pointer.
 	 */
-	MousePosY(): int;
-
-	/**
-	 * Returns the current y-coordinate of the mouse pointer.
-	 */
-	mousePosY(): int;
-
-	/**
-	 * Returns a Rect giving the size of the invisible border around windows.
-	 *
-	 * On Windows 10, the top border is typically zero and the others are usually several pixels thick. The thickness varies by OS version, system DPI, and other factors; you should not store it to disk as it may not be correct for the system that loads it.
-	 *
-	 * On some operating systems (e.g. Windows 10), windows may be larger than they appear: Beyond the visible edge is a border that is part of the window but invisible. This border exists for legacy compatibility, allowing window frames to appear thin while providing something thick enough to resize with the mouse.(You can usually ignore the border but it is important when positioning windows next to each other, or to screen edges, where ignoring it results in gaps between windows.): The Rect returned by this method is unusual: The left, right, top and bottom properties do not represent the coordinates of a rectangle but rather the width of borders (if any) on each side of a window. As a consequence, the width and height properties of the Rect are meaningless.;
-	 *
-	 * This property is relatively expensive to calculate. You should not, for example, call the method once for each side; instead, call it once and store the Rect in a variable, then query that for each side.
-	 */
-	ShadowBorder(): Rect;
+	mousePosY(): number;
 
 	/**
 	 * Returns a Rect giving the size of the invisible border around windows.
@@ -6854,14 +5642,7 @@ interface DOpusSysInfo {
 	 *
 	 * A monitor's work area is the monitor's rectangle minus the Windows Taskbar and any other app bars (which can include docked toolbars created by Opus, or similar things added by other software). If a monitor does not have a Taskbar or other app bar docked to it, its work area will be the same as its full rectangle.
 	 */
-	WorkAreas(index?: number): Vector<Rect>|Rect;
-
-	/**
-	 * Similar to the Monitors method, documented above, except it returns the work area of each monitor rather than the full monitor area.
-	 *
-	 * A monitor's work area is the monitor's rectangle minus the Windows Taskbar and any other app bars (which can include docked toolbars created by Opus, or similar things added by other software). If a monitor does not have a Taskbar or other app bar docked to it, its work area will be the same as its full rectangle.
-	 */
-	workAreas(index?: number): Vector<Rect>|Rect;
+	workAreas(index?: number): DOpusVector<Rect>|Rect;
 
 }
 
@@ -7027,27 +5808,12 @@ interface DOpusTab {
 	/**
 	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to this tab.
 	 */
-	Dlg(): DOpusDialog;
-
-	/**
-	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to this tab.
-	 */
 	dlg(): DOpusDialog;
 
 	/**
 	 * Returns an Item object representing the file or folder which has focus in the tab. The focus item is typically indicated by an outline around its name, and is usually the last item which was clicked on, or the last item which was moved to with the keyboard. The focus item is often also selected, but not always; focus and selection are two different things. If no focus item exists, or if the focus item is a special file or folder, such as This PC, which cannot be represented by an Item object, then this method does not return an object. (In JScript, test if the result == null and in VBScript test if the result is nothing.)
 	 */
-	GetFocusItem(): DOpusItem;
-
-	/**
-	 * Returns an Item object representing the file or folder which has focus in the tab. The focus item is typically indicated by an outline around its name, and is usually the last item which was clicked on, or the last item which was moved to with the keyboard. The focus item is often also selected, but not always; focus and selection are two different things. If no focus item exists, or if the focus item is a special file or folder, such as This PC, which cannot be represented by an Item object, then this method does not return an object. (In JScript, test if the result == null and in VBScript test if the result is nothing.)
-	 */
-	getfocusitem(): DOpusItem;
-
-	/**
-	 * When a script accesses particular properties of a Tab object, a snapshot is taken of the tab's state. For example, if you ask for the selected_files property, the list of selected files is calculated and then stored in memory. This can speed things up, and also means you don't have to worry about the list changing under you as you work through it. If the script then makes changes to the tab (e.g. it selects files, creates a new folder, etc.), these changes will not be reflected by the cached snapshot(s) if you access the same properties on the same tab object again. To clear the cached snapshots and re-synchronize the object with the tab's current state, call the Tab.Update method.
-	 */
-	Update(): void;
+	getFocusItem(): DOpusItem;
 
 	/**
 	 * When a script accesses particular properties of a Tab object, a snapshot is taken of the tab's state. For example, if you ask for the selected_files property, the list of selected files is calculated and then stored in memory. This can speed things up, and also means you don't have to worry about the list changing under you as you work through it. If the script then makes changes to the tab (e.g. it selects files, creates a new folder, etc.), these changes will not be reflected by the cached snapshot(s) if you access the same properties on the same tab object again. To clear the cached snapshots and re-synchronize the object with the tab's current state, call the Tab.Update method.
@@ -7130,37 +5896,17 @@ interface DOpusTabGroup {
 	/**
 	 * Adds a new sub-folder to this tab group folder. Only available when the folder property is True. You can either provide a TabGroup object (which itself has the folder property set to True) or the name for the new folder. If the operation succeeds a TabGroup object is returned which represents the new folder. If the operation fails False is returned.
 	 */
-	AddChildFolder(TabGroup?: object, name?: string): DOpusTabGroup;
-
-	/**
-	 * Adds a new sub-folder to this tab group folder. Only available when the folder property is True. You can either provide a TabGroup object (which itself has the folder property set to True) or the name for the new folder. If the operation succeeds a TabGroup object is returned which represents the new folder. If the operation fails False is returned.
-	 */
-	addchildfolder(TabGroup?: object, name?: string): DOpusTabGroup;
+	addChildFolder(TabGroup?: object, name?: string): DOpusTabGroup;
 
 	/**
 	 * Adds a new tab group to this tab group folder. Only available when the folder property is True. You can either provide a TabGroup object or the name for the new group. If the operation succeeds a TabGroup object is returned which represents the new tab group. If the operation fails False is returned.
 	 */
-	AddChildGroup(TabGroup?: object, name?: string): DOpusTabGroup;
-
-	/**
-	 * Adds a new tab group to this tab group folder. Only available when the folder property is True. You can either provide a TabGroup object or the name for the new group. If the operation succeeds a TabGroup object is returned which represents the new tab group. If the operation fails False is returned.
-	 */
-	addchildgroup(TabGroup?: object, name?: string): DOpusTabGroup;
+	addChildGroup(TabGroup?: object, name?: string): DOpusTabGroup;
 
 	/**
 	 * Deletes the child item (folder or tab group).
 	 */
-	DeleteChild(TabGroup?: object): void;
-
-	/**
-	 * Deletes the child item (folder or tab group).
-	 */
-	deletechild(TabGroup?: object): void;
-
-	/**
-	 * Returns a duplicate of this tab group or folder. When it's returned the duplicate has not yet been added to a tab list.
-	 */
-	Duplicate(): DOpusTabGroup;
+	deleteChild(TabGroup?: object): void;
 
 	/**
 	 * Returns a duplicate of this tab group or folder. When it's returned the duplicate has not yet been added to a tab list.
@@ -7170,17 +5916,7 @@ interface DOpusTabGroup {
 	/**
 	 * In a tab group that has specific left and right tabs specified, this method links together a tab from the left side and a tab from the right side. Only available if the dual property is set to True. You can provide TabGroupTabEntry objects or the index numbers of the tabs you want to link.The optional type parameter can be set to "slave" to specify that the tabs should be slaved to each other.
 	 */
-	Link(obj1?: DOpusTabGroupTabEntry, obj2?: DOpusTabGroupTabEntry, type?: string): void;
-
-	/**
-	 * In a tab group that has specific left and right tabs specified, this method links together a tab from the left side and a tab from the right side. Only available if the dual property is set to True. You can provide TabGroupTabEntry objects or the index numbers of the tabs you want to link.The optional type parameter can be set to "slave" to specify that the tabs should be slaved to each other.
-	 */
 	link(obj1?: DOpusTabGroupTabEntry, obj2?: DOpusTabGroupTabEntry, type?: string): void;
-
-	/**
-	 * Unlinks the specified tab from its partner. Only available if the dual property is set to True.
-	 */
-	Unlink(TabGroupTabEntry?: object): void;
 
 	/**
 	 * Unlinks the specified tab from its partner. Only available if the dual property is set to True.
@@ -7201,47 +5937,22 @@ interface DOpusTabGroups {
 	/**
 	 * Adds a new folder to the list of tab groups. You can either provide a TabGroup object (which has the folder property set to True) or the name for the new folder. If the operation succeeds a TabGroup object is returned which represents the new folder. If the operation fails False is returned.
 	 */
-	AddChildFolder(TabGroup?: object, name?: string): DOpusTabGroup;
-
-	/**
-	 * Adds a new folder to the list of tab groups. You can either provide a TabGroup object (which has the folder property set to True) or the name for the new folder. If the operation succeeds a TabGroup object is returned which represents the new folder. If the operation fails False is returned.
-	 */
-	addchildfolder(TabGroup?: object, name?: string): DOpusTabGroup;
+	addChildFolder(TabGroup?: object, name?: string): DOpusTabGroup;
 
 	/**
 	 * Adds a new tab group to the list of tab groups. You can either provide a TabGroup object or the name for the new group. If the operation succeeds a TabGroup object is returned which represents the new tab group. If the operation fails False is returned.
 	 */
-	AddChildGroup(TabGroup?: object, name?: string): DOpusTabGroup;
-
-	/**
-	 * Adds a new tab group to the list of tab groups. You can either provide a TabGroup object or the name for the new group. If the operation succeeds a TabGroup object is returned which represents the new tab group. If the operation fails False is returned.
-	 */
-	addchildgroup(TabGroup?: object, name?: string): DOpusTabGroup;
+	addChildGroup(TabGroup?: object, name?: string): DOpusTabGroup;
 
 	/**
 	 * Deletes the child item (folder or tab group).
 	 */
-	DeleteChild(TabGroup?: object): void;
-
-	/**
-	 * Deletes the child item (folder or tab group).
-	 */
-	deletechild(TabGroup?: object): void;
-
-	/**
-	 * Saves the tab group list and any changes you have made. Note that this only saves changes made to the object it is called on, and each use of DOpus.TabGroups creates a new, independent object. Therefore, you should modify tab groups like this (JScript): var tabGroups = DOpus.TabGroups; var group = tabGroups.AddChildGroup("New Tab Group"); if (!group) DOpus.Output("Group already exists"); else { group.desc = "Example description"; var tabs = group.tabs; tabs.AddTab("C:\\"); tabGroups.Save(); } And not like this: // This will not work correctly. var group = DOpus.TabGroups.AddChildGroup("New Tab Group"); if (!group) DOpus.Output("Group already exists"); else { group.desc = "Example description"; group.tabs.AddTab("C:\\"); DOpus.TabGroups.Save(); } The second example will not work because the last line creates a second, unrelated snapshot of the current state, which is unaffected by the unsaved changes to the first snapshot, and then saves the second snapshot without making any changes to it.
-	 */
-	Save(): void;
+	deleteChild(TabGroup?: object): void;
 
 	/**
 	 * Saves the tab group list and any changes you have made. Note that this only saves changes made to the object it is called on, and each use of DOpus.TabGroups creates a new, independent object. Therefore, you should modify tab groups like this (JScript): var tabGroups = DOpus.TabGroups; var group = tabGroups.AddChildGroup("New Tab Group"); if (!group) DOpus.Output("Group already exists"); else { group.desc = "Example description"; var tabs = group.tabs; tabs.AddTab("C:\\"); tabGroups.Save(); } And not like this: // This will not work correctly. var group = DOpus.TabGroups.AddChildGroup("New Tab Group"); if (!group) DOpus.Output("Group already exists"); else { group.desc = "Example description"; group.tabs.AddTab("C:\\"); DOpus.TabGroups.Save(); } The second example will not work because the last line creates a second, unrelated snapshot of the current state, which is unaffected by the unsaved changes to the first snapshot, and then saves the second snapshot without making any changes to it.
 	 */
 	save(): void;
-
-	/**
-	 * Updates the TabGroups object to reflect any changes made through the Preferences user interface.
-	 */
-	Update(): void;
 
 	/**
 	 * Updates the TabGroups object to reflect any changes made through the Preferences user interface.
@@ -7294,11 +6005,6 @@ interface DOpusTabGroupTabEntry {
 	/**
 	 * Returns a duplicate of this tab entry.
 	 */
-	Duplicate(): DOpusTabGroupTabEntry;
-
-	/**
-	 * Returns a duplicate of this tab entry.
-	 */
 	duplicate(): DOpusTabGroupTabEntry;
 
 }
@@ -7320,42 +6026,22 @@ interface DOpusTabGroupTabList {
 	/**
 	 * Adds a folder tab entry to this list. You can provide a TabGroupTabEntry object, or the path and optional name of the new folder tab.
 	 */
-	AddTab(TabGroupTabEntry?: object, path?: string, name?: string): DOpusTabGroupTabEntry;
-
-	/**
-	 * Adds a folder tab entry to this list. You can provide a TabGroupTabEntry object, or the path and optional name of the new folder tab.
-	 */
-	addtab(TabGroupTabEntry?: object, path?: string, name?: string): DOpusTabGroupTabEntry;
+	addTab(TabGroupTabEntry?: object, path?: string, name?: string): DOpusTabGroupTabEntry;
 
 	/**
 	 * Deletes a folder tab entry from this list. You can provide a TabGroupTabEntry object, or the index of the tab entry to delete. If you specify the index as -1 then all tab entries will be deleted.
 	 */
-	DeleteTab(TabGroupTabEntry?: object, index?: number): void;
-
-	/**
-	 * Deletes a folder tab entry from this list. You can provide a TabGroupTabEntry object, or the index of the tab entry to delete. If you specify the index as -1 then all tab entries will be deleted.
-	 */
-	deletetab(TabGroupTabEntry?: object, index?: number): void;
+	deleteTab(TabGroupTabEntry?: object, index?: number): void;
 
 	/**
 	 * Inserts a folder tab entry to this list. You can provide a TabGroupTabEntry object, or the path and optional name of the new folder tab. The final parameter must be the index indicating the desired insertion position.
 	 */
-	InsertTabAt(TabGroupTabEntry?: object, path?: string, name?: string, index?: number): DOpusTabGroupTabEntry;
-
-	/**
-	 * Inserts a folder tab entry to this list. You can provide a TabGroupTabEntry object, or the path and optional name of the new folder tab. The final parameter must be the index indicating the desired insertion position.
-	 */
-	inserttabat(TabGroupTabEntry?: object, path?: string, name?: string, index?: number): DOpusTabGroupTabEntry;
+	insertTabAt(TabGroupTabEntry?: object, path?: string, name?: string, index?: number): DOpusTabGroupTabEntry;
 
 	/**
 	 * Moves the specified tab entry to a new position, and optionally a new tab list. If the second parameter is a TabGroupTabList object then the tab entry will be moved to that list. The final parameter must be the index indicating the desired insertion position.
 	 */
-	MoveTabTo(TabGroupTabEntry?: object, TabGroupTabList?: object, index?: number): void;
-
-	/**
-	 * Moves the specified tab entry to a new position, and optionally a new tab list. If the second parameter is a TabGroupTabList object then the tab entry will be moved to that list. The final parameter must be the index indicating the desired insertion position.
-	 */
-	movetabto(TabGroupTabEntry?: object, TabGroupTabList?: object, index?: number): void;
+	moveTabTo(TabGroupTabEntry?: object, TabGroupTabList?: object, index?: number): void;
 
 }
 
@@ -7499,11 +6185,6 @@ interface DOpusTabStats {
 	 * Returns the total length in seconds of all selected music files.
 	 */
 	readonly selmusiclength: number;
-
-	/**
-	 * The first time a script accesses a particular TabStats object, a snapshot is taken of the tab state. If the script then makes changes to that tab (e.g. it selects files, creates a new folder, etc), these changes will not be reflected by the object. To re-synchronize the object with the tab, call the TabStats.Update method.
-	 */
-	Update(): void;
 
 	/**
 	 * The first time a script accesses a particular TabStats object, a snapshot is taken of the tab state. If the script then makes changes to that tab (e.g. it selects files, creates a new folder, etc), these changes will not be reflected by the object. To re-synchronize the object with the tab, call the TabStats.Update method.
@@ -7676,11 +6357,6 @@ interface DOpusVar extends String {
 	/**
 	 * Deletes this variable from its parent collection.
 	 */
-	Delete(): void;
-
-	/**
-	 * Deletes this variable from its parent collection.
-	 */
 	delete(): void;
 
 }
@@ -7694,17 +6370,7 @@ interface DOpusVars extends DOpusVar {
 	/**
 	 * Deletes the named variable from the collection. You can also specify a wildcard pattern to delete multiple variables (or * for all).
 	 */
-	Delete(name?: string): void;
-
-	/**
-	 * Deletes the named variable from the collection. You can also specify a wildcard pattern to delete multiple variables (or * for all).
-	 */
 	delete(name?: string): void;
-
-	/**
-	 * Returns True if the named variable exists in the collection, or False if it doesn't exist.
-	 */
-	Exists(name?: string): boolean;
 
 	/**
 	 * Returns True if the named variable exists in the collection, or False if it doesn't exist.
@@ -7714,17 +6380,7 @@ interface DOpusVars extends DOpusVar {
 	/**
 	 * Returns the value of the named variable. You can use this method as an alternative to indexing the collection.
 	 */
-	Get(name?: string): any;
-
-	/**
-	 * Returns the value of the named variable. You can use this method as an alternative to indexing the collection.
-	 */
 	get(name?: string): any;
-
-	/**
-	 * Sets the named value to the specified value. You can use this method as an alternative to indexing the collection.You can store any type of variable in a Vars collection, although not all types can be saved to disk. If you want your variable to be persistent you should only use bool, int, string, date, currency or a Vector of those types.
-	 */
-	Set(name?: string, value?: any): void;
 
 	/**
 	 * Sets the named value to the specified value. You can use this method as an alternative to indexing the collection.You can store any type of variable in a Vars collection, although not all types can be saved to disk. If you want your variable to be persistent you should only use bool, int, string, date, currency or a Vector of those types.
@@ -7774,24 +6430,9 @@ interface DOpusVector<T> {
 	append(from?: DOpusVector<T>, start?: number, end?: number): void;
 
 	/**
-	 * Copies the values of another Vector to the end of this one, preserving the existing values as well. If start and end are not provided, the entire Vector is appended - otherwise, only the specified elements are appended.Instead of a Vector object you can also pass a collection to this method and the contents of the collection will be copied to the end of the Vector. In JScript you can pass a standard array to this method to copy the array to the end of a Vector.
-	 */
-	append(from?: DOpusVector<any>, start?: number, end?: number): void;
-
-	/**
 	 * Copies the value of another Vector to this one. If start and end are not provided, the entire Vector is copied - otherwise, only the specified elements are copied.Instead of a Vector object you can also pass a collection to this method and the contents of the collection will be copied to the Vector. In JScript you can pass a standard array to this method to copy the array into a Vector.
 	 */
 	assign(from?: DOpusVector<any>, start?: number, end?: number): void;
-
-	/**
-	 * Copies the value of another Vector to this one. If start and end are not provided, the entire Vector is copied - otherwise, only the specified elements are copied.Instead of a Vector object you can also pass a collection to this method and the contents of the collection will be copied to the Vector. In JScript you can pass a standard array to this method to copy the array into a Vector.
-	 */
-	assign(from?: DOpusVector<any>, start?: number, end?: number): void;
-
-	/**
-	 * Returns the last element in the Vector.
-	 */
-	back(): any;
 
 	/**
 	 * Returns the last element in the Vector.
@@ -7804,24 +6445,9 @@ interface DOpusVector<T> {
 	clear(): void;
 
 	/**
-	 * Clears the contents of the Vector.
-	 */
-	clear(): void;
-
-	/**
 	 * Erases the element at the specified index.
 	 */
 	erase(index?: number): void;
-
-	/**
-	 * Erases the element at the specified index.
-	 */
-	erase(index?: number): void;
-
-	/**
-	 * Exchanges the positions of the two specified elements.
-	 */
-	exchange(index1?: number, index2?: number): void;
 
 	/**
 	 * Exchanges the positions of the two specified elements.
@@ -7834,24 +6460,9 @@ interface DOpusVector<T> {
 	front(): any;
 
 	/**
-	 * Returns the first element in the Vector.
-	 */
-	front(): any;
-
-	/**
 	 * Inserts the provided value at the specified position.
 	 */
 	insert(index?: number, value?: any): void;
-
-	/**
-	 * Inserts the provided value at the specified position.
-	 */
-	insert(index?: number, value?: any): void;
-
-	/**
-	 * Removes the last element of the Vector.
-	 */
-	pop_back(): void;
 
 	/**
 	 * Removes the last element of the Vector.
@@ -7864,24 +6475,9 @@ interface DOpusVector<T> {
 	push_back(value?: any): void;
 
 	/**
-	 * Adds the provided value to the end of the Vector.
-	 */
-	push_back(value?: any): void;
-
-	/**
 	 * Reserves space in the Vector for the specified number of elements (increases its capacity, although the count of elements remains unchanged). Note that Vectors grow dynamically - you don't have to specifically reserve or resize them. However if you want to add a large number of elements to a Vector it can be more efficient to reserve space for them first.
 	 */
 	reserve(capacity?: number): void;
-
-	/**
-	 * Reserves space in the Vector for the specified number of elements (increases its capacity, although the count of elements remains unchanged). Note that Vectors grow dynamically - you don't have to specifically reserve or resize them. However if you want to add a large number of elements to a Vector it can be more efficient to reserve space for them first.
-	 */
-	reserve(capacity?: number): void;
-
-	/**
-	 * Resizes the Vector to the specified number of elements. Any existing elements past the new size of the Vector will be erased.
-	 */
-	resize(size?: number): void;
 
 	/**
 	 * Resizes the Vector to the specified number of elements. Any existing elements past the new size of the Vector will be erased.
@@ -7894,24 +6490,9 @@ interface DOpusVector<T> {
 	shrink_to_fit(): void;
 
 	/**
-	 * Reduces the capacity of the Vector to the number of elements it currently holds.
-	 */
-	shrink_to_fit(): void;
-
-	/**
 	 * Sorts the contents of the Vector. Strings and numbers are sorted alphabetically and numerically - other elements are grouped by type but not specifically sorted in any particular order.
 	 */
 	sort(): void;
-
-	/**
-	 * Sorts the contents of the Vector. Strings and numbers are sorted alphabetically and numerically - other elements are grouped by type but not specifically sorted in any particular order.
-	 */
-	sort(): void;
-
-	/**
-	 * Removes all but one of any duplicate elements from the Vector. The number of elements removed is returned.
-	 */
-	unique(): number;
 
 	/**
 	 * Removes all but one of any duplicate elements from the Vector. The number of elements removed is returned.
@@ -7951,12 +6532,7 @@ interface DOpusVersion extends String {
 	/**
 	 * Returns True if the current version of Opus is the specified version or greater. You can specify the major version only (e.g. "11"), a major and minor version (e.g. "11.3") or a specific beta version (e.g. "11.3.1").
 	 */
-	AtLeast(version?: string): boolean;
-
-	/**
-	 * Returns True if the current version of Opus is the specified version or greater. You can specify the major version only (e.g. "11"), a major and minor version (e.g. "11.3") or a specific beta version (e.g. "11.3.1").
-	 */
-	atleast(version?: string): boolean;
+	atLeast(version?: string): boolean;
 
 }
 
@@ -8193,17 +6769,7 @@ interface DOpusViewer {
 	/**
 	 * Adds the specified file to the viewer's current list of files. You can either pass a string or a Path object to indicate the file to add to the list. By default the file will be added to the end of the list, unless you specify a 0-based index as the second argument.
 	 */
-	AddFile(filepath?: string, index?: number): void;
-
-	/**
-	 * Adds the specified file to the viewer's current list of files. You can either pass a string or a Path object to indicate the file to add to the list. By default the file will be added to the end of the list, unless you specify a 0-based index as the second argument.
-	 */
-	addfile(filepath?: string, index?: number): void;
-
-	/**
-	 * Runs a command in the context of this viewer window. You can either pass a string or a Command object. If the argument you pass is a string then it can only be a viewer command argument as documented for the Show VIEWERCMD command. For example, Command(“next”) would run the Show VIEWERCMD=next command in the context of this viewer. If you pass a Command object then all commands (internal or external) can be used.
-	 */
-	Command(command?: string | DOpusCommand): void;
+	addFile(filepath?: string, index?: number): void;
 
 	/**
 	 * Runs a command in the context of this viewer window. You can either pass a string or a Command object. If the argument you pass is a string then it can only be a viewer command argument as documented for the Show VIEWERCMD command. For example, Command(“next”) would run the Show VIEWERCMD=next command in the context of this viewer. If you pass a Command object then all commands (internal or external) can be used.
@@ -8213,22 +6779,12 @@ interface DOpusViewer {
 	/**
 	 * Removes the specified file from the viewer's current list of files. You can either pass the 0-based index of the file to remove, or the filepath (either as a string or a Path object).
 	 */
-	RemoveFile(index?: number, filepath?: string): void;
-
-	/**
-	 * Removes the specified file from the viewer's current list of files. You can either pass the 0-based index of the file to remove, or the filepath (either as a string or a Path object).
-	 */
-	removefile(index?: number, filepath?: string): void;
+	removeFile(index?: number, filepath?: string): void;
 
 	/**
 	 * Used to change how the viewer window is grouped with other Opus windows on the taskbar. Specify a group name to move the window into an alternative group, or omit the group argument to reset back to the default group. If one or more windows are moved into the same group, they will be grouped together, separate from other the default group. This only works on Windows 7 and above, and only when taskbar grouping is enabled. Group names are limited to 103 characters and will be truncated if longer. Spaces and dots in group names are automatically converted to underscores. Returns true on success.
 	 */
-	SetTaskbarGroup(group?: string): boolean;
-
-	/**
-	 * Used to change how the viewer window is grouped with other Opus windows on the taskbar. Specify a group name to move the window into an alternative group, or omit the group argument to reset back to the default group. If one or more windows are moved into the same group, they will be grouped together, separate from other the default group. This only works on Windows 7 and above, and only when taskbar grouping is enabled. Group names are limited to 103 characters and will be truncated if longer. Spaces and dots in group names are automatically converted to underscores. Returns true on success.
-	 */
-	settaskbargroup(group?: string): boolean;
+	setTaskbarGroup(group?: string): boolean;
 
 }
 
@@ -8311,27 +6867,12 @@ interface DOpusWild extends String {
 	/**
 	 * Escapes all wildcard characters in the input string and returns the result. For example, "the * 'dog' said *" would be conterted to "the '* ''dog'' said '*". The optional type argument lets you specify the conversion: none: Escape characters used in standard pattern matching r: Escape characters used in regular expressions b: Double all back-slashes n: Double all back-slashes that come before the letter 'n' Note that these modes cannot be combined.
 	 */
-	EscapeString(input?: string, type?: string): string;
-
-	/**
-	 * Escapes all wildcard characters in the input string and returns the result. For example, "the * 'dog' said *" would be conterted to "the '* ''dog'' said '*". The optional type argument lets you specify the conversion: none: Escape characters used in standard pattern matching r: Escape characters used in regular expressions b: Double all back-slashes n: Double all back-slashes that come before the letter 'n' Note that these modes cannot be combined.
-	 */
-	escapestring(input?: string, type?: string): string;
-
-	/**
-	 * Compares the specified string against the previously-parsed pattern, and returns True if it matches.
-	 */
-	Match(test?: string): boolean;
+	escapeString(input?: string, type?: string): string;
 
 	/**
 	 * Compares the specified string against the previously-parsed pattern, and returns True if it matches.
 	 */
 	match(test?: string): boolean;
-
-	/**
-	 * Parses the supplied pattern. The flags string is optional - if supplied it must be a string consisting of one or more of the following characters: c - case-sensitive (otherwise pattern matching is not case-sensitive) d - DOS only (only standard MS-DOS wildcards are supported)f - filename mode (special handling for matching filenames)r - regular expression (otherwise standard pattern matching is used)
-	 */
-	Parse(pattern?: string, flags?: string): boolean;
 
 	/**
 	 * Parses the supplied pattern. The flags string is optional - if supplied it must be a string consisting of one or more of the following characters: c - case-sensitive (otherwise pattern matching is not case-sensitive) d - DOS only (only standard MS-DOS wildcards are supported)f - filename mode (special handling for matching filenames)r - regular expression (otherwise standard pattern matching is used)
@@ -8486,17 +7027,7 @@ interface DOpusConstructor {
 	/**
 	 * Clears the script output log.
 	 */
-	ClearOutput(): void;
-
-	/**
-	 * Clears the script output log.
-	 */
-	clearoutput(): void;
-
-	/**
-	 * Creates and returns a new DOpusFactory object, which can be used to create various lightweight helper objects like Blob, Map and Vector.
-	 */
-	Create(): DOpusFactoryConstructor;
+	clearOutput(): void;
 
 	/**
 	 * Creates and returns a new DOpusFactory object, which can be used to create various lightweight helper objects like Blob, Map and Vector.
@@ -8506,18 +7037,7 @@ interface DOpusConstructor {
 	/**
 	 * Delays for the specified number of milliseconds before returning.
 	 */
-	Delay(time?: number): void;
-
-	/**
-	 * Delays for the specified number of milliseconds before returning.
-	 */
 	delay(time?: number): void;
-
-	/**
-	 * Creates a new Dialog object, that lets you display dialogs and popup menus.
-	 * Note: Scripts should not usually use this when responding to events triggered by toolbars or folder tabs. The Dialog returned by DOpus.Dlg will not have its parent window configured. Most scripting events provide you an object which can either create a pre-configured Dialog or which includes a SourceTab property or similar which can do the same. In almost all situations you should use those instead.
-	 */
-	Dlg(): DOpusDialog;
 
 	/**
 	 * Creates a new Dialog object, that lets you display dialogs and popup menus.
@@ -8529,48 +7049,26 @@ interface DOpusConstructor {
 	/**
 	 * Creates the DPI helper object which assists when dealing with different system scaling settings (e.g. high-DPI monitors).
 	 */
-	DPI(): DOpusDPI;
-
-	/**
-	 * Creates the DPI helper object which assists when dealing with different system scaling settings (e.g. high-DPI monitors).
-	 */
 	dpi(): DOpusDPI;
 
 
 	/**
 	 * Creates a new FSUtil object, that provides helper methods for accessing the file system.
 	 */
-	FSUtil(): DOpusFSUtil;
-
-	/**
-	 * Creates a new FSUtil object, that provides helper methods for accessing the file system.
-	 */
-	fsutil(): DOpusFSUtil;
+	fsUtil(): DOpusFSUtil;
 
 	/**
 	 * Retrieves the current contents of the system clipboard, if it contains either text or files.
 	 * You can control the returned type by passing either "text" or "files" for the <type> argument - Opus will convert to the requested type if possible.
 	 * If <type> is not specified the contents will be returned in their native format.
 	 */
-	GetClip(type?: string): string | DOpusItem;
-
-	/**
-	 * Retrieves the current contents of the system clipboard, if it contains either text or files.
-	 * You can control the returned type by passing either "text" or "files" for the <type> argument - Opus will convert to the requested type if possible.
-	 * If <type> is not specified the contents will be returned in their native format.
-	 */
-	getclip(type?: string): string | DOpusItem;
+	getClip(type?: string): string | DOpusItem;
 
 
 	/**
 	 * Returns a string indicating the native format of the clipboard contents - "text", "files" or an empty string in any other case.
 	 */
-	GetClipFormat(): string;
-
-	/**
-	 * Returns a string indicating the native format of the clipboard contents - "text", "files" or an empty string in any other case.
-	 */
-	getclipformat(): string;
+	getClipFormat(): string;
 
 	/**
 	 * Returns a string indicating which qualifier keys are currently held down. If none are held down, the string will be "none". Otherwise, the string can contain any or all of the following, separated by commas: "shift", "ctrl", "alt", "lwin", "rwin".
@@ -8580,52 +7078,21 @@ interface DOpusConstructor {
 	 * If you do call DOpus.GetQualifiers, you would normally want to call it as soon as possible and then store the result, so there is less time for the user to let go of a key after triggering your script.
 	 * If you call DOpus.GetQualifiers more than once, you may get a different result each time, due to keys being pushed or released between calls. Call it once and store the result if you need to do multiple checks and need them to be consistent. This does not generally affect the qualifiers properties mentioned earlier, since they are usually stored snapshots of the key state.
 	 */
-	GetQualifiers(): string;
-
-	/**
-	 * Returns a string indicating which qualifier keys are currently held down. If none are held down, the string will be "none". Otherwise, the string can contain any or all of the following, separated by commas: "shift", "ctrl", "alt", "lwin", "rwin".
-	 * Note that many events pass you a similar list of qualifiers. If you are passed a list of qualifiers, you should generally use that list rather than call DOpus.GetQualifiers.
-	 * For example, script commands are passed a Func object with a qualifiers property. That property will tell you which keys were held down when the command was triggered, and that may be different to the keys held down a few seconds later. When the user clicks a button to run a command, they normally expect the command to use the keys they held when they clicked, not the keys they are touching later while waiting for it to finish.
-	 * Similarly, events like OnBeforeFolderChange will often pass you an object like BeforeFolderChangeData containing a qualifiers property which indicates key state when the event was triggered. You should normally use that instead of calling DOpus.GetQualifiers.
-	 * If you do call DOpus.GetQualifiers, you would normally want to call it as soon as possible and then store the result, so there is less time for the user to let go of a key after triggering your script.
-	 * If you call DOpus.GetQualifiers more than once, you may get a different result each time, due to keys being pushed or released between calls. Call it once and store the result if you need to do multiple checks and need them to be consistent. This does not generally affect the qualifiers properties mentioned earlier, since they are usually stored snapshots of the key state.
-	 */
-	getqualifiers(): string;
+	getQualifiers(): string;
 
 	/**
 	 * Loads an image file from the specified external file. You can optionally specify the desired size to load the image at, and whether the alpha channel (if any) should be loaded or not.
 	 * You can also provide a Blob object containing the image data instead of a filename.
 	 * The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
 	 */
-	LoadImage(filename?: string | DOpusBlob, width?: number, height?: number, alpha?: boolean): DOpusImage;
-
-	/**
-	 * Loads an image file from the specified external file. You can optionally specify the desired size to load the image at, and whether the alpha channel (if any) should be loaded or not.
-	 * You can also provide a Blob object containing the image data instead of a filename.
-	 * The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
-	 */
-	loadimage(filename?: string | DOpusBlob, width?: number, height?: number, alpha?: boolean): DOpusImage;
+	loadImage(filename?: string | DOpusBlob, width?: number, height?: number, alpha?: boolean): DOpusImage;
 
 	/**
 	 * Extracts a thumbnail from the specified external file. You can optionally specify a timeout (in milliseconds) and the desired size to load the thumbnail at.
 	 * If loading fails (or the timeout expires before the thumbnail could be generated) this method returns False.
 	 * The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
 	 */
-	LoadThumbnail(filename?: string, timeout?: number, width?: number, height?: number): DOpusImage | false;
-
-	/**
-	 * Extracts a thumbnail from the specified external file. You can optionally specify a timeout (in milliseconds) and the desired size to load the thumbnail at.
-	 * If loading fails (or the timeout expires before the thumbnail could be generated) this method returns False.
-	 * The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
-	 */
-	loadthumbnail(filename?: string, timeout?: number, width?: number, height?: number): DOpusImage | false;
-
-	/**
-	 * Prints the specified text string to the script output log (found in the Utility Panel,  the CLI in script mode, the Rename dialog and the Command Editor in script mode).
-	 * If the second argument is provided and set to True, the message will be displayed as an error. This means the text will be displayed in red and if no log windows are currently open, a warning icon will flash in the Lister status bar to alert the user of an error condition.
-	 * If the optional third argument is provided and set to True then the log message will have a timestamp prepended to it. Timestamps only appear in the utility panel, not in places like the Command Editor's output panel. Error messages always get timestamps so if the second argument is True then the third is ignored
-	 */
-	Output(text?: string, error?: boolean, timestamp?: boolean): void;
+	loadThumbnail(filename?: string, timeout?: number, width?: number, height?: number): DOpusImage | false;
 
 	/**
 	 * Prints the specified text string to the script output log (found in the Utility Panel,  the CLI in script mode, the Rename dialog and the Command Editor in script mode).
@@ -8637,28 +7104,12 @@ interface DOpusConstructor {
 	/**
 	 * Causes Opus to reload and reinitialize the specified script. You must provide the full pathname of the script on disk (if a script add-in wants to reload itself you can pass the value of the Script.file property).
 	 */
-	ReloadScript(file?: string): void;
-
-	/**
-	 * Causes Opus to reload and reinitialize the specified script. You must provide the full pathname of the script on disk (if a script add-in wants to reload itself you can pass the value of the Script.file property).
-	 */
-	reloadscript(file?: string): void;
+	reloadScript(file?: string): void;
 
 	/**
 	 * Places the specified text, or Item collection (or Vector of Item objects) on the system clipboard. If called with no arguments the clipboard will be cleared.
 	 */
-	SetClip(text?: string | DOpusItem | DOpusVector<DOpusItem>): void;
-
-	/**
-	 * Places the specified text, or Item collection (or Vector of Item objects) on the system clipboard. If called with no arguments the clipboard will be cleared.
-	 */
-	setclip(text?: string | DOpusItem | DOpusVector<DOpusItem>): void;
-
-	/**
-	 * Returns a Toolbars object which lets you enumerate all defined toolbars (whether they are currently open or not).
-	 * You can restrict this object to only return in-use toolbars by specifying the optional type parameter - specify "listers" to only return toolbars currently turned on in a Lister, and "docks" to only return toolbars that are currently floating.
-	 */
-	Toolbars(type?: string): DOpusToolbars;
+	setClip(text?: string | DOpusItem | DOpusVector<DOpusItem>): void;
 
 	/**
 	 * Returns a Toolbars object which lets you enumerate all defined toolbars (whether they are currently open or not).
@@ -8669,12 +7120,7 @@ interface DOpusConstructor {
 	/**
 	 * Returns a string indicating the type of an object or variable.
 	 */
-	TypeOf(arg0: any): string;
-
-	/**
-	 * Returns a string indicating the type of an object or variable.
-	 */
-	typeof(arg0: any): string;
+	typeOf(arg0: any): string;
 
 }
 
@@ -8693,27 +7139,12 @@ interface DOpusFactoryConstructor {
 	/**
 	 * Returns a new Blob object, that lets you access and manipulate a chunk of binary data from a script. If no parameters are given the new Blob will be empty - you can set its size using the resize method - otherwise you can specify the initial size as a parameter.You can also create a Blob pre-filled with data by specifying the actual byte values (e.g. Blob(72,69,76,76,79)).If another Blob (or an array - see the documentation on the Blob object for a discussion of this) is given then the new Blob will be created as a copy of the existing one.
 	 */
-	Blob(size?: number, source?: number | DOpusBlob): DOpusBlob;
-
-	/**
-	 * Returns a new Blob object, that lets you access and manipulate a chunk of binary data from a script. If no parameters are given the new Blob will be empty - you can set its size using the resize method - otherwise you can specify the initial size as a parameter.You can also create a Blob pre-filled with data by specifying the actual byte values (e.g. Blob(72,69,76,76,79)).If another Blob (or an array - see the documentation on the Blob object for a discussion of this) is given then the new Blob will be created as a copy of the existing one.
-	 */
 	blob(size?: number, source?: number | DOpusBlob): DOpusBlob;
 
 	/**
 	 * Creates a new BusyIndicator object, that lets you control the breadcrumbs bar busy indicator from your script.
 	 */
-	BusyIndicator(): DOpusBusyIndicator;
-
-	/**
-	 * Creates a new BusyIndicator object, that lets you control the breadcrumbs bar busy indicator from your script.
-	 */
-	busyindicator(): DOpusBusyIndicator;
-
-	/**
-	 * Creates a new Command object, that lets you run Opus commands from a script.
-	 */
-	Command(): DOpusCommand;
+	busyIndicator(): DOpusBusyIndicator;
 
 	/**
 	 * Creates a new Command object, that lets you run Opus commands from a script.
@@ -8723,17 +7154,7 @@ interface DOpusFactoryConstructor {
 	/**
 	 * Creates a new Date object. If an existing Date object or date value is specified the new object will be initialized to that value, otherwise the date will be set to the current local time.
 	 */
-	Date(date?: any): DOpusDate;
-
-	/**
-	 * Creates a new Date object. If an existing Date object or date value is specified the new object will be initialized to that value, otherwise the date will be set to the current local time.
-	 */
 	date(date?: any): DOpusDate;
-
-	/**
-	 * Creates a new Map object. If no arguments are provided, the Map will be empty. Otherwise, the Map will be pre-initialized with the supplied key/value pairs. For example: Map("firstname","fred","lastname","bloggs");. The individual keys and values can be different types.
-	 */
-	Map(key?: any, value?: any): DOpusMap;
 
 	/**
 	 * Creates a new Map object. If no arguments are provided, the Map will be empty. Otherwise, the Map will be pre-initialized with the supplied key/value pairs. For example: Map("firstname","fred","lastname","bloggs");. The individual keys and values can be different types.
@@ -8743,37 +7164,17 @@ interface DOpusFactoryConstructor {
 	/**
 	 * Creates a new case-sensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings; for example: StringSet("dog","cat","pony"); You can also pass an array of strings or Vector object to initialise the set.
 	 */
-	StringSet(): DOpusStringSet;
-
-	/**
-	 * Creates a new case-sensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings; for example: StringSet("dog","cat","pony"); You can also pass an array of strings or Vector object to initialise the set.
-	 */
-	stringset(): DOpusStringSet;
+	stringSet(): DOpusStringSet;
 
 	/**
 	 * Creates a new case-insensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings.
 	 */
-	StringSetI(): DOpusStringSet;
-
-	/**
-	 * Creates a new case-insensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings.
-	 */
-	stringseti(): DOpusStringSet;
+	stringSetI(): DOpusStringSet;
 
 	/**
 	 * Creates a new StringTools object, that provides helper functions for string encoding and decoding.
 	 */
-	StringTools(): DOpusStringTools;
-
-	/**
-	 * Creates a new StringTools object, that provides helper functions for string encoding and decoding.
-	 */
-	stringtools(): DOpusStringTools;
-
-	/**
-	 * Creates a new SysInfo object, that lets scripts access miscellaneous system information that may not be otherwise easy to obtain from a script.
-	 */
-	SysInfo(): DOpusSysInfo;
+	stringTools(): DOpusStringTools;
 
 	/**
 	 * Creates a new SysInfo object, that lets scripts access miscellaneous system information that may not be otherwise easy to obtain from a script.
@@ -8784,17 +7185,7 @@ interface DOpusFactoryConstructor {
 	/**
 	 * Creates a new UnorderedSet object. If no arguments are provided the UnorderedSet will be empty. Otherwise it will be pre-initialized with the supplied elements. You can also pass an array or Vector to initialise the set.
 	 */
-	UnorderedSet(): DOpusUnorderedSet;
-
-	/**
-	 * Creates a new UnorderedSet object. If no arguments are provided the UnorderedSet will be empty. Otherwise it will be pre-initialized with the supplied elements. You can also pass an array or Vector to initialise the set.
-	 */
-	unorderedset(): DOpusUnorderedSet;
-
-	/**
-	 * Creates a new Vector object. If no arguments are provided, the Vector will be empty.If a single integer argument is provided, the Vector will be pre-initialized to that number of elements.If more than one argument is provided, the Vector will be pre-initialized with those elements; for example: Vector("dog","cat","horse"); The individual elements can be different types. You can also pass another Vector or a JScript array as the argument to initialise the new Vector from an existing one.
-	 */
-	Vector(elements?: number): DOpusVector<any>;
+	unorderedSet(): DOpusUnorderedSet;
 
 	/**
 	 * Creates a new Vector object. If no arguments are provided, the Vector will be empty.If a single integer argument is provided, the Vector will be pre-initialized to that number of elements.If more than one argument is provided, the Vector will be pre-initialized with those elements; for example: Vector("dog","cat","horse"); The individual elements can be different types. You can also pass another Vector or a JScript array as the argument to initialise the new Vector from an existing one.
