@@ -76,6 +76,8 @@ If VSCode cannot infer it or does incorrectly you can help it via adding `/** @t
 
 
 
+More screenshots can be seen below.
+
 
 
 ## Help needed
@@ -104,3 +106,48 @@ Now all the little details:
 * **Most attributes are defined to be read-only... at the moment.** But that will improve over time. The information whether a field is readonly (e.g. a file's size) or changeable (e.g. a column's value) is unfortunately in the remarks column in the help file. My parser is not an AI which can deduce that, so adjusting these will be an ongoing manual effort. Update 20210213: This has been improving over the last days already.
 * This was not easy as it seemed. It's the product of ca. 15 hours of work: a lot of JS debugging and many manual corrections. I had to decompile the DOpus.chm file and parse every object's file individually using a Tampermonkey script (~~which will be uploaded later~~ done). Because even the slightest inconsistencies between the files, like formatting, a's within strong's or strong's within a's, different notations or a very obscure constellation broke my parser. So **not everything looks perfect.**
 * The file dos not pass ESLint & JSHint checks yet, but before fixing it, I want to test the latest beta with the new Map methods.
+
+
+
+## Even more screenshots
+
+**UPDATE 20210215:** I reviewed all scripting objects and put markdown formatting wherever it made sense and was not too tedious, so that lists, keywords, code blocks are properly formatted. This is all manual work so it does and will not look exactly like the CHM file, but comes very close.
+
+The type in front of x has been inserted only for demonstration purposes; VSCode will often infer the type as mentioned above.
+
+![./Screenshots/InAction-BusyIndicator.png](./Screenshots/InAction-BusyIndicator.png)
+
+![./Screenshots/InAction-Control.png](./Screenshots/InAction-Control.png)
+
+![./Screenshots/InAction-Date.png](./Screenshots/InAction-Date.png)
+
+![./Screenshots/InAction-Dialog.png](./Screenshots/InAction-Dialog.png)
+
+![./Screenshots/InAction-Dialog2.png](./Screenshots/InAction-Dialog2.png)
+
+![./Screenshots/InAction-Dialog3.png](./Screenshots/InAction-Dialog3.png)
+
+![./Screenshots/InAction-DOpus.png](./Screenshots/InAction-DOpus.png)
+
+![./Screenshots/InAction-Favorites.png](./Screenshots/InAction-Favorites.png)
+
+![./Screenshots/InAction-FSUtil.png](./Screenshots/InAction-FSUtil.png)
+
+![./Screenshots/InAction-Item.png](./Screenshots/InAction-Item.png)
+
+![./Screenshots/InAction-Item2.png](./Screenshots/InAction-Item2.png)
+
+![./Screenshots/InAction-Map.png](./Screenshots/InAction-Map.png)
+
+![./Screenshots/InAction-Msg.png](./Screenshots/InAction-Msg.png)
+
+![./Screenshots/InAction-Progress.png](./Screenshots/InAction-Progress.png)
+
+![./Screenshots/InAction-ScriptColumnData.png](./Screenshots/InAction-ScriptColumnData.png)
+
+![./Screenshots/InAction-StringTools.png](./Screenshots/InAction-StringTools.png)
+
+![./Screenshots/InAction-TabGroups.png](./Screenshots/InAction-TabGroups.png)
+
+![./Screenshots/InAction-Wild.png](./Screenshots/InAction-Wild.png)
+
