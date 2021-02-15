@@ -4497,15 +4497,23 @@ interface DOpusProgress {
 	/**
 	 * Adds the specified number of files to the operation total. The bytes argument is optional - in a "full size" progress indicator this lets you add to the total byte size of the operation.
 	 */
-	addFiles(count?: number, bytes?: DOpusFileSize): void;
+	addFiles(count?: number, bytes?: DOpusFileSize|number): void;
 
 	/**
-	 * Clears the state of the three "control" buttons (Abort / Pause / Skip) so they no longer register as being clicked when GetAbortState is called. If you only want to clear the Skip state, you should normally do that as part of a call to EnableSkip instead. That way you avoid accidentally clearing one of the other states if they become set between you calling GetAbortState and ClearAbortState. In fact, there are very few situations where you should call ClearAbortState.
+	 * Clears the state of the three "control" buttons (Abort / Pause / Skip) so they no longer register as being clicked when GetAbortState is called.
+	 *
+	 * If you only want to clear the Skip state, you should normally do that as part of a call to EnableSkip instead. That way you avoid accidentally clearing one of the other states if they become set between you calling GetAbortState and ClearAbortState. In fact, there are very few situations where you should call ClearAbortState.
 	 */
 	clearAbortState(): void;
 
 	/**
-	 * Enables the progress dialog's Skip button. For EnableSkip to work, you must have set the skip property to True before the progress dialog was created by the Init method. enable: If True, the Skip button should be enabled; otherwise, it should be disabled. delay (optional, True by default): If True, there will be a short delay before the Skip button is enabled, with it temporarily disabled during the delay; otherwise, the change is instant. See below for why a delay is usually a good idea. clear (optional, True by default): If True, any record of the user pushing the Skip will be cleared, such that GetAbortState no longer returns "s". You usually want this if the progress dialog just moved to a new item. If you support the Skip button, you should normally call EnableSkip once per file, just after you call SetName and similar methods. When used that way, you'll usually want delay and clear to both be True, otherwise clicks of the Skip button intended for one file could affect the file(s) that come after it. For example, if a file takes a long time but then finishes just as the user gets tired of waiting and clicks Skip, the delay and cleared state ensure the unwanted click is harmless.
+	 * Enables the progress dialog's Skip button. For EnableSkip to work, you must have set the skip property to True before the progress dialog was created by the Init method.
+	 *
+	 * * **enable**: If True, the Skip button should be enabled; otherwise, it should be disabled.
+	 * * **delay** (optional, True by default): If True, there will be a short delay before the Skip button is enabled, with it temporarily disabled during the delay; otherwise, the change is instant. See below for why a delay is usually a good idea.
+	 * * **clear** (optional, True by default): If True, any record of the user pushing the Skip will be cleared, such that GetAbortState no longer returns "s". You usually want this if the progress dialog just moved to a new item.
+	 *
+	 * If you support the Skip button, you should normally call EnableSkip once per file, just after you call SetName and similar methods. When used that way, you'll usually want delay and clear to both be True, otherwise clicks of the Skip button intended for one file could affect the file(s) that come after it. For example, if a file takes a long time but then finishes just as the user gets tired of waiting and clicks Skip, the delay and cleared state ensure the unwanted click is harmless.
 	 */
 	enableSkip(enable?: boolean, delay?: boolean, clear?: boolean): void;
 
@@ -4515,7 +4523,21 @@ interface DOpusProgress {
 	finishFile(): void;
 
 	/**
-	 * Polls the state of the three "control" buttons. This returns a string that indicates which, if any, of the three buttons have been clicked by the user. The button states are represented by the following letters in the returned string:a - Abortp - Pauses - SkipIf none of the states apply, an empty string is returned. autoPause (optional, False by default): If True, pausing is handled for you automatically. Calls to GetAbortState(True) block while paused and don't return until unpaused; the "p" state is never returned. (Note that clicking Skip or Abort will implicitly unpause the operation.) wanted (optional): If you only want to check one or two of the states, pass a string with their letters. For example, GetAbortState(True,"ap") will test for the Abort and Pause states, but not the Skip one. All states will be checked if the argument is an empty string or not given at all. simple (optional, True by default): If True, the result string will have at most one letter, indicating the most important state. If False, it is possible for multiple states to be indicated at once. For example if Skip and then Pause are clicked, in that order, without the script clearing the Skip state, then GetAbortState(False,"",False) would return "ps" while GetAbortState(False) would return just "p". To clear the state of the three buttons, call the ClearAbortState method. To clear just the Skip button's state, use the EnableSkip method.
+	 * Polls the state of the three "control" buttons. This returns a string that indicates which, if any, of the three buttons have been clicked by the user. The button states are represented by the following letters in the returned string:
+	 *
+	 * * **a** - Abort
+	 * * **p** - Pause
+	 * * **s** - Skip
+	 *
+	 * If none of the states apply, an empty string is returned.
+	 *
+	 * **autoPause** (optional, False by default): If True, pausing is handled for you automatically. Calls to GetAbortState(True) block while paused and don't return until unpaused; the "p" state is never returned. (Note that clicking Skip or Abort will implicitly unpause the operation.)
+	 *
+	 * **wanted** (optional): If you only want to check one or two of the states, pass a string with their letters. For example, GetAbortState(True,"ap") will test for the Abort and Pause states, but not the Skip one. All states will be checked if the argument is an empty string or not given at all.
+	 *
+	 * **simple** (optional, True by default): If True, the result string will have at most one letter, indicating the most important state. If False, it is possible for multiple states to be indicated at once. For example if Skip and then Pause are clicked, in that order, without the script clearing the Skip state, then GetAbortState(False,"",False) would return "ps" while GetAbortState(False) would return just "p".
+	 *
+	 * To clear the state of the three buttons, call the ClearAbortState method. To clear just the Skip button's state, use the EnableSkip method.
 	 */
 	getAbortState(autoPause?: boolean, wanted?: string, simple?: boolean): string;
 
@@ -4530,7 +4552,11 @@ interface DOpusProgress {
 	hideFileByteCounts(show?: boolean): void;
 
 	/**
-	 * Initializes the dialog. This method causes the actual dialog to be created, although it will not be displayed until the Show method is called. The fundamental properties shown above must be set before this method is called - once the dialog has been created they can not be altered. The parent parameter can be either a Tab or a Lister - this controls which window the dialog is centered over, and if the owned property is set to True which window it is owned by (always appears on top of). If no parent is provided the dialog will not be associated with any particular window. The title parameter specifies the window title of the dialog.
+	 * Initializes the dialog. This method causes the actual dialog to be created, although it will not be displayed until the Show method is called. The fundamental properties shown above must be set before this method is called - once the dialog has been created they can not be altered.
+	 *
+	 * The parent parameter can be either a Tab or a Lister - this controls which window the dialog is centered over, and if the owned property is set to True which window it is owned by (always appears on top of). If no parent is provided the dialog will not be associated with any particular window.
+	 *
+	 * The title parameter specifies the window title of the dialog.
 	 */
 	init(parent?: DOpusTab | DOpusLister, title?: string): void;
 
@@ -4547,12 +4573,12 @@ interface DOpusProgress {
 	/**
 	 * Sets the total completed byte count.
 	 */
-	setBytesProgress(bytes?: DOpusFileSize): void;
+	setBytesProgress(bytes?: DOpusFileSize|number): void;
 
 	/**
 	 * Sets the size of the current file.
 	 */
-	setFileSize(bytes?: DOpusFileSize): void;
+	setFileSize(bytes?: DOpusFileSize|number): void;
 
 	/**
 	 * Sets the total number of files.
@@ -4565,7 +4591,9 @@ interface DOpusProgress {
 	setFilesProgress(count?: number): void;
 
 	/**
-	 * Sets the text at the top of the dialog that indicates the source and destination of an operation. The header argument refers to the string that normally says From: - this allows you to change it in case that term is not applicable to your action. The from argument is the source path, and the to argument (if there is one) is the destination path. Note that if you specify a destination path this always has a To: header appended to it. If you omit the to argument entirely (not just passing an empty string), the destination line will become blank, including the To: header. Use that if you want the second line to be used sometimes but not always. If you never want anything on the second line, use the SetStatus method instead as it will not add space for the extra line.
+	 * Sets the text at the top of the dialog that indicates the source and destination of an operation. The header argument refers to the string that normally says From: - this allows you to change it in case that term is not applicable to your action. The from argument is the source path, and the to argument (if there is one) is the destination path. Note that if you specify a destination path this always has a To: header appended to it.
+	 *
+	 * If you omit the to argument entirely (not just passing an empty string), the destination line will become blank, including the To: header. Use that if you want the second line to be used sometimes but not always. If you never want anything on the second line, use the SetStatus method instead as it will not add space for the extra line.
 	 */
 	setFromTo(header?: string, from?: string, to?: string): void;
 
@@ -4607,7 +4635,7 @@ interface DOpusProgress {
 	/**
 	 * Step the byte progress indicator the specified number of bytes.
 	 */
-	stepBytes(bytes?: DOpusFileSize): void;
+	stepBytes(bytes?: DOpusFileSize|number): void;
 
 	/**
 	 * Step the file progress indicator the specified number of files.
@@ -5544,6 +5572,7 @@ interface DOpusStringSet {
 
 }
 
+
 /**
  * A StringTools object provides several utility methods for encoding and decoding strings. For example, you can use a StringTools object to Base64-encode a chunk of data, or decode a UTF-8 encoded message header.
  *
@@ -5552,17 +5581,50 @@ interface DOpusStringSet {
 interface DOpusStringTools {
 
 	/**
-	 * Decodes an encoded string or data. You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned. If format is specified as "base64" the source will be Base64-decoded, and a Blob is returned. If format is specified as "quoted" the source will be Quoted-printable-decoded, and a Blob is returned. If format is specified as "auto" or not supplied, special handling is invoked to decode a MIME-encoded email subject (e.g. one beginning with =?), and a string is returned. If "auto" is specified it will also detect UTF-8 or UTF-16 encoded data if it has a BOM at the beginning. If format is specified as utf-8 the source will be converted from UTF-8 to a native string. Alternatively, if format is utf-16 or utf-16-le, the source will be converted from UTF-16 Little Endian to a native string. Or, if format is utf-16-be, the source will be converted from UTF-16 Big Endian to a native string. If decoding UTF-8 or UTF-16 (via "auto" or "utf-8", etc.), any byte-order-mark (BOM) will be skipped if one exists at the beginning of the input data. Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8"), or a Windows code-page ID (e.g. 936, 65001). The source will be decoded using the specified code-page and a string is returned.
+	 * Decodes an encoded string or data.
+	 *
+	 * You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned.
+	 *
+	 * If format is specified as "base64" the source will be Base64-decoded, and a Blob is returned.
+	 *
+	 * If format is specified as "quoted" the source will be Quoted-printable-decoded, and a Blob is returned.
+	 *
+	 * If format is specified as "auto" or not supplied, special handling is invoked to decode a MIME-encoded email subject (e.g. one beginning with =?), and a string is returned. If "auto" is specified it will also detect UTF-8 or UTF-16 encoded data if it has a BOM at the beginning.
+	 *
+	 * If format is specified as utf-8 the source will be converted from UTF-8 to a native string. Alternatively, if format is utf-16 or utf-16-le, the source will be converted from UTF-16 Little Endian to a native string. Or, if format is utf-16-be, the source will be converted from UTF-16 Big Endian to a native string.
+	 *
+	 * If decoding UTF-8 or UTF-16 (via "auto" or "utf-8", etc.), any byte-order-mark (BOM) will be skipped if one exists at the beginning of the input data.
+	 *
+	 * Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8"), or a Windows code-page ID (e.g. 936, 65001). The source will be decoded using the specified code-page and a string is returned.
 	 */
 	decode(source?: DOpusBlob | string, format?: string): string | DOpusBlob;
 
 	/**
-	 * Encodes a string or data. You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned. If format is specified as "base64" the source will be Base64-encoded, and a string is returned. If format is specified as "quoted" the source will be Quoted-printable-encoded, and a string is returned. If format is specified as "utf-8 bom", the output data is encoded as UTF-8 with a byte-order-mark (BOM) at the start. Use "utf-8" if you want UTF-8 without the BOM. If format is specified as "utf-16 bom" or "utf-16-le bom", the output data is encoded as UTF-16 Little Endian with a byte-order-mark (BOM) at the start. Use "utf-16" or "utf-16-le" if you do not want the BOM. If format is specified as "utf-16-be bom", the output data is encoded as UTF-16 Big Endian with a byte-order-mark (BOM) at the start. Use "utf-16-be" if you do not want the BOM. Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8" etc.), or a Windows code-page ID (e.g. 936, 65001). The source will be encoded using the specified code-page and a Blob is returned.
+	 * Encodes a string or data.
+	 *
+	 * You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned.
+	 *
+	 * If format is specified as "base64" the source will be Base64-encoded, and a string is returned.
+	 *
+	 * If format is specified as "quoted" the source will be Quoted-printable-encoded, and a string is returned.
+	 *
+	 * If format is specified as "utf-8 bom", the output data is encoded as UTF-8 with a byte-order-mark (BOM) at the start. Use "utf-8" if you want UTF-8 without the BOM.
+	 *
+	 * If format is specified as "utf-16 bom" or "utf-16-le bom", the output data is encoded as UTF-16 Little Endian with a byte-order-mark (BOM) at the start. Use "utf-16" or  * "utf-16-le" if you do not want the BOM.
+	 *
+	 * If format is specified as "utf-16-be bom", the output data is encoded as UTF-16 Big Endian with a byte-order-mark (BOM) at the start. Use "utf-16-be" if you do not want the  * BOM.
+	 *
+	 * Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8" etc.), or a Windows code-page ID (e.g. 936, 65001). The source will be encoded using the  * specified code-page and a Blob is returned.
 	 */
 	encode(source?: DOpusBlob | string, format?: string): string | DOpusBlob;
 
 	/**
-	 * Tests the input string to see if it only contains characters that can be represented in ASCII. If the result is false, the string is not safe to save into a text file unless you use a Unicode format such as UTF-8. This check is not affected by locales or codepages. Instead, it tests whether the string consists of only 7-bit ASCII characters, such that no characters will be lost of modified if you save the string to a text file and then load it back on any other computer.
+	 * Tests the input string to see if it only contains characters that can be represented in ASCII.
+	 *
+	 * If the result is false, the string is not safe to save into a text file unless you use a Unicode format such as UTF-8.
+	 *
+	 * This check is not affected by locales or codepages. Instead, it tests whether the string consists of only 7-bit ASCII characters, such that no characters will be lost of * modified if you save the string to a text file and then load it back on any other computer.
+	 *
 	 */
 	isASCII(input?: string): boolean;
 
