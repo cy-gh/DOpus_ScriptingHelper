@@ -55,12 +55,12 @@ interface DOpusActivateTabData {
 	/**
 	 * Returns a Tab object representing the tab that has become active.
 	 */
-	readonly newtab: DOpusTab;
+	readonly newTab: DOpusTab;
 
 	/**
 	 * Returns a Tab object representing the tab that has gone inactive.
 	 */
-	readonly oldtab: DOpusTab;
+	readonly oldTab: DOpusTab;
 
 	/**
 	 * Returns a string indicating any qualifier keys that were held down by the user when the event was triggered.
@@ -301,42 +301,42 @@ interface DOpusAudioMeta {
 	/**
 	 * Album
 	 */
-	readonly mp3album: any;
+	readonly mp3Album: any;
 
 	/**
 	 * Album artist
 	 */
-	readonly mp3albumartist: any;
+	readonly mp3AlbumArtist: any;
 
 	/**
 	 * Artists
 	 */
-	readonly mp3artist: any;
+	readonly mp3Artist: any;
 
 	/**
 	 * Audio codec
 	 */
-	readonly audiocodec: any;
+	readonly audioCodec: any;
 
 	/**
 	 * Audio codec
 	 */
-	readonly mp3type: any;
+	readonly mp3Type: any;
 
 	/**
 	 * BPM
 	 */
-	readonly mp3bpm: any;
+	readonly mp3Bpm: any;
 
 	/**
 	 * Bit depth
 	 */
-	readonly picdepth: any;
+	readonly picDepth: any;
 
 	/**
 	 * Bit rate
 	 */
-	readonly mp3bitrate: any;
+	readonly mp3Bitrate: any;
 
 	/**
 	 * Compilation
@@ -361,89 +361,89 @@ interface DOpusAudioMeta {
 	/**
 	 * Disc number
 	 */
-	readonly mp3disc: any;
+	readonly mp3Disc: any;
 
 	/**
 	 * Disc number
 	 */
-	readonly mp3disk: any;
+	readonly mp3Disk: any;
 
 	/**
 	 * Duration
 	 */
-	readonly mp3songlength: any;
+	readonly mp3SongLength: any;
 
 	/**
 	 * Encoded by
 	 */
-	readonly mp3encoder: any;
+	readonly mp3Encoder: any;
 
 	/**
 	 * Encoding Software
 	 */
-	readonly mp3encodingsoftware: any;
+	readonly mp3EncodingSoftware: any;
 
 	/**
 	 * Genre
 	 */
-	readonly mp3genre: any;
+	readonly mp3Genre: any;
 
 	/**
 	 * Initial key
 	 */
-	readonly initialkey: any;
+	readonly initialKey: any;
 
 	/**
 	 * Mode
 	 */
-	readonly mp3mode: any;
+	readonly mp3Mode: any;
 
 	/**
 	 * Music comment
 	 */
-	readonly mp3comment: any;
+	readonly mp3Comment: any;
 
 	/**
 	 * Music info
 	 */
-	readonly mp3info: any;
+	readonly mp3Info: any;
 
 	/**
 	 * Music title
 	 */
-	readonly mp3title: any;
+	readonly mp3Title: any;
 
 	/**
 	 * Protected
 	 */
-	readonly mp3drm: any;
+	readonly mp3Drm: any;
 
 	/**
 	 * Release date
 	 */
-	readonly releasedate: any;
+	readonly releaseDate: any;
 
 	/**
 	 * Sample rate
 	 */
-	readonly mp3samplerate: any;
+	readonly mp3Samplerate: any;
 
 	/**
 	 * Track number
 	 */
-	readonly mp3track: any;
+	readonly mp3Track: any;
 
 	/**
 	 * Year
 	 */
-	readonly mp3year: any;
+	readonly mp3Year: any;
 
 	/**
 	 * Returns a collection of AudioCoverArt objects representing any cover art imagery stored in the audio file.
 	 *
 	 * The default value of this property returns the number of cover art images - for performance reasons, you should check whether this is greater than 0 before enumerating or accessing individual items in the collection.
 	 */
-	readonly coverart: DOpusAudioCoverArt;
+	readonly coverArt: DOpusAudioCoverArt;
 }
 
 /**
@@ -773,7 +773,7 @@ interface DOpusCommand {
 	/**
 	 * Set this property to False to prevent files used by this command from being deselected, and True to deselect them once the function is finished. Note that files will only be deselected if they came from a Tab object, and only then if the command is successful.
 	 */
-	readonly deselect: boolean;
+	deselect: boolean;
 
 	/**
 	 * Returns a Path object that represents the destination folder of this command. If a destination tab is set, this will be the path in the tab. You can not set this property directly - instead, use either the SetDest or SetDestTab methods to change the destination folder.
@@ -783,12 +783,12 @@ interface DOpusCommand {
 	/**
 	 * Returns a Tab object that represents the destination tab for this command (if it has one - not all commands require a destination). You can not set this property directly - instead, use the SetDestTab method to change the destination tab.
 	 */
-	readonly desttab: DOpusTab;
+	readonly destTab: DOpusTab;
 
 	/**
 	 * Returns the number of items in the files collection.
 	 */
-	readonly filecount: number;
+	readonly fileCount: number;
 
 	/**
 	 * Returns a collection of all Item objects that represent the files and folders this command is to act upon. You can not modify this collection directly - instead you can use the various methods (ClearFiles, SetFiles, AddFile, RemoveFile, etc.) to modify the list of items to act upon.
@@ -798,7 +798,7 @@ interface DOpusCommand {
 	/**
 	 * Returns the number of instruction lines added to the command.
 	 */
-	readonly linecount: number;
+	readonly lineCount: number;
 
 	/**
 	 * Returns a Progress object that you can use to display a progress indicator to the user.
@@ -818,7 +818,7 @@ interface DOpusCommand {
 	/**
 	 * Returns a Tab object that represents the source tab for this command. You can not set this property directly - instead, use the SetSourceTab method to change the source tab.
 	 */
-	readonly sourcetab: DOpusTab;
+	readonly sourceTab: DOpusTab;
 
 	/**
 	 * This Vars object represents all defined variables with command scope (that are scoped to this function - e.g. that were set using the @set directive).
@@ -2125,7 +2125,7 @@ interface DOpusDocMeta {
 	/**
 	 * Company
 	 */
-	readonly companyname: any;
+	readonly companyName: any;
 
 	/**
 	 * Copyright
@@ -2140,22 +2140,22 @@ interface DOpusDocMeta {
 	/**
 	 * Document created date
 	 */
-	readonly doccreateddate: any;
+	readonly docCreatedDate: any;
 
 	/**
 	 * Last edit time
 	 */
-	readonly docedittime: any;
+	readonly docEditTime: any;
 
 	/**
 	 * Last saved by
 	 */
-	readonly doclastsavedby: any;
+	readonly docLastSavedBy: any;
 
 	/**
 	 * Last saved date
 	 */
-	readonly doclastsaveddate: any;
+	readonly docLastSavedDate: any;
 
 	/**
 	 * Pages
@@ -2614,27 +2614,27 @@ interface DOpusExeMeta {
 	/**
 	 * Company
 	 */
-	readonly companyname: any;
+	readonly companyName: any;
 
 	/**
 	 * Module Description
 	 */
-	readonly moddesc: any;
+	readonly modDesc: any;
 
 	/**
 	 * Module Version
 	 */
-	readonly modversion: any;
+	readonly modVersion: any;
 
 	/**
 	 * Product Name
 	 */
-	readonly prodname: any;
+	readonly prodName: any;
 
 	/**
 	 * Product Version
 	 */
-	readonly prodversion: any;
+	readonly prodVersion: any;
 
 }
 
@@ -3317,7 +3317,7 @@ interface DOpusFontMeta {
 	/**
 	 * The clipping precision.
 	 */
-	readonly clipprecision: number;
+	readonly clipPrecision: number;
 
 	/**
 	 * The angle, in tenths of degrees, between the escapement vector and the x-axis of the device.
@@ -3327,7 +3327,7 @@ interface DOpusFontMeta {
 	/**
 	 * The typeface name of the font.
 	 */
-	readonly fontname: string;
+	readonly fontName: string;
 
 	/**
 	 * The height, in logical units, of the font's character cell or character.
@@ -3347,12 +3347,12 @@ interface DOpusFontMeta {
 	/**
 	 * The output precision.
 	 */
-	readonly outprecision: number;
+	readonly outPrecision: number;
 
 	/**
 	 * The pitch and family of the font.
 	 */
-	readonly pitchandfamily: number;
+	readonly pitchAndFamily: number;
 
 	/**
 	 * The output quality.
@@ -3780,7 +3780,7 @@ interface DOpusFunc {
 	/**
 	 * Returns a Map object that provides keyword lookup for each of the arguments given on the command line. An argument will only be present in the Map if it was used on the command line, so you can easily check which arguments are present using the Map.exists() method.
 	 */
-	readonly argsmap: DOpusMap;
+	readonly argsMap: DOpusMap;
 
 	/**
 	 * This property returns a pre-filled Command object that can be used to run commands against the source and destination tabs. Using this object is the equivalent of calling DOpusFactory.Command and setting the source and destination tabs manually.
@@ -3790,17 +3790,17 @@ interface DOpusFunc {
 	/**
 	 * This object represents the default destination tab for the function.
 	 */
-	readonly desttab: DOpusTab;
+	readonly destTab: DOpusTab;
 
 	/**
 	 * Returns True if the command was invoked via a drag-and-drop operation.
 	 */
-	readonly fromdrop: boolean;
+	readonly fromDrop: boolean;
 
 	/**
 	 * Returns True if the command was invoked via the keyboard (i.e. via a hotkey rather than a button).
 	 */
-	readonly fromkey: boolean;
+	readonly fromKey: boolean;
 
 	/**
 	 * Returns a string indicating any qualifier keys that were held down by the user when the command was invoked.
@@ -3814,7 +3814,7 @@ interface DOpusFunc {
 	/**
 	 * This object represents the default source tab for the function.
 	 */
-	readonly sourcetab: DOpusTab;
+	readonly sourceTab: DOpusTab;
 
 	/**
 	 * If this button was run from the standalone image viewer, this object represents the viewer window.
@@ -3842,7 +3842,7 @@ interface DOpusGetCopyQueueNameData {
 	/**
 	 * Returns a Tab object representing the destination folder tab.
 	 */
-	readonly desttab: DOpusTab;
+	readonly destTab: DOpusTab;
 
 	/**
 	 * Returns a binary string indicating the physical drive indices that the destination path is located on (if any). For example, 00100000000000000000000000 indicates that drive C: is the destination drive.
@@ -3867,7 +3867,7 @@ interface DOpusGetCopyQueueNameData {
 	/**
 	 * Returns a Tab object representing the source folder tab.
 	 */
-	readonly sourcetab: DOpusTab;
+	readonly sourceTab: DOpusTab;
 
 	/**
 	 * Returns a binary string indicating the physical drive indices that the source path is located on (if any). For example, 00001000000000000000000000 indicates that drive E: is the source drive.
@@ -4010,12 +4010,12 @@ interface DOpusGlobalFilters {
 	/**
 	 * Returns True if the global option to hide hidden files is on.
 	 */
-	readonly hidehidden: boolean;
+	readonly hideHidden: boolean;
 
 	/**
 	 * Returns True if the global option to hide operating system files is on.
 	 */
-	readonly hidesystem: boolean;
+	readonly hideSystem: boolean;
 
 }
 
@@ -4029,7 +4029,7 @@ interface DOpusImage {
 	/**
 	 * Returns the bit count of the loaded image.
 	 */
-	readonly bitcount: number;
+	readonly bitCount: number;
 
 	/**
 	 * Returns the height of the loaded image.
@@ -4061,22 +4061,22 @@ interface DOpusImageMeta {
 	/**
 	 * Aperture
 	 */
-	readonly apertureval: any;
+	readonly apertureVal: any;
 
 	/**
 	 * Artists
 	 */
-	readonly mp3artist: any;
+	readonly mp3Artist: any;
 
 	/**
 	 * Camera make
 	 */
-	readonly cameramake: any;
+	readonly cameraMake: any;
 
 	/**
 	 * Camera model
 	 */
-	readonly cameramodel: any;
+	readonly cameraModel: any;
 
 	/**
 	 * Color space
@@ -4106,42 +4106,42 @@ interface DOpusImageMeta {
 	/**
 	 * Date digitized
 	 */
-	readonly datedigitized: any;
+	readonly dateDigitized: any;
 
 	/**
 	 * Date taken
 	 */
-	readonly datetaken: any;
+	readonly dateTaken: any;
 
 	/**
 	 * Date taken
 	 */
-	readonly shootingtime: any;
+	readonly shootingTime: any;
 
 	/**
 	 * Digital Zoom
 	 */
-	readonly digitalzoom: any;
+	readonly digitalZoom: any;
 
 	/**
 	 * Exposure bias
 	 */
-	readonly exposurebias: any;
+	readonly exposureBias: any;
 
 	/**
 	 * Exposure program
 	 */
-	readonly exposureprogram: any;
+	readonly exposureProgram: any;
 
 	/**
 	 * Exposure time
 	 */
-	readonly exposuretime: any;
+	readonly exposureTime: any;
 
 	/**
 	 * F-number
 	 */
-	readonly fnumber: any;
+	readonly fNumber: any;
 
 	/**
 	 * Flash
@@ -4151,7 +4151,7 @@ interface DOpusImageMeta {
 	/**
 	 * Focal length
 	 */
-	readonly focallength: any;
+	readonly focalLength: any;
 
 	/** DISABLED cannot use number as first char of a JS identifier - Focal length (35mm)*/
 	readonly disabled_35mmfocallength: any;
@@ -4159,17 +4159,17 @@ interface DOpusImageMeta {
 	/**
 	 * ISO speed
 	 */
-	readonly isorating: any;
+	readonly isoRating: any;
 
 	/**
 	 * Image description
 	 */
-	readonly imagedesc: any;
+	readonly imageDesc: any;
 
 	/**
 	 * Image quality
 	 */
-	readonly imagequality: any;
+	readonly imageQuality: any;
 
 	/**
 	 * Latitude
@@ -4179,12 +4179,12 @@ interface DOpusImageMeta {
 	/**
 	 * Lens make
 	 */
-	readonly lensmake: any;
+	readonly lensMake: any;
 
 	/**
 	 * Lens model
 	 */
-	readonly lensmodel: any;
+	readonly lensModel: any;
 
 	/**
 	 * Longitude
@@ -4194,12 +4194,12 @@ interface DOpusImageMeta {
 	/**
 	 * Macro mode
 	 */
-	readonly macromode: any;
+	readonly macroMode: any;
 
 	/**
 	 * Metering mode
 	 */
-	readonly meteringmode: any;
+	readonly meteringMode: any;
 
 	/**
 	 * Saturation
@@ -4209,12 +4209,12 @@ interface DOpusImageMeta {
 	/**
 	 * Scene capture type
 	 */
-	readonly scenecapturetype: any;
+	readonly sceneCaptureType: any;
 
 	/**
 	 * Scene mode
 	 */
-	readonly scenemode: any;
+	readonly sceneMode: any;
 
 	/**
 	 * Sharpness
@@ -4224,7 +4224,7 @@ interface DOpusImageMeta {
 	/**
 	 * Shutter speed
 	 */
-	readonly shutterspeed: any;
+	readonly shutterSpeed: any;
 
 	/**
 	 * Subject
@@ -4234,7 +4234,7 @@ interface DOpusImageMeta {
 	/**
 	 * Subject distance
 	 */
-	readonly subjectdistance: any;
+	readonly subjectDistance: any;
 
 	/**
 	 * Special instructions
@@ -4249,7 +4249,7 @@ interface DOpusImageMeta {
 	/**
 	 * White balance
 	 */
-	readonly whitebalance: any;
+	readonly whiteBalance: any;
 
 
 }
@@ -4370,7 +4370,7 @@ interface DOpusItem extends String {
 	/**
 	 * Similar to the groups property, except a FiletypeGroups object is returned instead of a Vector.
 	 */
-	readonly groupsobject: DOpusFiletypeGroups;
+	readonly groupsObject: DOpusFiletypeGroups;
 
 	/**
 	 * This is a unique ID for the item; it is used internally by Opus.
@@ -4535,7 +4535,7 @@ interface DOpusLister {
 	/**
 	 * Returns a Tab object representing the currently active (source) tab.
 	 */
-	readonly activetab: DOpusTab;
+	readonly activeTab: DOpusTab;
 
 	/**
 	 * Lister window bottom-edge coordinate.
@@ -4550,7 +4550,7 @@ interface DOpusLister {
 	/**
 	 * Returns a Tab object representing the current destination tab (in a dual-display Lister).
 	 */
-	readonly desttab: DOpusTab;
+	readonly destTab: DOpusTab;
 
 	/**
 	 * Indicates whether the Lister is in dual-display mode or not. Possible values are:
@@ -4564,7 +4564,7 @@ interface DOpusLister {
 	/**
 	 * Returns the current split percentage of the dual displays (e.g. 50 indicates they are evenly sized).
 	 */
-	readonly dualsize: number;
+	readonly dualSize: number;
 
 	/**
 	 * Returns True if this Lister is currently the foreground (active) window.
@@ -4574,7 +4574,7 @@ interface DOpusLister {
 	/**
 	 * Returns True if this Lister is currently the active Lister (foreground window), or was the most recently active Lister.
 	 */
-	readonly lastactive: boolean;
+	readonly lastActive: boolean;
 
 	/**
 	 * Provides the name of the Lister layout that this Lister came from (if any).
@@ -4593,7 +4593,7 @@ interface DOpusLister {
 	 * * **1** - metadata pane is open, vertical layout
 	 * * **2** - metadata pane is open, horizontal layout
 	 */
-	readonly metapane: number;
+	readonly metaPane: number;
 
 	/**
 	 * Lister window right-edge coordinate.
@@ -4625,22 +4625,22 @@ interface DOpusLister {
 	 *
 	 * The name only changes when a Folder Tab Group is loaded. The current tabs may no longer resemble the named tab group if the user has made changes since the group was loaded. The name persists across restarts, through the Default Lister and saved Layouts.
 	 */
-	readonly tabgroupleft: string;
+	readonly tabgroupLeft: string;
 
 	/**
 	 * Similar to tabgroupleft, above, but for the right half of the Lister (if any).
 	 */
-	readonly tabgroupright: string;
+	readonly tabgroupRight: string;
 
 	/**
 	 * Returns a collection of Tab objects that represent the tabs in the left/top side of a dual-display Lister. In a single-display Lister this is equivalent to all the tabs in the Lister.
 	 */
-	readonly tabsleft: DOpusTab;
+	readonly tabsLeft: DOpusTab;
 
 	/**
 	 * Returns a collection of Tab objects that represent the tabs in the right/bottom side of a dual-display Lister. In a single-display Lister this will return an empty collection.
 	 */
-	readonly tabsright: DOpusTab;
+	readonly tabsRight: DOpusTab;
 
 	/**
 	 * Returns the current title of the Lister window.
@@ -4670,7 +4670,7 @@ interface DOpusLister {
 	/**
 	 * If the utility panel is currently open, returns a string indicating the currently selected utility page. Possible values are **find** (which means the Find panel's Simple version), **findadvanced, sync, dupe, undo, filelog, ftplog, otherlog, email.**
 	 */
-	readonly utilpage: string;
+	readonly utilPage: string;
 
 	/**
 	 * Indicates whether or not the utility panel is currently open. Possible values are:
@@ -4678,7 +4678,7 @@ interface DOpusLister {
 	 * * **0** - utility panel is not open
 	 * * **1** - utility panel is open
 	 */
-	readonly utilpane: number;
+	readonly utilPane: number;
 
 	/**
 	 * This Vars object represents all defined variables with Lister scope (that are scoped to this Lister).
@@ -4692,7 +4692,7 @@ interface DOpusLister {
 	 * * **1** - viewer pane is open, vertical layout
 	 * * **2** - viewer pane is open, horizontal layout
 	 */
-	readonly viewpane: number;
+	readonly viewPane: number;
 
 	/**
 	 * Creates a new Dialog object, that lets you display dialogs and popup menus. The dialog's window property will be automatically assigned to this Lister.
@@ -4719,7 +4719,7 @@ declare var Lister: DOpusLister;
 /**
  * The Listers object is a collection of all currently open Listers . It can be obtained via the DOpus .listers property.
  *
- * **Note:** If you are looking for a window to use as the parent for a Dialog , you are probably looking in the wrong place. Scripts should not assume that DOpus.listers(0) or DOpus.listers.lastactive are the lister which launched them. Most scripting events provide you an object which can either create a pre-configured Dialog for you or which includes a SourceTab property or similar which can do the same. In almost all situations you should use those instead.
+ * **Note:** If you are looking for a window to use as the parent for a Dialog , you are probably looking in the wrong place. Scripts should not assume that DOpus.listers(0) or DOpus.listers.lastActive are the lister which launched them. Most scripting events provide you an object which can either create a pre-configured Dialog for you or which includes a SourceTab property or similar which can do the same. In almost all situations you should use those instead.
  *
  * @see {DOpusConstructor}
  *
@@ -4732,9 +4732,9 @@ interface DOpusListers extends DOpusLister {
 	/**
 	 * Returns a Lister object representing the most recently active Lister window.
 	 *
-	 * Do not assume that DOpus.listers.lastactive is the window which launched your script. See the note near the top of the page.
+	 * Do not assume that DOpus.listers.lastActive is the window which launched your script. See the note near the top of the page.
 	 */
-	readonly lastactive: DOpusLister;
+	readonly lastActive: DOpusLister;
 
 	/**
 	 * The first time a script accesses the DOpus.listers property, a snapshot is taken of all currently open Listers. If the script then opens or closes Listers itself, these changes will not be reflected by this collection. To re-synchronize the collection, call the Update method.
@@ -5087,12 +5087,12 @@ interface DOpusMsg extends Boolean {
 	/**
 	 * Returns the horizontal position of the mouse cursor when the message was generated.
 	 */
-	readonly mousex: number;
+	readonly mouseX: number;
 
 	/**
 	 * Returns the vertical position of the mouse cursor when the message was generated.
 	 */
-	readonly mousey: number;
+	readonly mouseY: number;
 
 	/**
 	 * For a drop event, this property returns a Vector of Item objects, representing the files that were dropped onto your dialog.
@@ -5187,37 +5187,37 @@ interface DOpusOtherMeta {
 	/**
 	 * An automatically generated description string for the item. This is the same string that is shown in the Description column in a Lister. Opus automatically generates the description for various types of files using the other metadata in ways that make the most sense.
 	 */
-	readonly autodesc: string;
+	readonly autoDesc: string;
 
 	/**
 	 * For a folder, the size of which has been calculated via GetSizes or similar, this provides the number of sub-folders directly underneath the folder.
 	 */
-	readonly dircount: number;
+	readonly dirCount: number;
 
 	/**
 	 * Similar to dircount, this provides the total number of sub-folders underneath the folder (this is a recursive count - it includes sub-sub-folders, sub-sub-sub-folders, etc.)
 	 */
-	readonly dircounttotal: number;
+	readonly dirCountTotal: number;
 
 	/**
 	 * For a folder, the size of which has been calculated via GetSizes or similar, this provides the number of files directly located in that folder.
 	 */
-	readonly filecount: number;
+	readonly fileCount: number;
 
 	/**
 	 * Similar to filecount, this provides the total number of files in the folder and all its sub-folders, sub-sub-folders, etc.
 	 */
-	readonly filecounttotal: number;
+	readonly fileCountTotal: number;
 
 	/**
 	 * For a folder, the size of which has been calculated via GetSizes or similar, this returns a string giving a summary of the contents of the folder.
 	 */
-	readonly foldercontents: string;
+	readonly folderContents: string;
 
 	/**
 	 * A description automatically generated for the item by its parent virtual file system.
 	 */
-	readonly nsdesc: string;
+	readonly nsDesc: string;
 
 	/**
 	 * Returns the user-assigned rating for this file or folder.
@@ -5237,7 +5237,7 @@ interface DOpusOtherMeta {
 	/**
 	 * Returns the user-assigned description for the file or folder.
 	 */
-	readonly usercomment: string;
+	readonly userComment: string;
 
 }
 
@@ -5577,12 +5577,12 @@ interface DOpusQuickFilter extends String {
 	/**
 	 * Returns True if the auto-clear mode is set in Preferences.
 	 */
-	readonly autoclear: boolean;
+	readonly autoClear: boolean;
 
 	/**
 	 * Returns True if the auto-star mode is set in Preferences.
 	 */
-	readonly autostar: boolean;
+	readonly autoStar: boolean;
 
 	/**
 	 * Returns True if the filter is disabled.
@@ -5592,7 +5592,7 @@ interface DOpusQuickFilter extends String {
 	/**
 	 * Returns True if easy mode is selected.
 	 */
-	readonly easymode: boolean;
+	readonly easyMode: boolean;
 
 	/**
 	 * Returns the current filter string.
@@ -5602,17 +5602,17 @@ interface DOpusQuickFilter extends String {
 	/**
 	 * Returns True if all folders are being hidden.
 	 */
-	readonly hidealldirs: boolean;
+	readonly hideAllDirs: boolean;
 
 	/**
 	 * Returns True if all files are being hidden.
 	 */
-	readonly hideallfiles: boolean;
+	readonly hideAllFiles: boolean;
 
 	/**
 	 * Returns True if filtering in flatview is enabled.
 	 */
-	readonly overrideflatview: boolean;
+	readonly overrideFlatview: boolean;
 
 	/**
 	 * Returns True if partial matching is enabled.
@@ -5632,17 +5632,17 @@ interface DOpusQuickFilter extends String {
 	/**
 	 * Returns True if all folders are being shown.
 	 */
-	readonly showalldirs: boolean;
+	readonly showAllDirs: boolean;
 
 	/**
 	 * Returns True if all files are being shown.
 	 */
-	readonly showallfiles: boolean;
+	readonly showAllFiles: boolean;
 
 	/**
 	 * Returns True if Show Everything mode is on, which overrides (almost) all filtering.
 	 */
-	readonly showeverything: boolean;
+	readonly showeEerything: boolean;
 
 }
 
@@ -5712,17 +5712,17 @@ interface DOpusResults {
 	/**
 	 * This property returns a collection of Tab objects representing any new tabs created by the command.
 	 */
-	readonly newtabs: DOpusTab;
+	readonly newTabs: DOpusTab;
 
 	/**
 	 * This property returns a collection of Lister objects representing any new Listers created by the command.
 	 */
-	readonly newlisters: DOpusLister;
+	readonly newListers: DOpusLister;
 
 	/**
 	 * This property returns a collection of Viewer objects representing any new image viewers created by the command. (This is only for standalone viewers, not the viewer pane.)
 	 */
-	readonly newviewers: DOpusViewer;
+	readonly newViewers: DOpusViewer;
 
 }
 
@@ -5810,22 +5810,22 @@ interface DOpusScriptColumn {
 	/**
 	 * If this is set to True (which is the default), and the file display is grouped by this column, Opus will generate the groups automatically based on the column value. If you set this to False, Opus will expect you to provide grouping information in your OnScriptColumn function.
 	 */
-	autogroup: boolean;
+	autoGroup: boolean;
 
 	/**
 	 * Set to True (or 1) to force Opus to update the value for this column when a file changes. You can also set this value to 2 to force Opus to update the value when the file's attributes change (normally it would only update if the file modification time or size changed).
 	 */
-	autorefresh: boolean | number;
+	autoRefresh: boolean | number;
 
 	/**
 	 * This property lets you control the default sort behavior for your column. Normally when the user clicks the column header to sort by a column the column is initially sorted in ascending order, and then clicking again reverses the sort order. If you set defsort to -1, the first click on the column header will sort in descending order. Date and size fields have this behavior set by default.
 	 */
-	defsort: number;
+	defSort: number;
 
 	/**
 	 * Specifies a default width for your column, which will be used unless the file display has auto-sizing enabled. If you specify a simple integer value this represents a width measured in average characters (e.g. 12 specifies 12 average characters wide). You can also specify an absolute number of pixels by adding the px suffix (e.g. "150px" specifies 150 pixels).
 	 */
-	defwidth: number | string;
+	defWidth: number | string;
 
 	/**
 	 * For graph columns, specifies the first graph color set. The graph will be displayed in these colors as long as its percentage is below the threshold.
@@ -5849,7 +5849,7 @@ interface DOpusScriptColumn {
 	/**
 	 * If the autogroup property is set to False, the grouporder property lets you control the order your column's groups appear in. Each group should be listed in the string in the desired order, separated by a semi-colon (e.g. "Never Modified;Modified"). If not provided, groups will default to sorting alphabetically.
 	 */
-	grouporder: string;
+	groupOrder: string;
 
 	/**
 	 * If this property is set, this defines the string that will be displayed in the column header when this column is added to a Lister. If not set, the label value will be used.
@@ -5859,7 +5859,7 @@ interface DOpusScriptColumn {
 	/**
 	 * Set this to True if you want your column to be only available for use in Info Tips. You might want this if your column takes a significant amount of time to return a value, in which case the user would probably only want to use it in an Info Tip so they can see the value on demand. If set to False (the default) the column will be available everywhere.
 	 */
-	infotiponly: boolean;
+	infotipOnly: boolean;
 
 	/**
 	 * This field lets you control the justification of your column. If not specified, columns default to left justify. Acceptable values are center, left, right and path.
@@ -5869,7 +5869,7 @@ interface DOpusScriptColumn {
 	/**
 	 * If this is set to True, and the user has the Sort-field specific key scrolling Preferences option enabled, then your column will participate in this special mode.
 	 */
-	keyscroll: boolean;
+	keyScroll: boolean;
 
 	/**
 	 * Use this to set a label for the column. This is displayed in the column header when the column is added to a Details/Power mode file display (unless overridden by the header property), and in various column lists such as in the Folder Options dialog.
@@ -5884,7 +5884,7 @@ interface DOpusScriptColumn {
 	/**
 	 * If the column type is set to stars this property lets you specify the maximum number of stars that will be used. This is used to ensure the column is sized correctly.
 	 */
-	maxstars: number;
+	maxStars: number;
 
 	/** This is the name of the method in your script that provides the actual values for your new column. This would typically be set to On*XXXXX* where *XXXXX* is the name of the command, however any method name can be used.
 	 *
@@ -5900,7 +5900,7 @@ interface DOpusScriptColumn {
 	 *
 	 * `scriptColData.columns("MyColumn").value = "My Column Value";`
 	 */
-	multicol: boolean;
+	multiCol: boolean;
 
 	/**
 	 * This is the raw name of the column. This determines the name that can be used to control the column programmatically (for example, the Set COLUMNSTOGGLE command can be used to toggle a column on or off by name).
@@ -5912,17 +5912,17 @@ interface DOpusScriptColumn {
 	/**
 	 * Set to True to force Opus to update the value for this column when a file's name changes.
 	 */
-	namerefresh: boolean;
+	nameRefresh: boolean;
 
 	/**
 	 * Set to True to prevent the file display being grouped by this column.
 	 */
-	nogroup: boolean;
+	noGroup: boolean;
 
 	/**
 	 * Set to True to prevent the file display being sorted by this column.
 	 */
-	nosort: boolean;
+	noSort: boolean;
 
 	/**
 	 * Time, in milliseconds, before Opus may give up waiting for calculation of a column value.
@@ -5975,7 +5975,7 @@ interface DOpusScriptColumn {
 	/**
 	 * Allows you to associate a data value with a column. The value will be passed to your column handler in the ScriptColumnData.userdata property
 	 */
-	userdata: any;
+	userData: any;
 
 }
 
@@ -6088,7 +6088,7 @@ interface DOpusScriptColumnData {
 	 *
 	 * Note that if the ScriptColumn.multicol value is set to True when the column is added then this property will be found inside the columns Map.
 	 */
-	userdata: any;
+	userData: any;
 
 }
 
@@ -6322,7 +6322,7 @@ interface DOpusShellProperty {
 	/**
 	 * The default width in pixels a column displaying this property should use.
 	 */
-	readonly defwidth: number;
+	readonly defWidth: number;
 
 	/**
 	 * The display name of this property (the name that should be shown to users).
@@ -6360,7 +6360,7 @@ interface DOpusShutdownData {
 	/**
 	 * Returns True if the Windows session is ending (that is, if Opus is shutting down because the system is shutting down), or False if it's just Opus that is quitting.
 	 */
-	readonly endsession: boolean;
+	readonly endSession: boolean;
 
 	/**
 	 * Returns a string indicating any qualifier keys that were held down by the user when the event was triggered.
@@ -6392,7 +6392,7 @@ interface DOpusSmartFavorite {
 	/**
 	 * Returns the number of points this entry has as a destination folder.
 	 */
-	readonly destpoints: number;
+	readonly destPoints: number;
 
 }
 
@@ -6904,7 +6904,7 @@ interface DOpusTabGroup {
 	/**
 	 * True if the Close existing folder tabs when opening this group option is turned on for this group. Only present when the folder property is False.
 	 */
-	readonly closeexisting: boolean;
+	readonly closeExisting: boolean;
 
 	/**
 	 * The description of this tab group, if any. Only present when the folder property is False.
@@ -6929,7 +6929,7 @@ interface DOpusTabGroup {
 	/**
 	 * Returns a TabGroupTabList object representing the tabs in this group that open in the left/top side of a dual-display Lister. Only present when the folder property is False and the dual property is True.
 	 */
-	readonly lefttabs: DOpusTabGroupTabList;
+	readonly leftTabs: DOpusTabGroupTabList;
 
 	/**
 	 * The name of this group or folder.
@@ -6939,7 +6939,7 @@ interface DOpusTabGroup {
 	/**
 	 * Returns a TabGroupTabList object representing the tabs in this group that open in the right/bottom side of a dual-display Lister. Only present when the folder property is False and the dual property is True.
 	 */
-	readonly righttabs: DOpusTabGroupTabList;
+	readonly rightTabs: DOpusTabGroupTabList;
 
 	/**
 	 * Returns a TabGroupTabList object representing the tabs in this group. Only present when both the folder and dual properties are False.
@@ -7063,12 +7063,12 @@ interface DOpusTabGroupTabEntry {
 	/**
 	 * Returns the link ID of this tab, if it is linked to another tab. Both tabs will have the same link ID but otherwise the value is meaningless. Use the TabGroup.Link and Unlink methods to change tab linkage.
 	 */
-	readonly linkid: number;
+	readonly linkId: number;
 
 	/**
 	 * If this tab is linked as a slave, returns the string **"slave"**.
 	 */
-	readonly linktype: string;
+	readonly linkType: string;
 
 	/**
 	 * Returns the lock type of this tab. Valid values are **"on"**, **"off"**, **"changes"** and **"reuse"**.
@@ -7157,42 +7157,42 @@ interface DOpusTabStats {
 	/**
 	 * Returns the total number of bytes in checked items as a FileSize object.
 	 */
-	readonly checkedbytes: DOpusFileSize;
+	readonly checkedBytes: DOpusFileSize;
 
 	/**
 	 * Returns the total number of bytes in checked folders as a FileSize object.
 	 */
-	readonly checkeddirbytes: DOpusFileSize;
+	readonly checkedDirBytes: DOpusFileSize;
 
 	/**
 	 * Returns the total number of checked folders.
 	 */
-	readonly checkeddirs: number;
+	readonly checkedDirs: number;
 
 	/**
 	 * Returns the total number of bytes in checked files as a FileSize object.
 	 */
-	readonly checkedfilebytes: DOpusFileSize;
+	readonly checkedFileBytes: DOpusFileSize;
 
 	/**
 	 * Returns the total number of checked files.
 	 */
-	readonly checkedfiles: number;
+	readonly checkedFiles: number;
 
 	/**
 	 * Returns the total number of checked items.
 	 */
-	readonly checkeditems: number;
+	readonly checkedItems: number;
 
 	/**
 	 * Returns the total length in seconds of all checked music files.
 	 */
-	readonly checkedmusiclength: number;
+	readonly checkedMusicLength: number;
 
 	/**
 	 * Returns the total number of bytes in all folders as a FileSize object.
 	 */
-	readonly dirbytes: DOpusFileSize;
+	readonly dirBytes: DOpusFileSize;
 
 	/**
 	 * Returns the total number of folders.
@@ -7202,17 +7202,17 @@ interface DOpusTabStats {
 	/**
 	 * Returns the total number of bytes in all files as a FileSize object.
 	 */
-	readonly filebytes: DOpusFileSize;
+	readonly fileBytes: DOpusFileSize;
 
 	/**
 	 * Returns the latest (most recent) file date in the folder.
 	 */
-	readonly filedate_max: Date;
+	readonly fileDate_max: Date;
 
 	/**
 	 * Returns the earliest (oldest) file date in the folder.
 	 */
-	readonly filedate_min: Date;
+	readonly fileDate_min: Date;
 
 	/**
 	 * Returns the total number of files.
@@ -7227,47 +7227,47 @@ interface DOpusTabStats {
 	/**
 	 * Returns the size of the largest file in the folder as a FileSize object.
 	 */
-	readonly largestfile: DOpusFileSize;
+	readonly largestFile: DOpusFileSize;
 
 	/**
 	 * Returns the total length in seconds of all music files.
 	 */
-	readonly musiclength: number;
+	readonly musicLength: number;
 
 	/**
 	 * Returns the total number of bytes in all selected items as a FileSize object.
 	 */
-	readonly selbytes: DOpusFileSize;
+	readonly selBytes: DOpusFileSize;
 
 	/**
 	 * Returns the total number of bytes in all selected folders as a FileSize object.
 	 */
-	readonly seldirbytes: DOpusFileSize;
+	readonly selDirBytes: DOpusFileSize;
 
 	/**
 	 * Returns the number of selected folders.
 	 */
-	readonly seldirs: number;
+	readonly selDirs: number;
 
 	/**
 	 * Returns the total number of bytes in all selected files as a FileSize object.
 	 */
-	readonly selfilebytes: DOpusFileSize;
+	readonly selFileBytes: DOpusFileSize;
 
 	/**
 	 * Returns the number of selected files.
 	 */
-	readonly selfiles: number;
+	readonly selFiles: number;
 
 	/**
 	 * Returns the number of selected items.
 	 */
-	readonly selitems: number;
+	readonly selItems: number;
 
 	/**
 	 * Returns the total length in seconds of all selected music files.
 	 */
-	readonly selmusiclength: number;
+	readonly selMusicLength: number;
 
 	/**
 	 * The first time a script accesses a particular TabStats object, a snapshot is taken of the tab state. If the script then makes changes to that tab (e.g. it selects files, creates a new folder, etc), these changes will not be reflected by the object. To re-synchronize the object with the tab, call the TabStats.Update method.
@@ -7291,7 +7291,7 @@ interface DOpusToolbar extends String {
 	 *
 	 * (Old scripts may use "default" instead of "deftoolbar"; this is deprecated because it does not work in JScript where "default" is a reserved keyword.)
 	 */
-	readonly deftoolbar: boolean;
+	readonly defToolbar: boolean;
 
 	/**
 	 * Returns a collection of Lister objects representing any and all Listers this toolbar is currently open in.
@@ -7657,32 +7657,32 @@ interface DOpusVideoMeta {
 	/**
 	 * Aspect ratio
 	 */
-	readonly aspectratio: any;
+	readonly aspectRatio: any;
 
 	/**
 	 * Audio codec
 	 */
-	readonly audiocodec: any;
+	readonly audioCodec: any;
 
 	/**
 	 * Audio codec
 	 */
-	readonly mp3type: any;
+	readonly mp3Type: any;
 
 	/**
 	 * Bit depth
 	 */
-	readonly picdepth: any;
+	readonly picDepth: any;
 
 	/**
 	 * Bit rate
 	 */
-	readonly mp3bitrate: any;
+	readonly mp3Bitrate: any;
 
 	/**
 	 * Broadcast date
 	 */
-	readonly broadcastdate: any;
+	readonly broadcastDate: any;
 
 	/**
 	 * Channel number
@@ -7702,7 +7702,7 @@ interface DOpusVideoMeta {
 	/**
 	 * Dimensions
 	 */
-	readonly picsize: any;
+	readonly picSize: any;
 
 	/**
 	 * Dimensions
@@ -7717,17 +7717,17 @@ interface DOpusVideoMeta {
 	/**
 	 * Duration
 	 */
-	readonly mp3songlength: any;
+	readonly mp3SongLength: any;
 
 	/**
 	 * Episode name
 	 */
-	readonly episodename: any;
+	readonly episodeName: any;
 
 	/**
 	 * FOURCC code
 	 */
-	readonly fourcc: any;
+	readonly fourCC: any;
 
 	/**
 	 * Frame rate
@@ -7737,7 +7737,7 @@ interface DOpusVideoMeta {
 	/**
 	 * Height
 	 */
-	readonly picheight: any;
+	readonly picHeight: any;
 
 	/**
 	 * High definition?
@@ -7747,12 +7747,12 @@ interface DOpusVideoMeta {
 	/**
 	 * Mode
 	 */
-	readonly mp3mode: any;
+	readonly mp3Mode: any;
 
 	/**
 	 * Physical size
 	 */
-	readonly picphyssize: any;
+	readonly picPhysSize: any;
 
 	/**
 	 * Publisher
@@ -7762,17 +7762,17 @@ interface DOpusVideoMeta {
 	/**
 	 * Recording time
 	 */
-	readonly recordingtime: any;
+	readonly recordingTime: any;
 
 	/**
 	 * Repeat?
 	 */
-	readonly isrepeat: any;
+	readonly isRepeat: any;
 
 	/**
 	 * Sample rate
 	 */
-	readonly mp3samplerate: any;
+	readonly mp3Samplerate: any;
 
 	/**
 	 * Station name
@@ -7782,12 +7782,12 @@ interface DOpusVideoMeta {
 	/**
 	 * Video codec
 	 */
-	readonly videocodec: any;
+	readonly videoCodec: any;
 
 	/**
 	 * Width
 	 */
-	readonly picwidth: any;
+	readonly picWidth: any;
 
 }
 
@@ -7828,7 +7828,7 @@ interface DOpusViewer {
 	/**
 	 * Returns True if the viewer is the most recently active viewer.
 	 */
-	readonly lastactive: boolean;
+	readonly lastActive: boolean;
 
 	/**
 	 * Returns the left coordinate of the viewer window.
@@ -7838,7 +7838,7 @@ interface DOpusViewer {
 	/**
 	 * Returns a Tab object representing the tab that launched the viewer (if there was one, and if it still exists).
 	 */
-	readonly parenttab: DOpusTab;
+	readonly parentTab: DOpusTab;
 
 	/**
 	 * Returns the right coordinate of the viewer window.
@@ -7967,7 +7967,7 @@ interface DOpusViewers extends DOpusViewer {
 	/**
 	 * Returns a Viewer object representing the most recently active viewer window.
 	 */
-	readonly lastactive: DOpusViewer;
+	readonly lastActive: DOpusViewer;
 
 }
 
@@ -8034,7 +8034,7 @@ interface DOpusWinVer extends String {
 	/**
 	 * True if running on Windows XP or better (this will always be true).
 	 */
-	readonly xporbetter: boolean;
+	readonly xpOrBetter: boolean;
 
 	/**
 	 * True if running on Windows Vista.
@@ -8044,7 +8044,7 @@ interface DOpusWinVer extends String {
 	/**
 	 * True if running on Windows Vista or better (later).
 	 */
-	readonly vistaorbetter: boolean;
+	readonly vistaOrBetter: boolean;
 
 	/**
 	 * True if running on Windows 7.
@@ -8054,7 +8054,7 @@ interface DOpusWinVer extends String {
 	/**
 	 * True if running on Windows 7 or better.
 	 */
-	readonly win7orbetter: boolean;
+	readonly win7OrBetter: boolean;
 
 	/**
 	 * True if running on Windows 8.
@@ -8064,7 +8064,7 @@ interface DOpusWinVer extends String {
 	/**
 	 * True if running on Windows 8 or better.
 	 */
-	readonly win8orbetter: boolean;
+	readonly win8OrBetter: boolean;
 
 	/**
 	 * True if running on Windows 8.1.
@@ -8074,7 +8074,7 @@ interface DOpusWinVer extends String {
 	/**
 	 * True if running on Windows 8.1 or better.
 	 */
-	readonly win81orbetter: boolean;
+	readonly win81OrBetter: boolean;
 
 	/**
 	 * True if running on Windows 10.
@@ -8084,6 +8084,6 @@ interface DOpusWinVer extends String {
 	/**
 	 * True if running on Windows 10 or better.
 	 */
-	readonly win10orbetter: boolean;
+	readonly win10OrBetter: boolean;
 
 }
