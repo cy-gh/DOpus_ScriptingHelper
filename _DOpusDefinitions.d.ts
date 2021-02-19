@@ -2400,7 +2400,7 @@ interface DOpusFactoryConstructor {
 	/**
 	 * Creates a new Map object. If no arguments are provided, the Map will be empty. Otherwise, the Map will be pre-initialized with the supplied key/value pairs. For example: Map("firstname","fred","lastname","bloggs");. The individual keys and values can be different types.
 	 */
-	map(key?: any, value?: any): DOpusMap;
+	map(key?: any, value?: any, ...keyValueTuples: any): DOpusMap;
 
 	/**
 	 * Creates a new case-sensitive StringSet object. If no arguments are provided, the StringSet will be empty. Otherwise it will be pre-initialized with the supplied strings; for example: StringSet("dog","cat","pony");
@@ -6166,6 +6166,8 @@ interface DOpusScriptCommandData {
  */
 interface DOpusScriptConfig {
 
+	[key: string]: any;
+
 	/**
 	 * The properties of the ScriptConfig object are entirely determined by the script itself.
 	 *
@@ -6193,7 +6195,7 @@ interface DOpusScriptInitData {
 	/**
 	 * Returns a ScriptConfig object, that the script can use to initialize its default configuration. Properties added to the object in this method will be displayed to the user in Preferences, allowing them to change their value and thus configure the behavior of the script.
 	 */
-	readonly config: DOpusScriptConfig;
+	config: DOpusScriptConfig;
 
 	/**
 	 * This lets you assign descriptions for your script's configuration options that are shown to the user in the editor dialog. To do this, set this property to a Map created via the DOpusFactory.Map method, filled with name/description string pairs.
