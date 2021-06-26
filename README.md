@@ -107,6 +107,9 @@ Now all the little details:
 * This was not easy as it seemed. It's the product of ca. 15 hours of work: a lot of JS debugging and many manual corrections. I had to decompile the DOpus.chm file and parse every object's file individually using a Tampermonkey script (~~which will be uploaded later~~ done). Because even the slightest inconsistencies between the files, like formatting, a's within strong's or strong's within a's, different notations or a very obscure constellation broke my parser. So **not everything looks perfect.**
 * The file dos not pass ESLint & JSHint checks yet, but before fixing it, I want to test the latest beta with the new Map methods.
 
+### Credits
+
+The trick to [change method signature in subclasses at Damir's Corner](https://www.damirscorner.com/blog/posts/20190712-ChangeMethodSignatureInTypescriptSubclass.html), saved me a ton of headache. This is needed for object types which *extend* each other, but one attribute or method with same name has different types or signatures, e.g. DOpusFiletypeGroup.matchExt() & DOpusFiletypeGroups.matchExt(), DOpusLister.lastActive & DOpusListers.lastActive, and so on.
 
 
 ## Even more screenshots
@@ -150,4 +153,3 @@ The type in front of x has been inserted only for demonstration purposes; VSCode
 ![./Screenshots/InAction-TabGroups.png](./Screenshots/InAction-TabGroups.png)
 
 ![./Screenshots/InAction-Wild.png](./Screenshots/InAction-Wild.png)
-
