@@ -1,7 +1,4 @@
-/**
- * @typedef DOpusCurrency
- * @type number
- */
+type DOpusCurrency = number;
 
 /**
  * If a script add-in provides an OnAboutScript method, it is passed an AboutData object when invoked via the user clicking the About button in Preferences.
@@ -30,7 +27,7 @@ interface DOpusActivateListerData {
 	readonly active: boolean;
 
 	/**
-	 * Returns a Lister object representing the Lister that is closing.
+	 * Returns  a Lister object object representing the Lister that is closing.
 	 */
 	readonly lister: DOpusLister;
 
@@ -175,10 +172,10 @@ interface DOpusAlias extends String {
 interface DOpusAliases {
 
 	// // new <T = any>(safearray: SafeArray<T>): Enumerator<T>;
-    // // new <T = any>(collection: { Item(index: any): T }): Enumerator<T>;
+	// // new <T = any>(collection: { Item(index: any): T }): Enumerator<T>;
 	// // new <T = any>(collection: any): Enumerator<T>;
 	// new <T = any>(safearray: SafeArray<DOpusAlias>): Enumerator<DOpusAlias>;
-    // new <T = any>(collection: { Item(index: any): DOpusAlias }): Enumerator<DOpusAlias>;
+	// new <T = any>(collection: { Item(index: any): DOpusAlias }): Enumerator<DOpusAlias>;
 	// new <T = any>(collection: DOpusAlias): Enumerator<DOpusAlias>;
 
 	/**
@@ -223,12 +220,13 @@ interface DOpusArgs {
 	 * If an argument is marked in the template as /M (multiple) then it returns a Vector containing elements of the appropriate type.
 	 *
 	 * If an argument was not provided on the command line by the user, its property will either return bool (for a /S or /O argument), or an empty variant otherwise. */
-	readonly [key: string]: boolean|number|string|DOpusVector<boolean|number|string>;
+	// readonly [key: string]: boolean | number | string | DOpusVector<boolean | number | string>;
+	readonly [key: string]: boolean | number | string | DOpusVector<boolean | number | string> | DOpusArgsHelper;
 
 	/**
 	 * The got_arg property returns an object with a bool child property for each argument in the template. It lets you test if a particular argument was provided on the command line, before you actually query for the value of the argument. For example, If Args.got_arg.size Then...
 	 */
-	readonly got_arg: DOpusArgsHelpe2;
+	readonly got_arg: DOpusArgsHelper;
 
 }
 
@@ -1268,32 +1266,32 @@ interface DOpusDate extends Date {
 	/**
 	 * Get or set the day value of the date.
 	 */
-	readonly day: number;
+	day: number;
 
 	/**
 	 * Get or set the hour value of the date.
 	 */
-	readonly hour: number;
+	hour: number;
 
 	/**
 	 * Get or set the minute value of the date.
 	 */
-	readonly min: number;
+	min: number;
 
 	/**
 	 * Get or set the month value of the date.
 	 */
-	readonly month: number;
+	month: number;
 
 	/**
 	 * Get or set the milliseconds value of the date.
 	 */
-	readonly ms: number;
+	ms: number;
 
 	/**
 	 * Get or set the seconds value of the date.
 	 */
-	readonly sec: number;
+	sec: number;
 
 	/**
 	 * Get the day-of-the-week value of the date.
@@ -1692,7 +1690,7 @@ interface DOpusDialog {
 	 *
 	 * A Path object is returned to indicate the folder chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
 	 */
-	folder(title?: string, defaultValue?: string, expand?: boolean, window?: DOpusLister|DOpusTab): DOpusPath;
+	folder(title?: string, defaultValue?: string, expand?: boolean, window?: DOpusLister | DOpusTab): DOpusPath;
 
 	/**
 	 * Returns a Msg object representing the most recent input event in a script dialog (only used in detached mode).
@@ -1715,7 +1713,7 @@ interface DOpusDialog {
 	 *
 	 * The return value is the entered string, or an empty value if the dialog was cancelled. The index of the button selected by the user will be available via the result property once this method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
 	 */
-	getString(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab, result?: string): string;
+	getString(message?: string, defaultValue?: string, max?: string, buttons?: string, title?: string, window?: DOpusLister | DOpusTab, result?: string): string;
 
 	/**
 	 * Stops the specified timer. The timer must previously have been created by a call to the SetTimer method.
@@ -1740,7 +1738,7 @@ interface DOpusDialog {
 	 *
 	 * A collection of Item objects is returned to indicate the files selected by the user. The returned object will have a result property that you should check first - the collection of items is only valid if result returns True. If it returns False it means the user cancelled the dialog.
 	 */
-	multi(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab): DOpusItem;
+	multi(title?: string, defaultValue?: string, window?: DOpusLister | DOpusTab): DOpusItem;
 
 	/**
 	 * Displays a "Browse to Open File" dialog that lets the user select a single file. The optional parameters are:
@@ -1753,7 +1751,7 @@ interface DOpusDialog {
 	 *
 	 * CYREADME - the documentation on this seems to be wrong: when as 3rd parameter allowed file extension, e.g. '*.txt', is given it also seems to work
 	 */
-	open(title?: string, defaultValue?: string, windowOrFileExt?: DOpusLister|DOpusTab|string): DOpusItem;
+	open(title?: string, defaultValue?: string, windowOrFileExt?: DOpusLister | DOpusTab | string): DOpusItem;
 
 	/**
 	 * Displays a dialog with one or more buttons. The optional parameters are:
@@ -1765,7 +1763,7 @@ interface DOpusDialog {
 	 *
 	 * The return value is the index of the button selected by the user, and this is also available in the result property once the method returns. The left-most button is index 1, the next button is index 2, and so on. If a dialog has more than one button then by definition the last (right-most) button is the "cancel" button and so this will return index 0.
 	 */
-	request(message?: string, buttons?: string, title?: string, window?: DOpusLister|DOpusTab): number;
+	request(message?: string, buttons?: string, title?: string, window?: DOpusLister | DOpusTab): number;
 
 	/**
 	 * Turns a previously detached dialog into a non-detached one, by taking over and running the default message loop. The RunDlg method won't return until the dialog has closed. You might use this if you created a dialog using Create, in order to initialize its controls, but don't actually want to run an interactive message loop.
@@ -1813,7 +1811,7 @@ interface DOpusDialog {
 	 *
 	 * A Path object is returned to indicate the file chosen by the user. This object will have an additional result property that will be False if the user cancelled the dialog - the other normal Path properties will only be valid if result is True.
 	 */
-	save(title?: string, defaultValue?: string, window?: DOpusLister|DOpusTab, type?: string): DOpusPath;
+	save(title?: string, defaultValue?: string, window?: DOpusLister | DOpusTab, type?: string): DOpusPath;
 
 	/**
 	 * Used to change how custom dialogs are grouped with other Opus windows on the taskbar. Specify a group name to move the window into an alternative group, or omit the group argument to reset back to the default group. If one or more windows are moved into the same group, they will be grouped together, separate from other the default group.
@@ -2336,7 +2334,7 @@ interface DOpusConstructor {
 	 *
 	 * If the optional third argument is provided and set to True then the log message will have a timestamp prepended to it. Timestamps only appear in the utility panel, not in places like the Command Editor's output panel. Error messages always get timestamps so if the second argument is True then the third is ignored
 	 */
-	output(text?: string, error?: boolean, timestamp?: boolean): void;
+	output(text?: string | boolean | number, error?: boolean, timestamp?: boolean): void;
 
 	/**
 	 * Causes Opus to reload and reinitialize the specified script. You must provide the full pathname of the script on disk (if a script add-in wants to reload itself you can pass the value of the Script.file property).
@@ -2977,7 +2975,7 @@ interface DOpusFileAttr extends String {
 	/**
 	 * Returns a string representing the attributes that are set (similar to the format displayed in the Attr column in the file display).
 	 */
-	toString(): void;
+	toString(): string;
 
 }
 
@@ -3206,6 +3204,15 @@ interface DOpusFiletypeGroup extends String {
 
 }
 
+// CREDITS:
+// https://www.damirscorner.com/blog/posts/20190712-ChangeMethodSignatureInTypescriptSubclass.html
+// original example which removes 'get' method from Map,
+// so that its signature can be changed in an extending subclass
+// type MapWithoutGet = new<K, V>(entries?: ReadonlyArray<readonly [K, V]> | null)
+// => { [P in Exclude<keyof Map<K, V>, 'get'>] : Map<K, V>[P] }
+type DOpusFiletypeGroupWithoutMatchExt = new() => { [P in Exclude<keyof DOpusFiletypeGroup, 'matchExt'>] : DOpusFiletypeGroup[P] };
+
+
 /**
  * The FileTypeGroups object represents a collection of FiletypeGroup objects. The object can be enumerated to retrieve the groups it represents.
  *
@@ -3215,7 +3222,7 @@ interface DOpusFiletypeGroup extends String {
  *
  * @returns {DOpusFiletypeGroup} Lets you enumerate the file type groups represented by this object.
  */
-interface DOpusFiletypeGroups extends DOpusFiletypeGroup {
+interface DOpusFiletypeGroups extends DOpusFiletypeGroupWithoutMatchExt {
 
 	/**
 	 * Searches the file type group collection for the named group.
@@ -3652,7 +3659,7 @@ interface DOpusFSUtil {
 	 *
 	 * The optional window parameter lets you associate the File object with a Tab or a Lister, which will be used if Opus needs to display any dialogs (e.g. a UAC elevation dialog).
 	 */
-	getTempFile(prefix?: string, suffix?: string, flags?: string, window?: object): DOpusFile;
+	getTempFile(suffix?: string, prefix?: string, flags?: string, window?: object): DOpusFile;
 
 	/**
 	 * Creates a temporary file (with a unique name) and returns the path to it in a Path object.
@@ -4716,6 +4723,8 @@ interface DOpusLister {
 
 declare var Lister: DOpusLister;
 
+
+type DOpusListerWithoutLastActive = new() => { [P in Exclude<keyof DOpusLister, 'lastActive'>] : DOpusLister[P] };
 /**
  * The Listers object is a collection of all currently open Listers . It can be obtained via the DOpus .listers property.
  *
@@ -4727,7 +4736,7 @@ declare var Lister: DOpusLister;
  *
  * Do not assume that DOpus.listers(0) is the window which launched your script. See the note near the top of the page.
  */
-interface DOpusListers extends DOpusLister {
+interface DOpusListers extends DOpusListerWithoutLastActive {
 
 	/**
 	 * Returns a Lister object representing the most recently active Lister window.
@@ -4802,6 +4811,8 @@ interface DOpusListerUIChangeData {
 
 /**
  * The Map object is an associative container . It is similar to an array or vector (e.g. Vector ) in that it can store one or more objects, but has the advantage of using a dictionary system to locate objects rather than numeric indexes. You can therefore insert or lookup objects using an arbitrary value (string, integer, date, etc.) as the key (e.g. Map("foo") to reference an element by the key "foo").
+ *
+ * You can access elements of the map as if the map is a function (e.g. Map("foo") to reference an element by the key "foo"). You can also use square brackets (like an array or Vector) but only if the name of the key begins with an underscore, or is completely numeric (e.g. Map[123] or Map["_foo"]). Additionally you can use the get and set methods.
  *
  * You can create a new Map using the DOpusFactory.Map method. The keys in a map can be enumerated, and are automatically kept sorted.
  *
@@ -5251,7 +5262,13 @@ interface DOpusOtherMeta {
  */
 interface DOpusPath extends String {
 
+	/**
+	 * Returns the full path as a string.
+	 */
 	toString(): string;
+
+	/** only for tsc compatibility reasons */
+	split(): string[];
 
 	/**
 	 * Returns the number of components in the path.
@@ -5419,7 +5436,7 @@ interface DOpusProgress {
 	/**
 	 * Adds the specified number of files to the operation total. The bytes argument is optional - in a "full size" progress indicator this lets you add to the total byte size of the operation.
 	 */
-	addFiles(count?: number, bytes?: DOpusFileSize|number): void;
+	addFiles(count?: number, bytes?: DOpusFileSize | number): void;
 
 	/**
 	 * Clears the state of the three "control" buttons (Abort / Pause / Skip) so they no longer register as being clicked when GetAbortState is called.
@@ -5495,12 +5512,12 @@ interface DOpusProgress {
 	/**
 	 * Sets the total completed byte count.
 	 */
-	setBytesProgress(bytes?: DOpusFileSize|number): void;
+	setBytesProgress(bytes?: DOpusFileSize | number): void;
 
 	/**
 	 * Sets the size of the current file.
 	 */
-	setFileSize(bytes?: DOpusFileSize|number): void;
+	setFileSize(bytes?: DOpusFileSize | number): void;
 
 	/**
 	 * Sets the total number of files.
@@ -5557,7 +5574,7 @@ interface DOpusProgress {
 	/**
 	 * Step the byte progress indicator the specified number of bytes.
 	 */
-	stepBytes(bytes?: DOpusFileSize|number): void;
+	stepBytes(bytes?: DOpusFileSize | number): void;
 
 	/**
 	 * Step the file progress indicator the specified number of files.
@@ -6648,7 +6665,7 @@ interface DOpusSysInfo {
 	 *
 	 * The WorkAreas method, documented below, is sometimes what you should use instead of this.
 	 */
-	monitors(index?: number): DOpusVector<DOpusRect>|DOpusRect;
+	monitors(index?: number): DOpusVector<DOpusRect> | DOpusRect;
 
 	/**
 	 * Returns the index of the monitor the mouse pointer is currently positioned on.
@@ -6687,7 +6704,7 @@ interface DOpusSysInfo {
 	 *
 	 * A monitor's work area is the monitor's rectangle minus the Windows Taskbar and any other app bars (which can include docked toolbars created by Opus, or similar things added by other software). If a monitor does not have a Taskbar or other app bar docked to it, its work area will be the same as its full rectangle.
 	 */
-	workAreas(index?: number): DOpusVector<DOpusRect>|DOpusRect;
+	workAreas(index?: number): DOpusVector<DOpusRect> | DOpusRect;
 
 }
 
@@ -7459,26 +7476,27 @@ interface DOpusVar extends String {
 
 }
 
+
+type DOpusVarWithoutDelete = new() => { [P in Exclude<keyof DOpusVar, 'delete'>] : DOpusVar[P] };
 /**
  * The Vars object represents a collection of user and script-defined variables. There are a number of different sets of variables, with differing scopes. Some sets support persistent variables, that are saved and re-loaded from one session to the other.
-
  */
-interface DOpusVars extends DOpusVar {
+interface DOpusVars extends DOpusVarWithoutDelete {
 
 	/**
 	 * Deletes the named variable from the collection. You can also specify a wildcard pattern to delete multiple variables (or **\*** for all).
 	 */
-	delete(name?: string): void;
+	delete(name: string): void;
 
 	/**
 	 * Returns True if the named variable exists in the collection, or False if it doesn't exist.
 	 */
-	exists(name?: string): boolean;
+	exists(name: string): boolean;
 
 	/**
 	 * Returns the value of the named variable. You can use this method as an alternative to indexing the collection.
 	 */
-	get(name?: string): any;
+	get(name: string): any;
 
 	/**
 	 * Sets the named value to the specified value. You can use this method as an alternative to indexing the collection.
@@ -7958,13 +7976,15 @@ interface DOpusViewerEventData {
 
 }
 
+
+type DOpusViewerWithoutLastActive = new() => { [P in Exclude<keyof DOpusViewer, 'lastActive'>] : DOpusViewer[P] };
 /**
  * The Viewers object is a collection of all currently open standalone image viewers . It can be obtained via the DOpus .viewers property.
  * @see {DOpusConstructor}
  *
  * @returns {DOpusViewer} Lets you enumerate the currently open viewers.
  */
-interface DOpusViewers extends DOpusViewer {
+interface DOpusViewers extends DOpusViewerWithoutLastActive {
 
 	/**
 	 * Returns a Viewer object representing the most recently active viewer window.
@@ -7973,6 +7993,10 @@ interface DOpusViewers extends DOpusViewer {
 
 }
 
+
+
+type StringWithoutMatch = new() => { [P in Exclude<keyof String, 'match'>] : String[P] };
+
 /**
  * The Wild object allows a script to access the in-built pattern matching functions in Opus. Even though most ActiveX scripting languages have their own pattern matching support (usually via a regular expression system of some sort), you may wish to use the one that Opus provides for consistency with internal Opus functions.
  *
@@ -7980,7 +8004,7 @@ interface DOpusViewers extends DOpusViewer {
  *
  * @returns {string} Returns the current pattern in the Wild object
  */
-interface DOpusWild extends String {
+interface DOpusWild extends StringWithoutMatch {
 
 	/**
 	 * Escapes all wildcard characters in the input string and returns the result.
