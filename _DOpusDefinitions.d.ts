@@ -2315,11 +2315,17 @@ interface DOpusConstructor {
 	 * You can also provide a Blob object containing the image data instead of a filename.
 	 *
 	 * The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
+	 *
 	 */
 	loadImage(filename?: string | DOpusBlob, width?: number, height?: number, alpha?: boolean): DOpusImage;
 
 	/**
 	 * Extracts a thumbnail from the specified external file. You can optionally specify a timeout (in milliseconds) and the desired size to load the thumbnail at.
+	 *
+	 * The optional flags value supports the following flags (supplied as a string):
+	 *
+	 * * **i** - prevents Opus from waiting for thumbnails that may take some time to generate, and instead returns a large icon if the thumbnail can't be generated immediately.
+	 * * **c** - modifies the i flag to only apply to Cloud storage folders.
 	 *
 	 * If loading fails (or the timeout expires before the thumbnail could be generated) this method returns False.
 	 *
@@ -3607,6 +3613,11 @@ interface DOpusFSUtil {
 	exists(path?: string): boolean;
 
 	/**
+	 * Returns a StringSet containing the names of any alternate data streams (ADS) found for the specified file or folder.
+	 */
+	getADSNames(path: string): DOpusStringSet;
+
+	/**
 	 * Returns the localized text description for a system error code.
 	 */
 	getErrorMsg(error?: number): string;
@@ -3695,7 +3706,9 @@ interface DOpusFSUtil {
 	newFileAttr(): DOpusFileAttr;
 
 	/**
-	 * Creates a new FileSize object, which makes it easier to handle 64 bit file sizes. You can initialize this with a number of data types (int, string, currency, another FileSize object, or a Blob containing exactly 1, 2, 4 or 8 bytes).If the optional "s" flag is specified, the FileSize object will use a signed 64 bit value rather than unsigned.
+	 * Creates a new FileSize object, which makes it easier to handle 64 bit file sizes. You can initialize this with a number of data types (int, string, decimal, currency, another FileSize object, or a Blob containing exactly 1, 2, 4 or 8 bytes). You can use a hexadecimal string by pre-pending $ or 0x.
+	 *
+	 * If the optional "s" flag is specified, the FileSize object will use a signed 64 bit value rather than unsigned.
 	 */
 	newFileSize(s?: string, size?: number): DOpusFileSize;
 
@@ -7401,7 +7414,7 @@ interface DOpusUnorderedSet {
 	/**
 	 * Copies the contents of another UnorderedSet to this one. You can also pass an array or Vector object.
 	 */
-	assign(from?: DOpusUnorderedSet): void;
+	assign(from?: DOpusUnorderedSet | any[] | DOpusVector<any>): void;
 
 	/**
 	 * Clears the contents of the UnorderedSet.
@@ -7516,6 +7529,11 @@ interface DOpusVars extends DOpusVarWithoutDelete {
  * You can create a new Vector using the DOpusFactory .Vector method.
  */
 interface DOpusVector<T> {
+
+	/**
+	 * Return the element with given index
+	 */
+	 [index: number]: T;
 
 	/**
 	 * Returns the capacity of the Vector (the number of elements it can hold without having to reallocate memory). This is not the same as the number of elements it currently holds, which can be 0 even if the capacity is something larger.
