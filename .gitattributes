@@ -1,1 +1,3 @@
 TamperMonkeyUserscript/* linguist-vendored
+*.ts linguist-language=TypeScript
+*.d.ts linguist-language=TypeScript
