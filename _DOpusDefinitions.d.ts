@@ -7567,7 +7567,7 @@ interface DOpusVector<T> {
 	 *
 	 * In JScript you can pass a standard array to this method to copy the array to the end of a Vector.
 	 */
-	append(from?: DOpusVector<T>, start?: number, end?: number): void;
+     append(from?: DOpusVector<T> | any[], start?: number, end?: number): void;
 
 	/**
 	 * Copies the value of another Vector to this one. If start and end are not provided, the entire Vector is copied - otherwise, only the specified elements are copied.
@@ -7576,7 +7576,7 @@ interface DOpusVector<T> {
 	 *
 	 * In JScript you can pass a standard array to this method to copy the array into a Vector.
 	 */
-	assign(from?: DOpusVector<any>, start?: number, end?: number): void;
+	assign(from?: DOpusVector<any> | any[], start?: number, end?: number): void;
 
 	/**
 	 * Returns the last element in the Vector.
