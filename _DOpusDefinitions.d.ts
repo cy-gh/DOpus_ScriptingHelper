@@ -5296,14 +5296,14 @@ interface DOpusPath extends String {
 	/**
 	 * Returns the drive number the path refers to (1=A, 2=B, etc.) or 0 if the path does not specify a drive. You can also change the drive letter of the path (while leaving the following path components alone) by modifying this value.
 	 */
-	readonly drive: number;
+	drive: number;
 
 	/**
 	 * Returns the filename extension of the path (the sub-string extending from the last . in the final component to the end of the string). This method does not check if the path actually refers to a file.
 	 *
 	 * You can also change a path's file extension by setting this property (and strip the extension altogether by setting it to an empty string).
 	 */
-	readonly ext: string;
+	ext: string;
 
 	/**
 	 * Returns the filename extension of the path, taking multi-part extensions into account. For example, ext might return ".rar" whereas ext_m would return ".part1.rar".
@@ -7567,7 +7567,7 @@ interface DOpusVector<T> {
 	 *
 	 * In JScript you can pass a standard array to this method to copy the array to the end of a Vector.
 	 */
-     append(from?: DOpusVector<T> | any[], start?: number, end?: number): void;
+	append(from?: DOpusVector<T>, start?: number, end?: number): void;
 
 	/**
 	 * Copies the value of another Vector to this one. If start and end are not provided, the entire Vector is copied - otherwise, only the specified elements are copied.
@@ -7576,7 +7576,7 @@ interface DOpusVector<T> {
 	 *
 	 * In JScript you can pass a standard array to this method to copy the array into a Vector.
 	 */
-	assign(from?: DOpusVector<any> | any[], start?: number, end?: number): void;
+	assign(from?: DOpusVector<any>, start?: number, end?: number): void;
 
 	/**
 	 * Returns the last element in the Vector.
