@@ -5275,11 +5275,6 @@ interface DOpusOtherMeta {
  */
 interface DOpusPath extends String {
 
-	/**
-	 * Returns the full path as a string.
-	 */
-	toString(): string;
-
 	/** only for tsc compatibility reasons */
 	split(): string[];
 
@@ -6195,9 +6190,6 @@ interface DOpusScriptCommandData {
  * @see {DOpusOnInit}
  */
 interface DOpusScriptConfig {
-
-	[key: string]: any;
-
 	/**
 	 * The properties of the ScriptConfig object are entirely determined by the script itself.
 	 *
@@ -6211,8 +6203,8 @@ interface DOpusScriptConfig {
 	 * * **Multi-line string options** - the variable type must be string and must contain at least one CR/LF pair. Note that a trailing CR/LF will be removed from the default value.
 	 * * **Multiple string options** - the variable type must be a Vector of strings
 	 * * **Drop-down list** - the variable type must be a Vector with an int as the first element (to specify the default selection), and strings for the remaining elements.
-	 * */
-	readonly any: any;
+	 */
+	[key: string]: any;
 
 }
 
@@ -6682,7 +6674,7 @@ interface DOpusSysInfo {
 
 	/**
 	 * Returns the index of the monitor the mouse pointer is currently positioned on.
-	 * */
+	 */
 	mouseMonitor(): number;
 
 	/**
@@ -7044,12 +7036,12 @@ interface DOpusTabGroups {
 	 * var tabGroups = DOpus.TabGroups;
 	 * var group = tabGroups.AddChildGroup("New Tab Group");
 	 * if (!group)
-	 * 	DOpus.Output("Group already exists");
+	 * 	 DOpus.Output("Group already exists");
 	 * else {
-	 * 	group.desc = "Example description";
-	 * 	var tabs = group.tabs;
-	 * 	tabs.AddTab("C:\\");
-	 * 	tabGroups.Save();
+	 * 	 group.desc = "Example description";
+	 * 	 var tabs = group.tabs;
+	 * 	 tabs.AddTab("C:\\");
+	 * 	 tabGroups.Save();
 	 * }
 	 * ```
 	 *
@@ -7058,11 +7050,11 @@ interface DOpusTabGroups {
 	 * // This will not work correctly.
 	 * var group = DOpus.TabGroups.AddChildGroup("New Tab Group");
 	 * if (!group)
-	 * 	DOpus.Output("Group already exists");
+	 * 	 DOpus.Output("Group already exists");
 	 * else {
-	 * 	group.desc = "Example description";
-	 * 	group.tabs.AddTab("C:\\");
-	 * 	DOpus.TabGroups.Save();
+	 * 	 group.desc = "Example description";
+	 * 	 group.tabs.AddTab("C:\\");
+	 * 	 DOpus.TabGroups.Save();
 	 * }
 	 * ```
 	 * The second example will not work because the last line creates a second, unrelated snapshot of the current state, which is unaffected by the unsaved changes to the first snapshot, and then saves the second snapshot without making any changes to it.
@@ -7567,7 +7559,7 @@ interface DOpusVector<T> {
 	 *
 	 * In JScript you can pass a standard array to this method to copy the array to the end of a Vector.
 	 */
-	append(from?: DOpusVector<T>, start?: number, end?: number): void;
+	append(from?: DOpusVector<T> | any[], start?: number, end?: number): void;
 
 	/**
 	 * Copies the value of another Vector to this one. If start and end are not provided, the entire Vector is copied - otherwise, only the specified elements are copied.
@@ -7576,7 +7568,7 @@ interface DOpusVector<T> {
 	 *
 	 * In JScript you can pass a standard array to this method to copy the array into a Vector.
 	 */
-	assign(from?: DOpusVector<any>, start?: number, end?: number): void;
+	assign(from?: DOpusVector<any> | any[], start?: number, end?: number): void;
 
 	/**
 	 * Returns the last element in the Vector.
