@@ -3577,6 +3577,11 @@ interface DOpusFormat {
 
 }
 
+
+declare enum DOpusFSUtilHashAlgorithms {
+    "md5", "sha1", "sha256", "sha512", "crc32", "crc32_php", "crc32_php_rev"
+}
+
 /**
  * The FSUtil object provides several utility methods for dealing with the file system. It is obtained using the DOpus.FSUtil method.
 
@@ -3698,7 +3703,7 @@ interface DOpusFSUtil {
 	 * DOpus.FSUtil.Hash("C:\Windows\Notepad.exe","md5")
 	 * ```
 	 */
-	hash(pathOrBlob?: string | DOpusBlob, type?: string): string | DOpusVector<any>;
+	hash(pathOrBlob?: string | DOpusBlob, type?: keyof typeof DOpusFSUtilHashAlgorithms): string | DOpusVector<any>;
 
 	/**
 	 * Creates a new FileAttr object, which represents file attributes. You can initialize the new object by passing either a string representing the attributes to turn on (e.g. "hsr") or another FileAttr object. If you don't pass a value the new object will default to all attributes turned off.
