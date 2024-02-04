@@ -1489,7 +1489,7 @@ interface DOpusDialog {
 	 *
 	 * When used with a script dialog this property lets you control the icon shown in the dialog's title bar. In this instance, instead of a string you can also provide an Image object that you obtained from the DOpus.LoadImage or Script.LoadImage methods. Note that the image must have been loaded from a .ico file.
 	 */
-	icon: DOpusImage;
+	icon: string | DOpusImage;
 
 	/**
 	 * In a text entry dialog, this property returns the text string that the user entered (i.e. once the Show method has returned).
@@ -1640,6 +1640,16 @@ interface DOpusDialog {
 	addHotkey(name?: string, key?: string): void;
 
 	/**
+	 * If a dialog has auto-sizing controls that depend on the sizes of other controls, and you make changes to their sizes at runtime, you can call this method to force the dialog to recalculate all relative control sizes once you've made the required changes.
+	 */
+	autoSize(): void;
+
+	/**
+	 *  Cancels folder or file change monitoring previously established by a call to the WatchDir method. The id parameter is the ID you assigned to your watcher when it was created.
+	 */
+	cancelWatchDir(id?: string): void;
+
+	/**
 	 * When creating a script dialog, calling this method creates the underlying dialog but does not display it. This lets you create the dialog and then initialize its controls before it is shown to the user.
 	 *
 	 * Using Create implies a detached dialog; the detach property will be set True automatically. However, you can call RunDlg afterwards if you don't need a custom message loop and just want to set up some controls before displaying the dialog.
@@ -1741,6 +1751,35 @@ interface DOpusDialog {
 	multi(title?: string, defaultValue?: string, window?: DOpusLister | DOpusTab): DOpusItem;
 
 	/**
+	 * Allows a script to add an icon to the system taskbar notification area.
+	 *
+	 * The method argument specifies one of four actions, each of which has its own set of arguments.
+	 *
+	 * |Method|Arguments            |Description                                                             |
+	 * |------|---------------------|------------------------------------------------------------------------|
+	 * |add   |icon, tooltip        |Add icon to the toolbar                                                 |
+	 * |update|icon, tooltip        |Updates icon or tooltip.                                                |
+	 * |remove|-                    |Removes the icon.                                                       |
+	 * |notify|title, message, flags|Displays a system notification message (or bubble tooltip in Windows 7).|
+	 *
+	 * For the add and update methods, the icon argument can be a string or Image object - see the documentation for the icon property above for more details. If the dialog has been assigned an icon via this property then that icon will be used automatically if none is provided.
+	 *
+	 * The tooltip argument provides a tooltip string that the system will display when the user moves the mouse over the icon. If the dialog's title property has been set then the title will be used if no explicit tooltip is given.
+	 *
+	 * The notify method lets you show a system notification associated with your dialog. This method is similar to the DOpus.Notify method - see the description of that method for more information on the arguments.
+	 *
+	 * Once your script has added an icon, the user can interact with it using the mouse. Mouse activity will generate click, dblclk and rclick events in your dialog's message loop. The Msg.control property will be set to notifyicon.
+	 *
+	 * The icon is automatically removed when your dialog closes. It's also restored automatically if Explorer restarts after the icon has been added.
+	 *
+	 * Please note that only one icon per dialog is supported.
+	 */
+	notifyIcon(method?: 'add', icon?: string | DOpusImage, tooltip?: string): void;
+	notifyIcon(method?: 'update', icon?: string | DOpusImage, tooltip?: string): void;
+	notifyIcon(method?: 'remove'): void;
+	notifyIcon(method?: 'notify', title?: string, message?: string, flags?: string): void;
+
+	/**
 	 * Displays a "Browse to Open File" dialog that lets the user select a single file. The optional parameters are:
 	 *
 	 * * **title** - specify title of the dialog
@@ -1773,6 +1812,8 @@ interface DOpusDialog {
 	 * If the dialog is not already visible (because neither Show nor GetMsg were called) then it will become visible when you call RunDlg. (Compatibility note: Prior to Opus 12.22, scripts needed to call Show explicitly.)
 	 */
 	runDlg(): number;
+
+
 
 	/**
 	 * Saves the position (and size) of the dialog to your Opus configuration. The position can then be restored later on by a call to LoadPosition.
@@ -1829,7 +1870,28 @@ interface DOpusDialog {
 	 *
 	 * The id string is a string that Opus can use to identify your dialog or the script it comes from. The template name of the dialog will be automatically appended to this. For example, you might specify id as "kundal" - Opus would then internally save these variables for a dialog called "dialog1" as "kundal!dialog1". Make sure you pick a string that other script authors are unlikely to use as Opus has no other way of telling the saved variables apart.
 	 */
-	vars(id?: string): DOpusVars;
+	vars(id: string): DOpusVars;
+
+	/**
+	 *  Establish monitoring of a folder or file for changes. Returns 0 for success or an error code on failure.
+	 *
+	 * The id argument lets you provide an ID for this watcher that's used to identify it when changes occur. dir is the full path to a filesystem folder, or a file if the i flag is set.
+	 *
+	 * The optional flags are:
+	 *
+	 * * **f** - monitor for file change in folder (e.g. file created)
+	 * * **d** - monitor for directory change in folder (e.g. directory created)
+	 * * **r** - recursive - monitor sub-folders
+	 * * **a** - monitor for file attribute changes
+	 * * **s** - monitor for file size changes
+	 * * **w** - monitor for last write time changes
+	 * * **i** - monitor a single file rather than a folder
+	 *
+	 * When a change occurs to a monitored file or folder, the dialog's message loop receives a dirchange event. The Msg.control property identifies the watcher's ID.
+	 *
+	 * Use the CancelWatchDir method to cancel monitoring.
+	 */
+	watchDir(id: string, path: string, flags?: string): number;
 
 	/**
 	 * Allows a script dialog to monitor events in a folder tab. You will receive notifications of the requested events through your message loop.
@@ -1847,6 +1909,7 @@ interface DOpusDialog {
 	 * * **srcdst** - source/destination state changed
 	 * * **view** - view mode changed
 	 * * **flat** - flat view state changed
+	 * * **filter** - quick filter changed
 	 *
 	 * Once notification has been established you will be notified of all requested events when they occur. Note that no specific information is sent with notifications - e.g. for the "change" event, you aren't told which items have changed, only that something has.
 	 *
@@ -1856,7 +1919,7 @@ interface DOpusDialog {
 	 *
 	 * The Msg.control property tells you which tab the change occurred in; if you specified an ID when you called the WatchTab function, this will be in the Msg.control property - otherwise, it will be the numeric handle of the tab. Note that it's *not* the actual Tab object. You can access the Tab object via the Msg.tab property but this can be inefficient, as it requires a new Tab object to be created every time. If you're only monitoring one tab it's better to store the Tab object in your own variable - and if you're monitoring multiple tabs you could, e.g. use a unique ID for each one and keep the objects in a Map.
 	 *
-	 * The Msg.value property tells you which notification event occurred. Possible values are select, navigate, filechange, activate, srcdst, view, flat, and close (sent if the tab is closed while you are monitoring it).
+	 * The Msg.value property tells you which notification event occurred. Possible values are select, navigate, filechange, activate, srcdst, view, flat, filter and close (sent if the tab is closed while you are monitoring it).
 	 *
 	 * For the filechange event, the Msg.data property contains a bit mask indicating which file events occurred. 1 = add, 2 = delete, 4 = change. The values will be added together (so e.g. 6 indicates at least one item was changed and at least one was deleted). It's up to your script to determine exactly what changed.
 	 *
@@ -2332,6 +2395,14 @@ interface DOpusConstructor {
 	 * The returned Image object can be given as the value of the Control.label property for a static control in a script dialog (when that control is in "image" mode). You can also assign as to the icon property of a Dialog object to specify a custom window icon for your script dialog.
 	 */
 	loadThumbnail(filename?: string, timeout?: number, width?: number, height?: number): DOpusImage | false;
+
+	/**
+	 * Displays a system notification (or in Windows 7, a balloon tooltip). This requires the Opus taskbar icon to be added to the taskbar notification area so if it's turned off in Preferences, it will be added temporarily and then removed again.
+	 *
+	 * The optional flags are:
+	 * *n*	No sound. Prevents the system from playing a sound when the notification is displayed.
+	 */
+	notify(title?: string, message?: string, flags?: 'n' | '' | undefined): void;
 
 	/**
 	 * Prints the specified text string to the script output log (found in the Utility Panel, the CLI in script mode, the Rename dialog and the Command Editor in script mode).
@@ -3579,7 +3650,7 @@ interface DOpusFormat {
 
 
 declare enum DOpusFSUtilHashAlgorithms {
-    "md5", "sha1", "sha256", "sha512", "crc32", "crc32_php", "crc32_php_rev"
+    "md5", "sha1", "sha256", "sha512", "crc32", "crc32_php", "crc32_php_rev", "blake"
 }
 
 /**
@@ -5826,6 +5897,12 @@ interface DOpusScript extends DOpusVars {
 	 */
 	showHelp(page?: string): void;
 
+	/**
+	 * Lets a script add-in update the flags for a FAYT extension. This equates to the options shown to the user for the FAYT mode on the Quick Keys Preferences page.
+	 * The name should be the name of the FAYT extension command; this is given to your command as the @see DOpusScriptFAYTCommandData.fayt property. The flags value should represent a flag combination that's meaningful to your extension.
+	 */
+	updateFAYTFlags(name?: string, flags?: number): void;
+
 }
 
 declare var Script: DOpusScript;
@@ -6135,6 +6212,11 @@ interface DOpusScriptCommand {
 	desc: string;
 
 	/**
+	 * Returns a ScriptFAYTCommand object that you can use to initialise this command to extend the FAYT field.
+	 */
+	fayt: DOpusScriptFAYTCommand
+
+	/**
 	 * Set to True to hide this command from the drop-down command list shown in the command editor. This lets you add commands that can still be used in buttons and hotkeys but won't clutter up the command list.
 	 */
 	hide: boolean;
@@ -6189,6 +6271,113 @@ interface DOpusScriptCommandData {
 }
 
 /**
+ * A simple object that bundles two colors together (text and background).
+ */
+interface DOpusScriptColorPair {
+	/**
+	 * Specify the background color. This should be in the form #RRGGBB (hexadecimal) or RRR,GGG,BBB (decimal).
+	 * Specify the text color. This should be in the form #RRGGBB (hexadecimal) or RRR,GGG,BBB (decimal).
+	 */
+	backcolor: string;
+
+	/**
+	 * Specify the background color. This should be in the form #RRGGBB (hexadecimal) or RRR,GGG,BBB (decimal).
+	 * Specify the text color. This should be in the form #RRGGBB (hexadecimal) or RRR,GGG,BBB (decimal).
+	 */
+	textcolor: string;
+}
+
+
+
+
+/**
+ * When a script calls the ScriptInitData.AddCommand method to add commands to the Opus internal command set, the ScriptCommand object it retrieves provides a ScriptFAYTCommand object in the fayt property. You can initialise this object to create a command that extends the FAYT field.
+ * @see {ScriptInitData}
+ * @see {ScriptCommand}
+ */
+interface DOpusScriptFAYTCommand {
+	/**
+	 * Specify the default background color for your FAYT extension. This should be in the form #RRGGBB (hexadecimal) or RRR,GGG,BBB (decimal). You should use this and the textcolor property to specify both dark and light colors as the same, otherwise use the dark and light properties.
+	 */
+	backcolor: string;
+	/**
+	 * Use the ScriptColorPair object this returns to specify the default dark mode text and background colors for your FAYT extension (and use the light property to specify the light mode colors). If you want the default dark and light colors to be the same, you can use the textcolor and backcolor properties instead.
+	 */
+	dark: DOpusScriptColorPair;
+	/**
+	 * Set this property to True to enable the FAYT extension.
+	 */
+	enable: boolean;
+	/**
+	 * Lets you specify a set of flags that the user will be able to turn on or off through the user interface. To use this, you need to assign the property to a Map object created by the DOpus.Create.Map method.
+	 * Each flag should be added to the map with its numeric value (a power of two; e.g. 1, 2, 4, 8, …) as the key and its label as the value. When your FAYT extension is called, Opus will add the values of the flags the user has chosen together and pass them to your command.
+	 * The maximum number of flags you can add is 16.
+	 */
+	flags: DOpusMap;
+	/**
+	 * Lets you specify a default key for your FAYT extension. Pushing this key from a file display or FAYT field will invoke the script.
+	 */
+	key: string;
+	/**
+	 * This lets you specify a label for your FAYT extension which is shown in the user interface. If not supplied, the name of the command is used.
+	 */
+	label: string;
+	/**
+	 * Use the ScriptColorPair object this returns to specify the default light mode text and background colors for your FAYT extension (and use the dark property to specify the dark mode colors). If you want the default dark and light colors to be the same, you can use the textcolor and backcolor properties instead.
+	 */
+	light: DOpusScriptColorPair;
+	/**
+	 * Set to True to have your extension called in realtime as the user types. If set to False your extension will be called only when the user presses Enter. If set to an integer value, this specifies the number of milliseconds between when the user types and your script is called (i.e. deferred notification).
+	 */
+	realtime: boolean|number;
+	/**
+	 * Specify the default text color for your FAYT extension. This should be in the form #RRGGBB (hexadecimal) or RRR,GGG,BBB (decimal). You should use this and the backcolor property to specify both dark and light colors as the same, otherwise use the dark and light properties.
+	 */
+	textcolor: string;
+}
+
+/**
+ * The ScriptFAYTCommandData object is passed to the script-defined entry points for any script add-ins that extend the FAYT field. The method name for these events is defined by the script itself, but generically it's referred to as OnScriptFAYTCommand.
+ */
+interface DOpusScriptFAYTCommandData {
+	/**
+	 * Provides the text the user typed into the FAYT field.
+	 */
+	readonly cmdline: string;
+
+	/**
+	 * The name of the FAYT extension command being invoked. This lets you use the same entry point to implement multiple FAYT extensions if desired. If the value is False then this is not a FAYT extension at all, but a regular script command.
+	 */
+	readonly fayt: string|boolean;
+
+	/**
+	 * Provides the sum of all the flags the user has enabled for your FAYT extension. These come from the flags property you specified when initialising your extension via the @see DOpusScriptFAYTCommand object.
+	 * Your script can update the flags in the users' configuration using the @see IScript.UpdateFAYTFlags method.
+	 */
+	readonly flags: int;
+
+	/**
+	 * This will equal the string "return" if the user pushed the return key to trigger your FAYT extension.
+	 */
+	readonly key: string;
+
+	/**
+	 * If set to True this is a hint that you should update the suggestions list via the @see Tab.UpdateFAYTSuggestions method.
+	 */
+	readonly suggest: bool;
+
+	/**
+	 * Provides the key that initially triggered the FAYT in this mode.
+	 */
+	readonly quickkey: string;
+
+	/**
+	 * Represents the tab in which the FAYT is being interacted with.
+	 */
+	readonly tab: DOpusTab;
+}
+
+/**
  * The ScriptConfig object is accessed via the ScriptInitData .config and the Script .config properties. The ScriptInitData .config property allows a script (in its OnInit method) to specify what configuration properties it supports, and provide default values for them. The properties assigned in OnInit will then be available in Preferences for the user to edit, and the user-edited configuration can then be accessed by other script methods using Script .config .
  * @see {DOpusScriptInitData}
  * @see {DOpusScript}
@@ -6210,7 +6399,6 @@ interface DOpusScriptConfig {
 	 * * **Drop-down list** - the variable type must be a Vector with an int as the first element (to specify the default selection), and strings for the remaining elements.
 	 */
 	[key: string]: any;
-
 }
 
 /**
@@ -6581,40 +6769,40 @@ interface DOpusStringSet {
 interface DOpusStringTools {
 
 	/**
+	 *
 	 * Decodes an encoded string or data.
 	 *
-	 * You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned.
+	 * You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned. Valid formats are:
 	 *
-	 * If format is specified as **"base64"** the source will be Base64-decoded, and a Blob is returned.
+	 * * **base64**	The source will be Base64-decoded, and a Blob is returned.
+	 * * **quoted**	The source will be Quoted-printable-decoded, and a Blob is returned.
+	 * * **utf-8**	The source will be converted from UTF-8 to a native string.
+	 * * **utf-16|utf-16-le**	The source will be converted from UTF-16 Little Endian to a native string.
+	 * * **utf-16-be**	The source will be converted from UTF-16 Big Endian to a native string.
+	 * * **auto**	Special handling is invoked to decode a MIME-encoded email subject (e.g. one beginning with =?), and a string is returned if identified. It will also detect UTF-8 or UTF-16 encoded data if it has a BOM at the beginning.
 	 *
-	 * If format is specified as **"quoted"** the source will be Quoted-printable-decoded, and a Blob is returned.
+	 * If decoding UTF-8 or UTF-16 (via "auto" or "utf-8", etc.), any byte-order-mark (BOM) will be skipped if one exists at the beginning of the input data.
 	 *
-	 * If format is specified as **"auto"** or not supplied, special handling is invoked to decode a MIME-encoded email subject (e.g. one beginning with =?), and a string is returned. If **"auto"** is specified it will also detect UTF-8 or UTF-16 encoded data if it has a BOM at the beginning.
-	 *
-	 * If format is specified as **"utf-8"** the source will be converted from UTF-8 to a native string. Alternatively, if format is **"utf-16"** or **"utf-16-le"**, the source will be converted from UTF-16 Little Endian to a native string. Or, if format is **"utf-16-be"**, the source will be converted from UTF-16 Big Endian to a native string.
-	 *
-	 * If decoding UTF-8 or UTF-16 (via **"auto"** or **"utf-8"**, etc.), any byte-order-mark (BOM) will be skipped if one exists at the beginning of the input data.
-	 *
-	 * Otherwise, format must be set to a valid code-page name (e.g. **"gb2312"**, **"utf-8"**), or a Windows code-page ID (e.g. **"936"**, **"65001"**). The source will be decoded using the specified code-page and a string is returned.
+	 * If format is not specified the default is auto. Otherwise, format must be set to one of the above keywords or a valid code-page name (e.g. "gb2312", "utf-8"), or a Windows code-page ID (e.g. 936, 65001). The source will be decoded using the specified code-page and a string is returned.
 	 */
 	decode(source?: DOpusBlob | string, format?: string): string | DOpusBlob;
 
 	/**
+
 	 * Encodes a string or data.
 	 *
-	 * You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned.
+	 * You can provide either a Blob object or a string as the source to decode. Depending on the value of the format argument, either a string or a Blob is returned. Valid formats are:
 	 *
-	 * If format is specified as **"base64"** the source will be Base64-encoded, and a string is returned.
+	 * * **base64**	The source will be Base64-encoded, and a string is returned.
+	 * * **quoted**	The source will be Quoted-printable-encoded, and a string is returned.
+	 * * **utf-8**	The source will be converted to UTF-8 without a byte-order-mark (BOM).
+	 * * **utf-8 bom**	The source will be converted to UTF-8 with a BOM at the start.
+	 * * **utf-16|utf-16-le**	The source will be converted to UTF-16 Little Endian without a BOM.
+	 * * **utf-16 bom|utf-16-le bom**	The source will be converted to UTF-16 Little Endian with a BOM.
+	 * * **utf-16-be**	The source will be converted to UTF-16 Big Endian without a BOM.
+	 * * **utf-16-be bom**	The source will be converted to UTF-16 Big Endian with a BOM.
 	 *
-	 * If format is specified as **"quoted"** the source will be Quoted-printable-encoded, and a string is returned.
-	 *
-	 * If format is specified as **"utf-8 bom"**, the output data is encoded as UTF-8 with a byte-order-mark (BOM) at the start. Use **"utf-8"** if you want UTF-8 without the BOM.
-	 *
-	 * If format is specified as **"utf-16 bom"** or **"utf-16-le bom"**, the output data is encoded as UTF-16 Little Endian with a byte-order-mark (BOM) at the start. Use **"utf-16"** or **"utf-16-le"** if you do not want the BOM.
-	 *
-	 * If format is specified as **"utf-16-be bom"**, the output data is encoded as UTF-16 Big Endian with a byte-order-mark (BOM) at the start. Use **"utf-16-be"** if you do not want the BOM.
-	 *
-	 * Otherwise, format must be set to a valid code-page name (e.g. **"gb2312"**, **"utf-8"** etc.), or a Windows code-page ID (e.g. **"936"**, **"65001"**). The source will be encoded using the specified code-page and a Blob is returned.
+	 * Otherwise, format must be set to a valid code-page name (e.g. "gb2312", "utf-8" etc.), or a Windows code-page ID (e.g. 936, 65001). The source will be encoded using the specified code-page and a Blob is returned.
 	 */
 	encode(source?: DOpusBlob | string, format?: string): string | DOpusBlob;
 
@@ -6627,6 +6815,52 @@ interface DOpusStringTools {
 	 *
 	 */
 	isASCII(input?: string): boolean;
+
+	/**
+	 *  Returns a translated string in the currently selected language. Mainly needed for internal use.
+	 *
+	 * The currently defined strings are:
+	 *
+	 * ID - English language string
+	 * * **FavoritesBar** - Favorites Bar
+	 * * **FindResults** - Find Results
+	 * * **CopySelection** - Copy Selection
+	 * * **CopyAll** - Copy All
+	 */
+	languageStr(name_id: string | number): string;
+
+	/**
+	 *  Strips any illegal filename characters from the supplied string.
+	 *
+	 * The optional flags are:
+	 *
+	 * * **f** - slashes: convert separators to / instead of \
+	 * * **n** - instead of path: replace separators with _ (implies s)
+	 * * **s** - mode: replace : with ; and remove \\ from UNC paths
+	 */
+	makeLegal(name: string, flags?: string): string;
+
+
+	/**
+	 * Returns a copy of the input string with any diacritics (accent symbols) removed. For example, "á" would be converted to "a".
+	 *
+	 * This function uses the same rules that are used by the "ignore diacritics" options for pattern matching throughout Opus.
+	 */
+	removeDiacritics(input: string): string;
+
+	/**
+	 * Truncates the specified input string to the requested number of characters.
+	 *
+	 * The optional type argument specifies the truncation type. Valid values are:
+	 * * **0** - truncate on the right
+	 * * **1** - truncate on the left
+	 * * **2** - truncate in the middle
+	 *
+	 * If not specified, the default is 2 if input is a Path object, otherwise the default is 0.
+	 *
+	 * If the input value is a Path and middle truncation is selected, the function takes path separators into account correctly.
+	 */
+	truncate(input: string|DOpusPath, length: number, type?: number): string;
 
 }
 
@@ -6897,6 +7131,14 @@ interface DOpusTab {
 	 * When a script accesses particular properties of a Tab object, a snapshot is taken of the tab's state. For example, if you ask for the selected_files property, the list of selected files is calculated and then stored in memory. This can speed things up, and also means you don't have to worry about the list changing under you as you work through it. If the script then makes changes to the tab (e.g. it selects files, creates a new folder, etc.), these changes will not be reflected by the cached snapshot(s) if you access the same properties on the same tab object again. To clear the cached snapshots and re-synchronize the object with the tab's current state, call the Tab.Update method.
 	 */
 	update(): void;
+
+ 	/**
+	 * When you're implementing a FAYT extension script, you can call this method at any time to update the list of suggestions shown to the user.
+	 * You can provide an array or Vector of strings, or a Map of string/string pairs.
+	 * When providing a Map each key represents the text that will be inserted if selected by the user, and the value represents a hint or description that's shown in a separate column in the suggestion list.
+	 * When providing an array or Vector of strings, you can provide the second column description by tab-separating it from the main value.
+	 */
+	updateFAYTSuggestions(params?: [string] | DOpusVector<string> | DOpusMap ): void;
 
 }
 
