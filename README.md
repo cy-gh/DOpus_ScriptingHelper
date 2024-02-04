@@ -6,6 +6,10 @@ The DO developers accepted my humble request regarding [new Get()/Set() methods 
 
 Unlike the name suggests, you don't have to learn TypeScript. TS can parse JavaScript as well and your scripts will still be good (*cough*), old JScript. If you are used to develop with [JSDoc](https://jsdoc.app/), JavaDoc and similar, you'll feel right at home! In fact, you will enjoy developing DOpus despite lacking a debugger.
 
+**UPDATE 20240204:**
+
+DOpus v13 has been released a couple weeks ago. I will update the objects as I find time and the v13 documentation has been updated fully.
+
 ## Setup
 
 You need VSCode or similar; I prefer [VSCodium Portable](https://portapps.io/app/vscodium-portable/).
