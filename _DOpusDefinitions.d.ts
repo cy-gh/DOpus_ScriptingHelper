@@ -3856,6 +3856,30 @@ interface DOpusFSUtil {
 	 */
 	sameDrive(path?: string, flags?: string): boolean;
 
+	/**
+	 * Establish monitoring of a folder or file for changes. Returns 0 for success or an error code on failure.
+	 *
+	 * When a change occurs to a monitored file or folder, the script's OnFilesystemChange event is triggered.
+	 *
+	 * The id argument lets you provide an ID for this watcher that's used to identify it when changes occur. dir is the full path to a filesystem folder, or a file if the i flag is set.
+	 *
+	 * The optional flags are:
+	 * * **f** - monitor for file change in folder (e.g. file created)
+	 * * **d** - monitor for directory change in folder (e.g. directory created)
+	 * * **r** - recursive - monitor sub-folders
+	 * * **a** - monitor for file attribute changes
+	 * * **s** - monitor for file size changes
+	 * * **w** - monitor for last write time changes
+	 * * **i** - monitor a single file rather than a folder
+	 *
+	 * Use the CancelWatchChanges method to cancel monitoring.
+	 */
+	watchChanges(id: string, path: string, flags?: string): number;
+
+	/**
+	 * Cancels folder or file change monitoring previously established by a call to the WatchChanges method. The id parameter is the ID you assigned to your watcher when it was created.
+	 */
+	cancelWatchChanges(id: string): void;
 }
 
 /**
@@ -6209,29 +6233,29 @@ interface DOpusScriptCommand {
 	/**
 	 * Use this to set a description for the command, that is displayed in the Customize dialog when the user selects the command from the Commands tab.
 	 */
-	desc: string;
+	desc?: string;
 
 	/**
 	 * Returns a ScriptFAYTCommand object that you can use to initialise this command to extend the FAYT field.
 	 */
-	fayt: DOpusScriptFAYTCommand
+	fayt?: DOpusScriptFAYTCommand
 
 	/**
 	 * Set to True to hide this command from the drop-down command list shown in the command editor. This lets you add commands that can still be used in buttons and hotkeys but won't clutter up the command list.
 	 */
-	hide: boolean;
+	hide?: boolean;
 
 	/**
 	 * Use this property to assign a default icon to this command. You can specify the name of an internal icon (if you want to specify an icon from a particular set, use setname:iconname - use this if you have bundled your script in a script package with its own icon set) or the path of an external icon or image file.
 	 */
-	icon: string;
+	icon?: string;
 
 	/**
 	 * Use this to set a label for the command. This is displayed in the Commands tab of the Customize dialog (under the Script Commands category), and will form the default label of the button created if the user drags that command out to a toolbar.
 	 *
 	 * The actual name of the command (used to invoke the command) is assigned through the name property.
 	 */
-	label: string;
+	label?: string;
 
 	/** This is the name of the method that Opus will call in your script when the command is invoked. This would typically be set to On*XXXXX* where *XXXXX* is the name of the command, however any method name can be used.
 	 *
@@ -6248,7 +6272,7 @@ interface DOpusScriptCommand {
 	 *
 	 * When your command is invoked and its OnScriptCommand event is triggered, any arguments supplied on the command line are parsed according to this template and provided via the ScriptCommandData.func.args property.
 	 */
-	template: string;
+	template?: string;
 
 }
 
@@ -6299,11 +6323,11 @@ interface DOpusScriptFAYTCommand {
 	/**
 	 * Specify the default background color for your FAYT extension. This should be in the form #RRGGBB (hexadecimal) or RRR,GGG,BBB (decimal). You should use this and the textcolor property to specify both dark and light colors as the same, otherwise use the dark and light properties.
 	 */
-	backcolor: string;
+	backcolor?: string;
 	/**
 	 * Use the ScriptColorPair object this returns to specify the default dark mode text and background colors for your FAYT extension (and use the light property to specify the light mode colors). If you want the default dark and light colors to be the same, you can use the textcolor and backcolor properties instead.
 	 */
-	dark: DOpusScriptColorPair;
+	dark?: DOpusScriptColorPair;
 	/**
 	 * Set this property to True to enable the FAYT extension.
 	 */
@@ -6313,7 +6337,7 @@ interface DOpusScriptFAYTCommand {
 	 * Each flag should be added to the map with its numeric value (a power of two; e.g. 1, 2, 4, 8, …) as the key and its label as the value. When your FAYT extension is called, Opus will add the values of the flags the user has chosen together and pass them to your command.
 	 * The maximum number of flags you can add is 16.
 	 */
-	flags: DOpusMap;
+	flags?: DOpusMap;
 	/**
 	 * Lets you specify a default key for your FAYT extension. Pushing this key from a file display or FAYT field will invoke the script.
 	 */
@@ -6321,19 +6345,19 @@ interface DOpusScriptFAYTCommand {
 	/**
 	 * This lets you specify a label for your FAYT extension which is shown in the user interface. If not supplied, the name of the command is used.
 	 */
-	label: string;
+	label?: string;
 	/**
 	 * Use the ScriptColorPair object this returns to specify the default light mode text and background colors for your FAYT extension (and use the dark property to specify the dark mode colors). If you want the default dark and light colors to be the same, you can use the textcolor and backcolor properties instead.
 	 */
-	light: DOpusScriptColorPair;
+	light?: DOpusScriptColorPair;
 	/**
 	 * Set to True to have your extension called in realtime as the user types. If set to False your extension will be called only when the user presses Enter. If set to an integer value, this specifies the number of milliseconds between when the user types and your script is called (i.e. deferred notification).
 	 */
-	realtime: boolean|number;
+	realtime?: boolean|number;
 	/**
 	 * Specify the default text color for your FAYT extension. This should be in the form #RRGGBB (hexadecimal) or RRR,GGG,BBB (decimal). You should use this and the backcolor property to specify both dark and light colors as the same, otherwise use the dark and light properties.
 	 */
-	textcolor: string;
+	textcolor?: string;
 }
 
 /**
@@ -8369,4 +8393,14 @@ interface DOpusWinVer extends String {
 	 */
 	readonly win10OrBetter: boolean;
 
+}
+
+/**
+ *  A script add-in can monitor file and folder changes by implementing the OnFilesystemChange event and calling the FSUtil.WatchChanges method to establish monitoring.
+ */
+interface DOpusFilesystemChangeData {
+	/**
+	 * 	Returns the ID of the watcher that detected a file or folder change. This ID is assigned when you create the watcher in the call to FSUtil.WatchChanges.
+	 */
+	id: string;
 }
