@@ -6378,7 +6378,7 @@ interface DOpusScriptFAYTCommandData {
 	 * Provides the sum of all the flags the user has enabled for your FAYT extension. These come from the flags property you specified when initialising your extension via the @see DOpusScriptFAYTCommand object.
 	 * Your script can update the flags in the users' configuration using the @see IScript.UpdateFAYTFlags method.
 	 */
-	readonly flags: int;
+	readonly flags: number;
 
 	/**
 	 * This will equal the string "return" if the user pushed the return key to trigger your FAYT extension.
@@ -8122,6 +8122,11 @@ interface DOpusViewer {
 	readonly foreground: boolean;
 
 	/**
+	 * Returns a Rect object representing the size of the currently displayed image (native size, ignoring any scaling).
+	 */
+	readonly imageSize: DOpusRect;
+
+	/**
 	 * Returns the index of the currently viewed image within the viewer's list of files.
 	 */
 	readonly index: number;
@@ -8145,6 +8150,11 @@ interface DOpusViewer {
 	 * Returns the right coordinate of the viewer window.
 	 */
 	readonly right: number;
+
+	/**
+	 * Returns a Rect object representing the current selection area (if any) of the image. If there's no selection the rectangle will be empty.
+	 */
+	readonly selection: DOpusRect;
 
 	/**
 	 * Returns or sets the title bar string for the viewer window.
